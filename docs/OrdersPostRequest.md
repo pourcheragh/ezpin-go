@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Sku** | Pointer to **float32** | Catalog SKU | [optional] 
-**Quantity** | Pointer to **float32** | Item count | [optional] 
+**Sku** | Pointer to **int32** | Catalog SKU | [optional] 
+**Quantity** | Pointer to **int32** | Item count | [optional] 
 **PreOder** | Pointer to **bool** | To determine whether you want to pre order your request or not. The product must support pre order mood. if you pass true your cards will get ready in the future. | [optional] 
-**Price** | Pointer to **float32** | Item price | [optional] 
-**DeliveryType** | Pointer to **float32** | 0-None 1-E-mail 2-SMS 3-WhatsApp | [optional] 
+**Price** | Pointer to **decimal.Decimal** | Item price | [optional] 
+**DeliveryType** | Pointer to **int32** | * &#x60;0&#x60; None *&#x60;1&#x60; email *&#x60;2&#x60; SMS *&#x60;3&#x60; WhatsApp | [optional] 
 **Destination** | Pointer to **string** | E-mail or Phone/Whatsapp number you want the order to be delivered to. | [optional] 
-**TerminalId** | Pointer to **float32** | Terminal ID of the sub-users that can be defined in setting section in user panel | [optional] 
-**TerminalPin** | Pointer to **float32** | Pin defined for sub-user | [optional] 
+**TerminalId** | Pointer to **int32** | Terminal ID of the sub-users that can be defined in setting section in user panel | [optional] 
+**TerminalPin** | Pointer to **int32** | Pin defined for sub-user | [optional] 
 **ReferenceCode** | Pointer to **string** | Refernce code. A unique UUID V4 referece code must be included in request | [optional] 
 
 ## Methods
@@ -35,20 +35,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetSku
 
-`func (o *OrdersPostRequest) GetSku() float32`
+`func (o *OrdersPostRequest) GetSku() int32`
 
 GetSku returns the Sku field if non-nil, zero value otherwise.
 
 ### GetSkuOk
 
-`func (o *OrdersPostRequest) GetSkuOk() (*float32, bool)`
+`func (o *OrdersPostRequest) GetSkuOk() (*int32, bool)`
 
 GetSkuOk returns a tuple with the Sku field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSku
 
-`func (o *OrdersPostRequest) SetSku(v float32)`
+`func (o *OrdersPostRequest) SetSku(v int32)`
 
 SetSku sets Sku field to given value.
 
@@ -60,20 +60,20 @@ HasSku returns a boolean if a field has been set.
 
 ### GetQuantity
 
-`func (o *OrdersPostRequest) GetQuantity() float32`
+`func (o *OrdersPostRequest) GetQuantity() int32`
 
 GetQuantity returns the Quantity field if non-nil, zero value otherwise.
 
 ### GetQuantityOk
 
-`func (o *OrdersPostRequest) GetQuantityOk() (*float32, bool)`
+`func (o *OrdersPostRequest) GetQuantityOk() (*int32, bool)`
 
 GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantity
 
-`func (o *OrdersPostRequest) SetQuantity(v float32)`
+`func (o *OrdersPostRequest) SetQuantity(v int32)`
 
 SetQuantity sets Quantity field to given value.
 
@@ -110,20 +110,20 @@ HasPreOder returns a boolean if a field has been set.
 
 ### GetPrice
 
-`func (o *OrdersPostRequest) GetPrice() float32`
+`func (o *OrdersPostRequest) GetPrice() decimal.Decimal`
 
 GetPrice returns the Price field if non-nil, zero value otherwise.
 
 ### GetPriceOk
 
-`func (o *OrdersPostRequest) GetPriceOk() (*float32, bool)`
+`func (o *OrdersPostRequest) GetPriceOk() (*decimal.Decimal, bool)`
 
 GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrice
 
-`func (o *OrdersPostRequest) SetPrice(v float32)`
+`func (o *OrdersPostRequest) SetPrice(v decimal.Decimal)`
 
 SetPrice sets Price field to given value.
 
@@ -135,20 +135,20 @@ HasPrice returns a boolean if a field has been set.
 
 ### GetDeliveryType
 
-`func (o *OrdersPostRequest) GetDeliveryType() float32`
+`func (o *OrdersPostRequest) GetDeliveryType() int32`
 
 GetDeliveryType returns the DeliveryType field if non-nil, zero value otherwise.
 
 ### GetDeliveryTypeOk
 
-`func (o *OrdersPostRequest) GetDeliveryTypeOk() (*float32, bool)`
+`func (o *OrdersPostRequest) GetDeliveryTypeOk() (*int32, bool)`
 
 GetDeliveryTypeOk returns a tuple with the DeliveryType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDeliveryType
 
-`func (o *OrdersPostRequest) SetDeliveryType(v float32)`
+`func (o *OrdersPostRequest) SetDeliveryType(v int32)`
 
 SetDeliveryType sets DeliveryType field to given value.
 
@@ -185,20 +185,20 @@ HasDestination returns a boolean if a field has been set.
 
 ### GetTerminalId
 
-`func (o *OrdersPostRequest) GetTerminalId() float32`
+`func (o *OrdersPostRequest) GetTerminalId() int32`
 
 GetTerminalId returns the TerminalId field if non-nil, zero value otherwise.
 
 ### GetTerminalIdOk
 
-`func (o *OrdersPostRequest) GetTerminalIdOk() (*float32, bool)`
+`func (o *OrdersPostRequest) GetTerminalIdOk() (*int32, bool)`
 
 GetTerminalIdOk returns a tuple with the TerminalId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTerminalId
 
-`func (o *OrdersPostRequest) SetTerminalId(v float32)`
+`func (o *OrdersPostRequest) SetTerminalId(v int32)`
 
 SetTerminalId sets TerminalId field to given value.
 
@@ -210,20 +210,20 @@ HasTerminalId returns a boolean if a field has been set.
 
 ### GetTerminalPin
 
-`func (o *OrdersPostRequest) GetTerminalPin() float32`
+`func (o *OrdersPostRequest) GetTerminalPin() int32`
 
 GetTerminalPin returns the TerminalPin field if non-nil, zero value otherwise.
 
 ### GetTerminalPinOk
 
-`func (o *OrdersPostRequest) GetTerminalPinOk() (*float32, bool)`
+`func (o *OrdersPostRequest) GetTerminalPinOk() (*int32, bool)`
 
 GetTerminalPinOk returns a tuple with the TerminalPin field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTerminalPin
 
-`func (o *OrdersPostRequest) SetTerminalPin(v float32)`
+`func (o *OrdersPostRequest) SetTerminalPin(v int32)`
 
 SetTerminalPin sets TerminalPin field to given value.
 

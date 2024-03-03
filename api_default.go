@@ -17,6 +17,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/shopspring/decimal"
 )
 
 
@@ -649,19 +651,19 @@ func (a *DefaultAPIService) CatalogsGetExecute(r ApiCatalogsGetRequest) (*Catalo
 type ApiCatalogsProductSkuAvailabilityGetRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
-	productSku float32
-	itemCount *float32
-	price *float32
+	productSku int32
+	itemCount *int32
+	price *decimal.Decimal
 }
 
 // Number of items
-func (r ApiCatalogsProductSkuAvailabilityGetRequest) ItemCount(itemCount float32) ApiCatalogsProductSkuAvailabilityGetRequest {
+func (r ApiCatalogsProductSkuAvailabilityGetRequest) ItemCount(itemCount int32) ApiCatalogsProductSkuAvailabilityGetRequest {
 	r.itemCount = &itemCount
 	return r
 }
 
 // Product price
-func (r ApiCatalogsProductSkuAvailabilityGetRequest) Price(price float32) ApiCatalogsProductSkuAvailabilityGetRequest {
+func (r ApiCatalogsProductSkuAvailabilityGetRequest) Price(price decimal.Decimal) ApiCatalogsProductSkuAvailabilityGetRequest {
 	r.price = &price
 	return r
 }
@@ -677,7 +679,7 @@ CatalogsProductSkuAvailabilityGet Method for CatalogsProductSkuAvailabilityGet
  @param productSku SKU of desired product
  @return ApiCatalogsProductSkuAvailabilityGetRequest
 */
-func (a *DefaultAPIService) CatalogsProductSkuAvailabilityGet(ctx context.Context, productSku float32) ApiCatalogsProductSkuAvailabilityGetRequest {
+func (a *DefaultAPIService) CatalogsProductSkuAvailabilityGet(ctx context.Context, productSku int32) ApiCatalogsProductSkuAvailabilityGetRequest {
 	return ApiCatalogsProductSkuAvailabilityGetRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -869,22 +871,22 @@ func (a *DefaultAPIService) CryptoCatalogGetExecute(r ApiCryptoCatalogGetRequest
 type ApiCryptoOrdersGetRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
-	limit *float32
-	offset *float32
+	limit *int32
+	offset *int32
 	startDate *string
 	endDate *string
-	staus *int32
+	status *int32
 	canPay *bool
 }
 
 // Maximum number of results
-func (r ApiCryptoOrdersGetRequest) Limit(limit float32) ApiCryptoOrdersGetRequest {
+func (r ApiCryptoOrdersGetRequest) Limit(limit int32) ApiCryptoOrdersGetRequest {
 	r.limit = &limit
 	return r
 }
 
 // Offset number in results
-func (r ApiCryptoOrdersGetRequest) Offset(offset float32) ApiCryptoOrdersGetRequest {
+func (r ApiCryptoOrdersGetRequest) Offset(offset int32) ApiCryptoOrdersGetRequest {
 	r.offset = &offset
 	return r
 }
@@ -902,8 +904,8 @@ func (r ApiCryptoOrdersGetRequest) EndDate(endDate string) ApiCryptoOrdersGetReq
 }
 
 // Status of the order
-func (r ApiCryptoOrdersGetRequest) Staus(staus int32) ApiCryptoOrdersGetRequest {
-	r.staus = &staus
+func (r ApiCryptoOrdersGetRequest) Status(status int32) ApiCryptoOrdersGetRequest {
+	r.status = &status
 	return r
 }
 
@@ -963,8 +965,8 @@ func (a *DefaultAPIService) CryptoOrdersGetExecute(r ApiCryptoOrdersGetRequest) 
 	if r.endDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "end_date", r.endDate, "")
 	}
-	if r.staus != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "staus", r.staus, "")
+	if r.status != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
 	}
 	if r.canPay != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "can_pay", r.canPay, "")
@@ -1640,20 +1642,20 @@ func (a *DefaultAPIService) NotificationConfigPostExecute(r ApiNotificationConfi
 type ApiOrdersGetRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
-	limit *float32
-	offset *float32
+	limit *int32
+	offset *int32
 	startDate *string
 	endDate *string
 }
 
 // Number of items in list
-func (r ApiOrdersGetRequest) Limit(limit float32) ApiOrdersGetRequest {
+func (r ApiOrdersGetRequest) Limit(limit int32) ApiOrdersGetRequest {
 	r.limit = &limit
 	return r
 }
 
 // Offset number of list
-func (r ApiOrdersGetRequest) Offset(offset float32) ApiOrdersGetRequest {
+func (r ApiOrdersGetRequest) Offset(offset int32) ApiOrdersGetRequest {
 	r.offset = &offset
 	return r
 }

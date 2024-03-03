@@ -12,6 +12,8 @@ package ezpin
 
 import (
 	"encoding/json"
+
+	"github.com/shopspring/decimal"
 )
 
 // checks if the CryptoCurrencyOrder type satisfies the MappedNullable interface at compile time
@@ -20,35 +22,35 @@ var _ MappedNullable = &CryptoCurrencyOrder{}
 // CryptoCurrencyOrder struct for CryptoCurrencyOrder
 type CryptoCurrencyOrder struct {
 	// crypto order id
-	Id *float32 `json:"id,omitempty"`
+	Id *int32 `json:"id,omitempty"`
 	// refence code of this crypto order
 	ReferenceCode *string `json:"reference_code,omitempty"`
 	// The amount of crypto you ordered.
-	RequestedPrice *int32 `json:"requested_price,omitempty"`
+	RequestedPrice *decimal.Decimal `json:"requested_price,omitempty"`
 	// price of this order
-	Price *int32 `json:"price,omitempty"`
+	Price *decimal.Decimal `json:"price,omitempty"`
 	// id of this crypto currency
 	CryptoCurrencyId *int32 `json:"crypto_currency_id,omitempty"`
 	CryptoCurrencyData *CryptoCurrencyOrderCryptoCurrencyData `json:"crypto_currency_data,omitempty"`
 	// id of fiat currency
 	CurrencyId *int32 `json:"currency_id,omitempty"`
 	CurrencyDaya *CryptoCurrencyOrderCurrencyDaya `json:"currency_daya,omitempty"`
-	// accept(1) , waiting(0) , reject(-1) , expired(-5)
+	// *`-5` Expired *`-1` Reject *`0` Waiting *`1` Accept
 	Status *int32 `json:"status,omitempty"`
 	// The destination wallet.
 	CryptoWallet *string `json:"crypto_wallet,omitempty"`
 	// text of status
 	StatusText *string `json:"status_text,omitempty"`
 	// percentage of commission defined for this user
-	CommissionPercent *float32 `json:"commission_percent,omitempty"`
+	CommissionPercent *decimal.Decimal `json:"commission_percent,omitempty"`
 	// price of commission defined for this user.
-	CommissionPrice *int32 `json:"commission_price,omitempty"`
+	CommissionPrice *decimal.Decimal `json:"commission_price,omitempty"`
 	// commission of network.
-	NetworkFee *float32 `json:"network_fee,omitempty"`
+	NetworkFee *decimal.Decimal `json:"network_fee,omitempty"`
 	// amount of crypto.
-	CryptoAmount *int32 `json:"crypto_amount,omitempty"`
+	CryptoAmount *decimal.Decimal `json:"crypto_amount,omitempty"`
 	// last price of that crypto currency that you want to buy.
-	CryptoPrice *int32 `json:"crypto_price,omitempty"`
+	CryptoPrice *decimal.Decimal `json:"crypto_price,omitempty"`
 	// can this order be payed or not.
 	CanPay *bool `json:"can_pay,omitempty"`
 	// is order redeemed or not.
@@ -79,9 +81,9 @@ func NewCryptoCurrencyOrderWithDefaults() *CryptoCurrencyOrder {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *CryptoCurrencyOrder) GetId() float32 {
+func (o *CryptoCurrencyOrder) GetId() int32 {
 	if o == nil || IsNil(o.Id) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Id
@@ -89,7 +91,7 @@ func (o *CryptoCurrencyOrder) GetId() float32 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoCurrencyOrder) GetIdOk() (*float32, bool) {
+func (o *CryptoCurrencyOrder) GetIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -105,8 +107,8 @@ func (o *CryptoCurrencyOrder) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given float32 and assigns it to the Id field.
-func (o *CryptoCurrencyOrder) SetId(v float32) {
+// SetId gets a reference to the given int32 and assigns it to the Id field.
+func (o *CryptoCurrencyOrder) SetId(v int32) {
 	o.Id = &v
 }
 
@@ -143,9 +145,9 @@ func (o *CryptoCurrencyOrder) SetReferenceCode(v string) {
 }
 
 // GetRequestedPrice returns the RequestedPrice field value if set, zero value otherwise.
-func (o *CryptoCurrencyOrder) GetRequestedPrice() int32 {
+func (o *CryptoCurrencyOrder) GetRequestedPrice() decimal.Decimal {
 	if o == nil || IsNil(o.RequestedPrice) {
-		var ret int32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.RequestedPrice
@@ -153,7 +155,7 @@ func (o *CryptoCurrencyOrder) GetRequestedPrice() int32 {
 
 // GetRequestedPriceOk returns a tuple with the RequestedPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoCurrencyOrder) GetRequestedPriceOk() (*int32, bool) {
+func (o *CryptoCurrencyOrder) GetRequestedPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.RequestedPrice) {
 		return nil, false
 	}
@@ -169,15 +171,15 @@ func (o *CryptoCurrencyOrder) HasRequestedPrice() bool {
 	return false
 }
 
-// SetRequestedPrice gets a reference to the given int32 and assigns it to the RequestedPrice field.
-func (o *CryptoCurrencyOrder) SetRequestedPrice(v int32) {
+// SetRequestedPrice gets a reference to the given decimal.Decimal and assigns it to the RequestedPrice field.
+func (o *CryptoCurrencyOrder) SetRequestedPrice(v decimal.Decimal) {
 	o.RequestedPrice = &v
 }
 
 // GetPrice returns the Price field value if set, zero value otherwise.
-func (o *CryptoCurrencyOrder) GetPrice() int32 {
+func (o *CryptoCurrencyOrder) GetPrice() decimal.Decimal {
 	if o == nil || IsNil(o.Price) {
-		var ret int32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.Price
@@ -185,7 +187,7 @@ func (o *CryptoCurrencyOrder) GetPrice() int32 {
 
 // GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoCurrencyOrder) GetPriceOk() (*int32, bool) {
+func (o *CryptoCurrencyOrder) GetPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.Price) {
 		return nil, false
 	}
@@ -201,8 +203,8 @@ func (o *CryptoCurrencyOrder) HasPrice() bool {
 	return false
 }
 
-// SetPrice gets a reference to the given int32 and assigns it to the Price field.
-func (o *CryptoCurrencyOrder) SetPrice(v int32) {
+// SetPrice gets a reference to the given decimal.Decimal and assigns it to the Price field.
+func (o *CryptoCurrencyOrder) SetPrice(v decimal.Decimal) {
 	o.Price = &v
 }
 
@@ -431,9 +433,9 @@ func (o *CryptoCurrencyOrder) SetStatusText(v string) {
 }
 
 // GetCommissionPercent returns the CommissionPercent field value if set, zero value otherwise.
-func (o *CryptoCurrencyOrder) GetCommissionPercent() float32 {
+func (o *CryptoCurrencyOrder) GetCommissionPercent() decimal.Decimal {
 	if o == nil || IsNil(o.CommissionPercent) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.CommissionPercent
@@ -441,7 +443,7 @@ func (o *CryptoCurrencyOrder) GetCommissionPercent() float32 {
 
 // GetCommissionPercentOk returns a tuple with the CommissionPercent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoCurrencyOrder) GetCommissionPercentOk() (*float32, bool) {
+func (o *CryptoCurrencyOrder) GetCommissionPercentOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.CommissionPercent) {
 		return nil, false
 	}
@@ -457,15 +459,15 @@ func (o *CryptoCurrencyOrder) HasCommissionPercent() bool {
 	return false
 }
 
-// SetCommissionPercent gets a reference to the given float32 and assigns it to the CommissionPercent field.
-func (o *CryptoCurrencyOrder) SetCommissionPercent(v float32) {
+// SetCommissionPercent gets a reference to the given decimal.Decimal and assigns it to the CommissionPercent field.
+func (o *CryptoCurrencyOrder) SetCommissionPercent(v decimal.Decimal) {
 	o.CommissionPercent = &v
 }
 
 // GetCommissionPrice returns the CommissionPrice field value if set, zero value otherwise.
-func (o *CryptoCurrencyOrder) GetCommissionPrice() int32 {
+func (o *CryptoCurrencyOrder) GetCommissionPrice() decimal.Decimal {
 	if o == nil || IsNil(o.CommissionPrice) {
-		var ret int32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.CommissionPrice
@@ -473,7 +475,7 @@ func (o *CryptoCurrencyOrder) GetCommissionPrice() int32 {
 
 // GetCommissionPriceOk returns a tuple with the CommissionPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoCurrencyOrder) GetCommissionPriceOk() (*int32, bool) {
+func (o *CryptoCurrencyOrder) GetCommissionPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.CommissionPrice) {
 		return nil, false
 	}
@@ -489,15 +491,15 @@ func (o *CryptoCurrencyOrder) HasCommissionPrice() bool {
 	return false
 }
 
-// SetCommissionPrice gets a reference to the given int32 and assigns it to the CommissionPrice field.
-func (o *CryptoCurrencyOrder) SetCommissionPrice(v int32) {
+// SetCommissionPrice gets a reference to the given decimal.Decimal and assigns it to the CommissionPrice field.
+func (o *CryptoCurrencyOrder) SetCommissionPrice(v decimal.Decimal) {
 	o.CommissionPrice = &v
 }
 
 // GetNetworkFee returns the NetworkFee field value if set, zero value otherwise.
-func (o *CryptoCurrencyOrder) GetNetworkFee() float32 {
+func (o *CryptoCurrencyOrder) GetNetworkFee() decimal.Decimal {
 	if o == nil || IsNil(o.NetworkFee) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.NetworkFee
@@ -505,7 +507,7 @@ func (o *CryptoCurrencyOrder) GetNetworkFee() float32 {
 
 // GetNetworkFeeOk returns a tuple with the NetworkFee field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoCurrencyOrder) GetNetworkFeeOk() (*float32, bool) {
+func (o *CryptoCurrencyOrder) GetNetworkFeeOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.NetworkFee) {
 		return nil, false
 	}
@@ -521,15 +523,15 @@ func (o *CryptoCurrencyOrder) HasNetworkFee() bool {
 	return false
 }
 
-// SetNetworkFee gets a reference to the given float32 and assigns it to the NetworkFee field.
-func (o *CryptoCurrencyOrder) SetNetworkFee(v float32) {
+// SetNetworkFee gets a reference to the given decimal.Decimal and assigns it to the NetworkFee field.
+func (o *CryptoCurrencyOrder) SetNetworkFee(v decimal.Decimal) {
 	o.NetworkFee = &v
 }
 
 // GetCryptoAmount returns the CryptoAmount field value if set, zero value otherwise.
-func (o *CryptoCurrencyOrder) GetCryptoAmount() int32 {
+func (o *CryptoCurrencyOrder) GetCryptoAmount() decimal.Decimal {
 	if o == nil || IsNil(o.CryptoAmount) {
-		var ret int32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.CryptoAmount
@@ -537,7 +539,7 @@ func (o *CryptoCurrencyOrder) GetCryptoAmount() int32 {
 
 // GetCryptoAmountOk returns a tuple with the CryptoAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoCurrencyOrder) GetCryptoAmountOk() (*int32, bool) {
+func (o *CryptoCurrencyOrder) GetCryptoAmountOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.CryptoAmount) {
 		return nil, false
 	}
@@ -553,15 +555,15 @@ func (o *CryptoCurrencyOrder) HasCryptoAmount() bool {
 	return false
 }
 
-// SetCryptoAmount gets a reference to the given int32 and assigns it to the CryptoAmount field.
-func (o *CryptoCurrencyOrder) SetCryptoAmount(v int32) {
+// SetCryptoAmount gets a reference to the given decimal.Decimal and assigns it to the CryptoAmount field.
+func (o *CryptoCurrencyOrder) SetCryptoAmount(v decimal.Decimal) {
 	o.CryptoAmount = &v
 }
 
 // GetCryptoPrice returns the CryptoPrice field value if set, zero value otherwise.
-func (o *CryptoCurrencyOrder) GetCryptoPrice() int32 {
+func (o *CryptoCurrencyOrder) GetCryptoPrice() decimal.Decimal {
 	if o == nil || IsNil(o.CryptoPrice) {
-		var ret int32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.CryptoPrice
@@ -569,7 +571,7 @@ func (o *CryptoCurrencyOrder) GetCryptoPrice() int32 {
 
 // GetCryptoPriceOk returns a tuple with the CryptoPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoCurrencyOrder) GetCryptoPriceOk() (*int32, bool) {
+func (o *CryptoCurrencyOrder) GetCryptoPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.CryptoPrice) {
 		return nil, false
 	}
@@ -585,8 +587,8 @@ func (o *CryptoCurrencyOrder) HasCryptoPrice() bool {
 	return false
 }
 
-// SetCryptoPrice gets a reference to the given int32 and assigns it to the CryptoPrice field.
-func (o *CryptoCurrencyOrder) SetCryptoPrice(v int32) {
+// SetCryptoPrice gets a reference to the given decimal.Decimal and assigns it to the CryptoPrice field.
+func (o *CryptoCurrencyOrder) SetCryptoPrice(v decimal.Decimal) {
 	o.CryptoPrice = &v
 }
 

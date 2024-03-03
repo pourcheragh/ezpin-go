@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FromCurrency** | Pointer to [**ExchangeRatesGet200ResponseResultsInnerFromCurrency**](ExchangeRatesGet200ResponseResultsInnerFromCurrency.md) |  | [optional] 
 **ToCurrency** | Pointer to [**ExchangeRatesGet200ResponseResultsInnerToCurrency**](ExchangeRatesGet200ResponseResultsInnerToCurrency.md) |  | [optional] 
-**Rate** | Pointer to **float32** | rate of exchange | [optional] 
+**Rate** | Pointer to **decimal.Decimal** | rate of exchange | [optional] 
 
 ## Methods
 
@@ -79,20 +79,20 @@ HasToCurrency returns a boolean if a field has been set.
 
 ### GetRate
 
-`func (o *ExchangeRatesGet200ResponseResultsInner) GetRate() float32`
+`func (o *ExchangeRatesGet200ResponseResultsInner) GetRate() decimal.Decimal`
 
 GetRate returns the Rate field if non-nil, zero value otherwise.
 
 ### GetRateOk
 
-`func (o *ExchangeRatesGet200ResponseResultsInner) GetRateOk() (*float32, bool)`
+`func (o *ExchangeRatesGet200ResponseResultsInner) GetRateOk() (*decimal.Decimal, bool)`
 
 GetRateOk returns a tuple with the Rate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRate
 
-`func (o *ExchangeRatesGet200ResponseResultsInner) SetRate(v float32)`
+`func (o *ExchangeRatesGet200ResponseResultsInner) SetRate(v decimal.Decimal)`
 
 SetRate sets Rate field to given value.
 

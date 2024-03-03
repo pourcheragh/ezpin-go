@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Price** | Pointer to **float32** | showing price | [optional] 
+**Price** | Pointer to **decimal.Decimal** | showing price | [optional] 
 **ShowingCurrency** | Pointer to [**[]ShowingCurrency**](ShowingCurrency.md) |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPrice
 
-`func (o *CatalogShowingPrice) GetPrice() float32`
+`func (o *CatalogShowingPrice) GetPrice() decimal.Decimal`
 
 GetPrice returns the Price field if non-nil, zero value otherwise.
 
 ### GetPriceOk
 
-`func (o *CatalogShowingPrice) GetPriceOk() (*float32, bool)`
+`func (o *CatalogShowingPrice) GetPriceOk() (*decimal.Decimal, bool)`
 
 GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrice
 
-`func (o *CatalogShowingPrice) SetPrice(v float32)`
+`func (o *CatalogShowingPrice) SetPrice(v decimal.Decimal)`
 
 SetPrice sets Price field to given value.
 

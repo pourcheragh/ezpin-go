@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Barcode** | Pointer to **string** | Barcode Number Of Physical Card | [optional] 
-**Sku** | Pointer to **float32** | SKU Of Product | [optional] 
-**Price** | Pointer to **float32** | Item price | [optional] 
-**TerminalId** | Pointer to **float32** | Terminal ID of the sub-users that can be defined in setting section in user panel. | [optional] 
-**TerminalPin** | Pointer to **float32** | Pin defined for sub-user | [optional] 
+**Sku** | Pointer to **int32** | SKU Of Product | [optional] 
+**Price** | Pointer to **decimal.Decimal** | Item price | [optional] 
+**TerminalId** | Pointer to **int32** | Terminal ID of the sub-users that can be defined in setting section in user panel. | [optional] 
+**TerminalPin** | Pointer to **int32** | Pin defined for sub-user | [optional] 
 **ReferenceCode** | Pointer to **string** | A unique UUID v4 referece code must be included in request | [optional] 
 
 ## Methods
@@ -57,20 +57,20 @@ HasBarcode returns a boolean if a field has been set.
 
 ### GetSku
 
-`func (o *CardsActivatePostRequest) GetSku() float32`
+`func (o *CardsActivatePostRequest) GetSku() int32`
 
 GetSku returns the Sku field if non-nil, zero value otherwise.
 
 ### GetSkuOk
 
-`func (o *CardsActivatePostRequest) GetSkuOk() (*float32, bool)`
+`func (o *CardsActivatePostRequest) GetSkuOk() (*int32, bool)`
 
 GetSkuOk returns a tuple with the Sku field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSku
 
-`func (o *CardsActivatePostRequest) SetSku(v float32)`
+`func (o *CardsActivatePostRequest) SetSku(v int32)`
 
 SetSku sets Sku field to given value.
 
@@ -82,20 +82,20 @@ HasSku returns a boolean if a field has been set.
 
 ### GetPrice
 
-`func (o *CardsActivatePostRequest) GetPrice() float32`
+`func (o *CardsActivatePostRequest) GetPrice() decimal.Decimal`
 
 GetPrice returns the Price field if non-nil, zero value otherwise.
 
 ### GetPriceOk
 
-`func (o *CardsActivatePostRequest) GetPriceOk() (*float32, bool)`
+`func (o *CardsActivatePostRequest) GetPriceOk() (*decimal.Decimal, bool)`
 
 GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrice
 
-`func (o *CardsActivatePostRequest) SetPrice(v float32)`
+`func (o *CardsActivatePostRequest) SetPrice(v decimal.Decimal)`
 
 SetPrice sets Price field to given value.
 
@@ -107,20 +107,20 @@ HasPrice returns a boolean if a field has been set.
 
 ### GetTerminalId
 
-`func (o *CardsActivatePostRequest) GetTerminalId() float32`
+`func (o *CardsActivatePostRequest) GetTerminalId() int32`
 
 GetTerminalId returns the TerminalId field if non-nil, zero value otherwise.
 
 ### GetTerminalIdOk
 
-`func (o *CardsActivatePostRequest) GetTerminalIdOk() (*float32, bool)`
+`func (o *CardsActivatePostRequest) GetTerminalIdOk() (*int32, bool)`
 
 GetTerminalIdOk returns a tuple with the TerminalId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTerminalId
 
-`func (o *CardsActivatePostRequest) SetTerminalId(v float32)`
+`func (o *CardsActivatePostRequest) SetTerminalId(v int32)`
 
 SetTerminalId sets TerminalId field to given value.
 
@@ -132,20 +132,20 @@ HasTerminalId returns a boolean if a field has been set.
 
 ### GetTerminalPin
 
-`func (o *CardsActivatePostRequest) GetTerminalPin() float32`
+`func (o *CardsActivatePostRequest) GetTerminalPin() int32`
 
 GetTerminalPin returns the TerminalPin field if non-nil, zero value otherwise.
 
 ### GetTerminalPinOk
 
-`func (o *CardsActivatePostRequest) GetTerminalPinOk() (*float32, bool)`
+`func (o *CardsActivatePostRequest) GetTerminalPinOk() (*int32, bool)`
 
 GetTerminalPinOk returns a tuple with the TerminalPin field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTerminalPin
 
-`func (o *CardsActivatePostRequest) SetTerminalPin(v float32)`
+`func (o *CardsActivatePostRequest) SetTerminalPin(v int32)`
 
 SetTerminalPin sets TerminalPin field to given value.
 

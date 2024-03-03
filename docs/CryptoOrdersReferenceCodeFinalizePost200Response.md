@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Detail** | Pointer to **string** | result of finaliz | [optional] 
-**Code** | Pointer to **float32** | message code | [optional] 
+**Code** | Pointer to **int32** | message code | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasDetail returns a boolean if a field has been set.
 
 ### GetCode
 
-`func (o *CryptoOrdersReferenceCodeFinalizePost200Response) GetCode() float32`
+`func (o *CryptoOrdersReferenceCodeFinalizePost200Response) GetCode() int32`
 
 GetCode returns the Code field if non-nil, zero value otherwise.
 
 ### GetCodeOk
 
-`func (o *CryptoOrdersReferenceCodeFinalizePost200Response) GetCodeOk() (*float32, bool)`
+`func (o *CryptoOrdersReferenceCodeFinalizePost200Response) GetCodeOk() (*int32, bool)`
 
 GetCodeOk returns a tuple with the Code field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCode
 
-`func (o *CryptoOrdersReferenceCodeFinalizePost200Response) SetCode(v float32)`
+`func (o *CryptoOrdersReferenceCodeFinalizePost200Response) SetCode(v int32)`
 
 SetCode sets Code field to given value.
 

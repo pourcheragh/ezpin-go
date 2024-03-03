@@ -12,6 +12,8 @@ package ezpin
 
 import (
 	"encoding/json"
+
+	"github.com/shopspring/decimal"
 )
 
 // checks if the CryptoOrdersPostRequest type satisfies the MappedNullable interface at compile time
@@ -24,13 +26,13 @@ type CryptoOrdersPostRequest struct {
 	// ID of Crypto Currency
 	CryptoCurrencyId *int32 `json:"crypto_currency_id,omitempty"`
 	// The amount you need to exchange from fiat currency to Cryptocurrency
-	RequestedPrice *int32 `json:"requested_price,omitempty"`
+	RequestedPrice *decimal.Decimal `json:"requested_price,omitempty"`
 	// A unique UUID v4 reference code must be included in request
 	ReferenceCode *string `json:"reference_code,omitempty"`
 	// Terminal ID of the sub-users that can be defined in setting section in user panel
-	TerminalId *float32 `json:"terminal_id,omitempty"`
+	TerminalId *int32 `json:"terminal_id,omitempty"`
 	// Pin defined for sub-user
-	TerminalPin *float32 `json:"terminal_pin,omitempty"`
+	TerminalPin *int32 `json:"terminal_pin,omitempty"`
 }
 
 // NewCryptoOrdersPostRequest instantiates a new CryptoOrdersPostRequest object
@@ -115,9 +117,9 @@ func (o *CryptoOrdersPostRequest) SetCryptoCurrencyId(v int32) {
 }
 
 // GetRequestedPrice returns the RequestedPrice field value if set, zero value otherwise.
-func (o *CryptoOrdersPostRequest) GetRequestedPrice() int32 {
+func (o *CryptoOrdersPostRequest) GetRequestedPrice() decimal.Decimal {
 	if o == nil || IsNil(o.RequestedPrice) {
-		var ret int32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.RequestedPrice
@@ -125,7 +127,7 @@ func (o *CryptoOrdersPostRequest) GetRequestedPrice() int32 {
 
 // GetRequestedPriceOk returns a tuple with the RequestedPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoOrdersPostRequest) GetRequestedPriceOk() (*int32, bool) {
+func (o *CryptoOrdersPostRequest) GetRequestedPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.RequestedPrice) {
 		return nil, false
 	}
@@ -141,8 +143,8 @@ func (o *CryptoOrdersPostRequest) HasRequestedPrice() bool {
 	return false
 }
 
-// SetRequestedPrice gets a reference to the given int32 and assigns it to the RequestedPrice field.
-func (o *CryptoOrdersPostRequest) SetRequestedPrice(v int32) {
+// SetRequestedPrice gets a reference to the given decimal.Decimal and assigns it to the RequestedPrice field.
+func (o *CryptoOrdersPostRequest) SetRequestedPrice(v decimal.Decimal) {
 	o.RequestedPrice = &v
 }
 
@@ -179,9 +181,9 @@ func (o *CryptoOrdersPostRequest) SetReferenceCode(v string) {
 }
 
 // GetTerminalId returns the TerminalId field value if set, zero value otherwise.
-func (o *CryptoOrdersPostRequest) GetTerminalId() float32 {
+func (o *CryptoOrdersPostRequest) GetTerminalId() int32 {
 	if o == nil || IsNil(o.TerminalId) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.TerminalId
@@ -189,7 +191,7 @@ func (o *CryptoOrdersPostRequest) GetTerminalId() float32 {
 
 // GetTerminalIdOk returns a tuple with the TerminalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoOrdersPostRequest) GetTerminalIdOk() (*float32, bool) {
+func (o *CryptoOrdersPostRequest) GetTerminalIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.TerminalId) {
 		return nil, false
 	}
@@ -205,15 +207,15 @@ func (o *CryptoOrdersPostRequest) HasTerminalId() bool {
 	return false
 }
 
-// SetTerminalId gets a reference to the given float32 and assigns it to the TerminalId field.
-func (o *CryptoOrdersPostRequest) SetTerminalId(v float32) {
+// SetTerminalId gets a reference to the given int32 and assigns it to the TerminalId field.
+func (o *CryptoOrdersPostRequest) SetTerminalId(v int32) {
 	o.TerminalId = &v
 }
 
 // GetTerminalPin returns the TerminalPin field value if set, zero value otherwise.
-func (o *CryptoOrdersPostRequest) GetTerminalPin() float32 {
+func (o *CryptoOrdersPostRequest) GetTerminalPin() int32 {
 	if o == nil || IsNil(o.TerminalPin) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.TerminalPin
@@ -221,7 +223,7 @@ func (o *CryptoOrdersPostRequest) GetTerminalPin() float32 {
 
 // GetTerminalPinOk returns a tuple with the TerminalPin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoOrdersPostRequest) GetTerminalPinOk() (*float32, bool) {
+func (o *CryptoOrdersPostRequest) GetTerminalPinOk() (*int32, bool) {
 	if o == nil || IsNil(o.TerminalPin) {
 		return nil, false
 	}
@@ -237,8 +239,8 @@ func (o *CryptoOrdersPostRequest) HasTerminalPin() bool {
 	return false
 }
 
-// SetTerminalPin gets a reference to the given float32 and assigns it to the TerminalPin field.
-func (o *CryptoOrdersPostRequest) SetTerminalPin(v float32) {
+// SetTerminalPin gets a reference to the given int32 and assigns it to the TerminalPin field.
+func (o *CryptoOrdersPostRequest) SetTerminalPin(v int32) {
 	o.TerminalPin = &v
 }
 

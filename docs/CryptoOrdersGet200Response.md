@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Count** | Pointer to **float32** | Number of total orders | [optional] 
+**Count** | Pointer to **int32** | Number of total orders | [optional] 
 **Next** | Pointer to **string** | next page of orders | [optional] 
 **Previous** | Pointer to **string** | previous page of orders | [optional] 
 **Results** | Pointer to [**[]CryptoCurrencyOrder**](CryptoCurrencyOrder.md) |  | [optional] 
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCount
 
-`func (o *CryptoOrdersGet200Response) GetCount() float32`
+`func (o *CryptoOrdersGet200Response) GetCount() int32`
 
 GetCount returns the Count field if non-nil, zero value otherwise.
 
 ### GetCountOk
 
-`func (o *CryptoOrdersGet200Response) GetCountOk() (*float32, bool)`
+`func (o *CryptoOrdersGet200Response) GetCountOk() (*int32, bool)`
 
 GetCountOk returns a tuple with the Count field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCount
 
-`func (o *CryptoOrdersGet200Response) SetCount(v float32)`
+`func (o *CryptoOrdersGet200Response) SetCount(v int32)`
 
 SetCount sets Count field to given value.
 

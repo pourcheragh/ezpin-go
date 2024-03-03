@@ -423,9 +423,9 @@ import (
 )
 
 func main() {
-	productSku := float32(2785) // float32 | SKU of desired product
-	itemCount := float32(10) // float32 | Number of items
-	price := float32(10) // float32 | Product price
+	productSku := int32(2785) // int32 | SKU of desired product
+	itemCount := int32(10) // int32 | Number of items
+	price := "10" // decimal.Decimal | Product price
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -445,7 +445,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**productSku** | **float32** | SKU of desired product | 
+**productSku** | **int32** | SKU of desired product | 
 
 ### Other Parameters
 
@@ -455,8 +455,8 @@ Other parameters are passed through a pointer to a apiCatalogsProductSkuAvailabi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **itemCount** | **float32** | Number of items | 
- **price** | **float32** | Product price | 
+ **itemCount** | **int32** | Number of items | 
+ **price** | **decimal.Decimal** | Product price | 
 
 ### Return type
 
@@ -537,7 +537,7 @@ Other parameters are passed through a pointer to a apiCryptoCatalogGetRequest st
 
 ## CryptoOrdersGet
 
-> CryptoOrdersGet200Response CryptoOrdersGet(ctx).Limit(limit).Offset(offset).StartDate(startDate).EndDate(endDate).Staus(staus).CanPay(canPay).Execute()
+> CryptoOrdersGet200Response CryptoOrdersGet(ctx).Limit(limit).Offset(offset).StartDate(startDate).EndDate(endDate).Status(status).CanPay(canPay).Execute()
 
 
 
@@ -554,16 +554,16 @@ import (
 )
 
 func main() {
-	limit := float32(10) // float32 | Maximum number of results (optional)
-	offset := float32(1) // float32 | Offset number in results (optional)
+	limit := int32(10) // int32 | Maximum number of results (optional)
+	offset := int32(1) // int32 | Offset number in results (optional)
 	startDate := "2020-01-03T04:00:00.000Z" // string | Report Start Date (optional)
 	endDate := "2020-01-07T11:00:00.000Z" // string | Report End Date (optional)
-	staus := int32(1) // int32 | Status of the order (optional)
+	status := int32(1) // int32 | Status of the order (optional)
 	canPay := true // bool | Shows if order can be finalized and has not been rejected or expired (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.CryptoOrdersGet(context.Background()).Limit(limit).Offset(offset).StartDate(startDate).EndDate(endDate).Staus(staus).CanPay(canPay).Execute()
+	resp, r, err := apiClient.DefaultAPI.CryptoOrdersGet(context.Background()).Limit(limit).Offset(offset).StartDate(startDate).EndDate(endDate).Status(status).CanPay(canPay).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.CryptoOrdersGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -584,11 +584,11 @@ Other parameters are passed through a pointer to a apiCryptoOrdersGetRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **float32** | Maximum number of results | 
- **offset** | **float32** | Offset number in results | 
+ **limit** | **int32** | Maximum number of results | 
+ **offset** | **int32** | Offset number in results | 
  **startDate** | **string** | Report Start Date | 
  **endDate** | **string** | Report End Date | 
- **staus** | **int32** | Status of the order | 
+ **status** | **int32** | Status of the order | 
  **canPay** | **bool** | Shows if order can be finalized and has not been rejected or expired | 
 
 ### Return type
@@ -1012,8 +1012,8 @@ import (
 )
 
 func main() {
-	limit := float32(10) // float32 | Number of items in list (optional)
-	offset := float32(1) // float32 | Offset number of list (optional)
+	limit := int32(10) // int32 | Number of items in list (optional)
+	offset := int32(1) // int32 | Offset number of list (optional)
 	startDate := "2020-01-03T04:00:00.000Z" // string | Report Start Date (optional)
 	endDate := "2020-01-07T11:00:00.000Z" // string | Report End Date (optional)
 
@@ -1040,8 +1040,8 @@ Other parameters are passed through a pointer to a apiOrdersGetRequest struct vi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **float32** | Number of items in list | 
- **offset** | **float32** | Offset number of list | 
+ **limit** | **int32** | Number of items in list | 
+ **offset** | **int32** | Offset number of list | 
  **startDate** | **string** | Report Start Date | 
  **endDate** | **string** | Report End Date | 
 

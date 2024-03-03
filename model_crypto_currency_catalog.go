@@ -12,6 +12,8 @@ package ezpin
 
 import (
 	"encoding/json"
+
+	"github.com/shopspring/decimal"
 )
 
 // checks if the CryptoCurrencyCatalog type satisfies the MappedNullable interface at compile time
@@ -20,7 +22,7 @@ var _ MappedNullable = &CryptoCurrencyCatalog{}
 // CryptoCurrencyCatalog struct for CryptoCurrencyCatalog
 type CryptoCurrencyCatalog struct {
 	// id of the fiat currency
-	CurrencyId *float32 `json:"currency_id,omitempty"`
+	CurrencyId *int32 `json:"currency_id,omitempty"`
 	// Title of the fiat currency
 	CurrencyTitle *string `json:"currency_title,omitempty"`
 	// symbol of this fiat currency
@@ -28,11 +30,11 @@ type CryptoCurrencyCatalog struct {
 	// code of this fiat currency
 	Code *string `json:"code,omitempty"`
 	// Price of crypto that you want to buy
-	Price *float32 `json:"price,omitempty"`
+	Price *decimal.Decimal `json:"price,omitempty"`
 	// Minumumm amount that you can buy more than this price.
-	MinAmount *float32 `json:"min_amount,omitempty"`
+	MinAmount *decimal.Decimal `json:"min_amount,omitempty"`
 	// Maximumm amount that you can buy this crpto currency less than this amount
-	MaxAmount *float32 `json:"max_amount,omitempty"`
+	MaxAmount *decimal.Decimal `json:"max_amount,omitempty"`
 	// id of this crypto currency
 	CryptoCurrencyId *string `json:"crypto_currency_id,omitempty"`
 	// name of this crypto currency
@@ -61,9 +63,9 @@ func NewCryptoCurrencyCatalogWithDefaults() *CryptoCurrencyCatalog {
 }
 
 // GetCurrencyId returns the CurrencyId field value if set, zero value otherwise.
-func (o *CryptoCurrencyCatalog) GetCurrencyId() float32 {
+func (o *CryptoCurrencyCatalog) GetCurrencyId() int32 {
 	if o == nil || IsNil(o.CurrencyId) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.CurrencyId
@@ -71,7 +73,7 @@ func (o *CryptoCurrencyCatalog) GetCurrencyId() float32 {
 
 // GetCurrencyIdOk returns a tuple with the CurrencyId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoCurrencyCatalog) GetCurrencyIdOk() (*float32, bool) {
+func (o *CryptoCurrencyCatalog) GetCurrencyIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.CurrencyId) {
 		return nil, false
 	}
@@ -87,8 +89,8 @@ func (o *CryptoCurrencyCatalog) HasCurrencyId() bool {
 	return false
 }
 
-// SetCurrencyId gets a reference to the given float32 and assigns it to the CurrencyId field.
-func (o *CryptoCurrencyCatalog) SetCurrencyId(v float32) {
+// SetCurrencyId gets a reference to the given int32 and assigns it to the CurrencyId field.
+func (o *CryptoCurrencyCatalog) SetCurrencyId(v int32) {
 	o.CurrencyId = &v
 }
 
@@ -189,9 +191,9 @@ func (o *CryptoCurrencyCatalog) SetCode(v string) {
 }
 
 // GetPrice returns the Price field value if set, zero value otherwise.
-func (o *CryptoCurrencyCatalog) GetPrice() float32 {
+func (o *CryptoCurrencyCatalog) GetPrice() decimal.Decimal {
 	if o == nil || IsNil(o.Price) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.Price
@@ -199,7 +201,7 @@ func (o *CryptoCurrencyCatalog) GetPrice() float32 {
 
 // GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoCurrencyCatalog) GetPriceOk() (*float32, bool) {
+func (o *CryptoCurrencyCatalog) GetPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.Price) {
 		return nil, false
 	}
@@ -215,15 +217,15 @@ func (o *CryptoCurrencyCatalog) HasPrice() bool {
 	return false
 }
 
-// SetPrice gets a reference to the given float32 and assigns it to the Price field.
-func (o *CryptoCurrencyCatalog) SetPrice(v float32) {
+// SetPrice gets a reference to the given decimal.Decimal and assigns it to the Price field.
+func (o *CryptoCurrencyCatalog) SetPrice(v decimal.Decimal) {
 	o.Price = &v
 }
 
 // GetMinAmount returns the MinAmount field value if set, zero value otherwise.
-func (o *CryptoCurrencyCatalog) GetMinAmount() float32 {
+func (o *CryptoCurrencyCatalog) GetMinAmount() decimal.Decimal {
 	if o == nil || IsNil(o.MinAmount) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.MinAmount
@@ -231,7 +233,7 @@ func (o *CryptoCurrencyCatalog) GetMinAmount() float32 {
 
 // GetMinAmountOk returns a tuple with the MinAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoCurrencyCatalog) GetMinAmountOk() (*float32, bool) {
+func (o *CryptoCurrencyCatalog) GetMinAmountOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.MinAmount) {
 		return nil, false
 	}
@@ -247,15 +249,15 @@ func (o *CryptoCurrencyCatalog) HasMinAmount() bool {
 	return false
 }
 
-// SetMinAmount gets a reference to the given float32 and assigns it to the MinAmount field.
-func (o *CryptoCurrencyCatalog) SetMinAmount(v float32) {
+// SetMinAmount gets a reference to the given decimal.Decimal and assigns it to the MinAmount field.
+func (o *CryptoCurrencyCatalog) SetMinAmount(v decimal.Decimal) {
 	o.MinAmount = &v
 }
 
 // GetMaxAmount returns the MaxAmount field value if set, zero value otherwise.
-func (o *CryptoCurrencyCatalog) GetMaxAmount() float32 {
+func (o *CryptoCurrencyCatalog) GetMaxAmount() decimal.Decimal {
 	if o == nil || IsNil(o.MaxAmount) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.MaxAmount
@@ -263,7 +265,7 @@ func (o *CryptoCurrencyCatalog) GetMaxAmount() float32 {
 
 // GetMaxAmountOk returns a tuple with the MaxAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CryptoCurrencyCatalog) GetMaxAmountOk() (*float32, bool) {
+func (o *CryptoCurrencyCatalog) GetMaxAmountOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.MaxAmount) {
 		return nil, false
 	}
@@ -279,8 +281,8 @@ func (o *CryptoCurrencyCatalog) HasMaxAmount() bool {
 	return false
 }
 
-// SetMaxAmount gets a reference to the given float32 and assigns it to the MaxAmount field.
-func (o *CryptoCurrencyCatalog) SetMaxAmount(v float32) {
+// SetMaxAmount gets a reference to the given decimal.Decimal and assigns it to the MaxAmount field.
+func (o *CryptoCurrencyCatalog) SetMaxAmount(v decimal.Decimal) {
 	o.MaxAmount = &v
 }
 

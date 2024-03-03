@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TransactionId** | Pointer to **float32** | id of activation transaction | [optional] 
+**TransactionId** | Pointer to **int32** | id of activation transaction | [optional] 
 **Barcode** | Pointer to **string** | barcode of physical card | [optional] 
 **Product** | Pointer to **string** | name of product | [optional] 
-**Status** | Pointer to **float32** | Pending(-1) , Activated(1) , Inactive(0) | [optional] 
+**Status** | Pointer to **int32** | *&#x60;-1&#x60; Pending *&#x60;0&#x60; Inactive *&#x60;1&#x60; Activated | [optional] 
 **StatusText** | Pointer to **string** | status of activation order | [optional] 
-**TotalFaceValue** | Pointer to **float32** | physical card price | [optional] 
-**TotalFees** | Pointer to **float32** | activation fee of physical card | [optional] 
-**TotalDiscounts** | Pointer to **float32** | discount of physical card | [optional] 
-**TotalCustomerCost** | Pointer to **float32** | price that customer should pay | [optional] 
-**TerminalId** | Pointer to **float32** | Terminal ID of the sub-user | [optional] 
+**TotalFaceValue** | Pointer to **decimal.Decimal** | physical card price | [optional] 
+**TotalFees** | Pointer to **decimal.Decimal** | activation fee of physical card | [optional] 
+**TotalDiscounts** | Pointer to **decimal.Decimal** | discount of physical card | [optional] 
+**TotalCustomerCost** | Pointer to **decimal.Decimal** | price that customer should pay | [optional] 
+**TerminalId** | Pointer to **int32** | Terminal ID of the sub-user | [optional] 
 **Currency** | Pointer to **string** | name of currency | [optional] 
 **CreatedTime** | Pointer to **string** | time of activation | [optional] 
 **ReferenceCode** | Pointer to **string** | reference code of activation | [optional] 
@@ -39,20 +39,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetTransactionId
 
-`func (o *Transaction) GetTransactionId() float32`
+`func (o *Transaction) GetTransactionId() int32`
 
 GetTransactionId returns the TransactionId field if non-nil, zero value otherwise.
 
 ### GetTransactionIdOk
 
-`func (o *Transaction) GetTransactionIdOk() (*float32, bool)`
+`func (o *Transaction) GetTransactionIdOk() (*int32, bool)`
 
 GetTransactionIdOk returns a tuple with the TransactionId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTransactionId
 
-`func (o *Transaction) SetTransactionId(v float32)`
+`func (o *Transaction) SetTransactionId(v int32)`
 
 SetTransactionId sets TransactionId field to given value.
 
@@ -114,20 +114,20 @@ HasProduct returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *Transaction) GetStatus() float32`
+`func (o *Transaction) GetStatus() int32`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *Transaction) GetStatusOk() (*float32, bool)`
+`func (o *Transaction) GetStatusOk() (*int32, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *Transaction) SetStatus(v float32)`
+`func (o *Transaction) SetStatus(v int32)`
 
 SetStatus sets Status field to given value.
 
@@ -164,20 +164,20 @@ HasStatusText returns a boolean if a field has been set.
 
 ### GetTotalFaceValue
 
-`func (o *Transaction) GetTotalFaceValue() float32`
+`func (o *Transaction) GetTotalFaceValue() decimal.Decimal`
 
 GetTotalFaceValue returns the TotalFaceValue field if non-nil, zero value otherwise.
 
 ### GetTotalFaceValueOk
 
-`func (o *Transaction) GetTotalFaceValueOk() (*float32, bool)`
+`func (o *Transaction) GetTotalFaceValueOk() (*decimal.Decimal, bool)`
 
 GetTotalFaceValueOk returns a tuple with the TotalFaceValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalFaceValue
 
-`func (o *Transaction) SetTotalFaceValue(v float32)`
+`func (o *Transaction) SetTotalFaceValue(v decimal.Decimal)`
 
 SetTotalFaceValue sets TotalFaceValue field to given value.
 
@@ -189,20 +189,20 @@ HasTotalFaceValue returns a boolean if a field has been set.
 
 ### GetTotalFees
 
-`func (o *Transaction) GetTotalFees() float32`
+`func (o *Transaction) GetTotalFees() decimal.Decimal`
 
 GetTotalFees returns the TotalFees field if non-nil, zero value otherwise.
 
 ### GetTotalFeesOk
 
-`func (o *Transaction) GetTotalFeesOk() (*float32, bool)`
+`func (o *Transaction) GetTotalFeesOk() (*decimal.Decimal, bool)`
 
 GetTotalFeesOk returns a tuple with the TotalFees field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalFees
 
-`func (o *Transaction) SetTotalFees(v float32)`
+`func (o *Transaction) SetTotalFees(v decimal.Decimal)`
 
 SetTotalFees sets TotalFees field to given value.
 
@@ -214,20 +214,20 @@ HasTotalFees returns a boolean if a field has been set.
 
 ### GetTotalDiscounts
 
-`func (o *Transaction) GetTotalDiscounts() float32`
+`func (o *Transaction) GetTotalDiscounts() decimal.Decimal`
 
 GetTotalDiscounts returns the TotalDiscounts field if non-nil, zero value otherwise.
 
 ### GetTotalDiscountsOk
 
-`func (o *Transaction) GetTotalDiscountsOk() (*float32, bool)`
+`func (o *Transaction) GetTotalDiscountsOk() (*decimal.Decimal, bool)`
 
 GetTotalDiscountsOk returns a tuple with the TotalDiscounts field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalDiscounts
 
-`func (o *Transaction) SetTotalDiscounts(v float32)`
+`func (o *Transaction) SetTotalDiscounts(v decimal.Decimal)`
 
 SetTotalDiscounts sets TotalDiscounts field to given value.
 
@@ -239,20 +239,20 @@ HasTotalDiscounts returns a boolean if a field has been set.
 
 ### GetTotalCustomerCost
 
-`func (o *Transaction) GetTotalCustomerCost() float32`
+`func (o *Transaction) GetTotalCustomerCost() decimal.Decimal`
 
 GetTotalCustomerCost returns the TotalCustomerCost field if non-nil, zero value otherwise.
 
 ### GetTotalCustomerCostOk
 
-`func (o *Transaction) GetTotalCustomerCostOk() (*float32, bool)`
+`func (o *Transaction) GetTotalCustomerCostOk() (*decimal.Decimal, bool)`
 
 GetTotalCustomerCostOk returns a tuple with the TotalCustomerCost field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalCustomerCost
 
-`func (o *Transaction) SetTotalCustomerCost(v float32)`
+`func (o *Transaction) SetTotalCustomerCost(v decimal.Decimal)`
 
 SetTotalCustomerCost sets TotalCustomerCost field to given value.
 
@@ -264,20 +264,20 @@ HasTotalCustomerCost returns a boolean if a field has been set.
 
 ### GetTerminalId
 
-`func (o *Transaction) GetTerminalId() float32`
+`func (o *Transaction) GetTerminalId() int32`
 
 GetTerminalId returns the TerminalId field if non-nil, zero value otherwise.
 
 ### GetTerminalIdOk
 
-`func (o *Transaction) GetTerminalIdOk() (*float32, bool)`
+`func (o *Transaction) GetTerminalIdOk() (*int32, bool)`
 
 GetTerminalIdOk returns a tuple with the TerminalId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTerminalId
 
-`func (o *Transaction) SetTerminalId(v float32)`
+`func (o *Transaction) SetTerminalId(v int32)`
 
 SetTerminalId sets TerminalId field to given value.
 

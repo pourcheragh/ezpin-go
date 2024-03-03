@@ -12,6 +12,8 @@ package ezpin
 
 import (
 	"encoding/json"
+	
+	"github.com/shopspring/decimal"
 )
 
 // checks if the CardsActivatePostRequest type satisfies the MappedNullable interface at compile time
@@ -22,13 +24,13 @@ type CardsActivatePostRequest struct {
 	// Barcode Number Of Physical Card
 	Barcode *string `json:"barcode,omitempty"`
 	// SKU Of Product
-	Sku *float32 `json:"sku,omitempty"`
+	Sku *int32 `json:"sku,omitempty"`
 	// Item price
-	Price *float32 `json:"price,omitempty"`
+	Price *decimal.Decimal `json:"price,omitempty"`
 	// Terminal ID of the sub-users that can be defined in setting section in user panel.
-	TerminalId *float32 `json:"terminal_id,omitempty"`
+	TerminalId *int32 `json:"terminal_id,omitempty"`
 	// Pin defined for sub-user
-	TerminalPin *float32 `json:"terminal_pin,omitempty"`
+	TerminalPin *int32 `json:"terminal_pin,omitempty"`
 	// A unique UUID v4 referece code must be included in request
 	ReferenceCode *string `json:"reference_code,omitempty"`
 }
@@ -83,9 +85,9 @@ func (o *CardsActivatePostRequest) SetBarcode(v string) {
 }
 
 // GetSku returns the Sku field value if set, zero value otherwise.
-func (o *CardsActivatePostRequest) GetSku() float32 {
+func (o *CardsActivatePostRequest) GetSku() int32 {
 	if o == nil || IsNil(o.Sku) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Sku
@@ -93,7 +95,7 @@ func (o *CardsActivatePostRequest) GetSku() float32 {
 
 // GetSkuOk returns a tuple with the Sku field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardsActivatePostRequest) GetSkuOk() (*float32, bool) {
+func (o *CardsActivatePostRequest) GetSkuOk() (*int32, bool) {
 	if o == nil || IsNil(o.Sku) {
 		return nil, false
 	}
@@ -109,15 +111,15 @@ func (o *CardsActivatePostRequest) HasSku() bool {
 	return false
 }
 
-// SetSku gets a reference to the given float32 and assigns it to the Sku field.
-func (o *CardsActivatePostRequest) SetSku(v float32) {
+// SetSku gets a reference to the given int32 and assigns it to the Sku field.
+func (o *CardsActivatePostRequest) SetSku(v int32) {
 	o.Sku = &v
 }
 
 // GetPrice returns the Price field value if set, zero value otherwise.
-func (o *CardsActivatePostRequest) GetPrice() float32 {
+func (o *CardsActivatePostRequest) GetPrice() decimal.Decimal {
 	if o == nil || IsNil(o.Price) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.Price
@@ -125,7 +127,7 @@ func (o *CardsActivatePostRequest) GetPrice() float32 {
 
 // GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardsActivatePostRequest) GetPriceOk() (*float32, bool) {
+func (o *CardsActivatePostRequest) GetPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.Price) {
 		return nil, false
 	}
@@ -141,15 +143,15 @@ func (o *CardsActivatePostRequest) HasPrice() bool {
 	return false
 }
 
-// SetPrice gets a reference to the given float32 and assigns it to the Price field.
-func (o *CardsActivatePostRequest) SetPrice(v float32) {
+// SetPrice gets a reference to the given decimal.Decimal and assigns it to the Price field.
+func (o *CardsActivatePostRequest) SetPrice(v decimal.Decimal) {
 	o.Price = &v
 }
 
 // GetTerminalId returns the TerminalId field value if set, zero value otherwise.
-func (o *CardsActivatePostRequest) GetTerminalId() float32 {
+func (o *CardsActivatePostRequest) GetTerminalId() int32 {
 	if o == nil || IsNil(o.TerminalId) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.TerminalId
@@ -157,7 +159,7 @@ func (o *CardsActivatePostRequest) GetTerminalId() float32 {
 
 // GetTerminalIdOk returns a tuple with the TerminalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardsActivatePostRequest) GetTerminalIdOk() (*float32, bool) {
+func (o *CardsActivatePostRequest) GetTerminalIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.TerminalId) {
 		return nil, false
 	}
@@ -173,15 +175,15 @@ func (o *CardsActivatePostRequest) HasTerminalId() bool {
 	return false
 }
 
-// SetTerminalId gets a reference to the given float32 and assigns it to the TerminalId field.
-func (o *CardsActivatePostRequest) SetTerminalId(v float32) {
+// SetTerminalId gets a reference to the given int32 and assigns it to the TerminalId field.
+func (o *CardsActivatePostRequest) SetTerminalId(v int32) {
 	o.TerminalId = &v
 }
 
 // GetTerminalPin returns the TerminalPin field value if set, zero value otherwise.
-func (o *CardsActivatePostRequest) GetTerminalPin() float32 {
+func (o *CardsActivatePostRequest) GetTerminalPin() int32 {
 	if o == nil || IsNil(o.TerminalPin) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.TerminalPin
@@ -189,7 +191,7 @@ func (o *CardsActivatePostRequest) GetTerminalPin() float32 {
 
 // GetTerminalPinOk returns a tuple with the TerminalPin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardsActivatePostRequest) GetTerminalPinOk() (*float32, bool) {
+func (o *CardsActivatePostRequest) GetTerminalPinOk() (*int32, bool) {
 	if o == nil || IsNil(o.TerminalPin) {
 		return nil, false
 	}
@@ -205,8 +207,8 @@ func (o *CardsActivatePostRequest) HasTerminalPin() bool {
 	return false
 }
 
-// SetTerminalPin gets a reference to the given float32 and assigns it to the TerminalPin field.
-func (o *CardsActivatePostRequest) SetTerminalPin(v float32) {
+// SetTerminalPin gets a reference to the given int32 and assigns it to the TerminalPin field.
+func (o *CardsActivatePostRequest) SetTerminalPin(v int32) {
 	o.TerminalPin = &v
 }
 

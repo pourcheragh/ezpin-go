@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Barcode** | Pointer to **string** | barcode of the physical card | [optional] 
 **Product** | Pointer to **string** | name of the physical product | [optional] 
-**Sku** | Pointer to **float32** | sku of the physical product | [optional] 
+**Sku** | Pointer to **int32** | sku of the physical product | [optional] 
 **StatusText** | Pointer to **string** | status of activation process | [optional] 
-**Status** | Pointer to **float32** | Pending(-1) , Activated(1) , Inactive(0) | [optional] 
-**MinPrice** | Pointer to **float32** | minimumm price available for physical product | [optional] 
-**MaxPrice** | Pointer to **float32** | maximumm price available for physical product | [optional] 
-**ActivatePrice** | Pointer to **float32** | price that the card has been activated with | [optional] 
+**Status** | Pointer to **int32** | *&#x60;-1&#x60; Pending *&#x60;0&#x60; Inactive *&#x60;1&#x60; Activated | [optional] 
+**MinPrice** | Pointer to **decimal.Decimal** | minimumm price available for physical product | [optional] 
+**MaxPrice** | Pointer to **decimal.Decimal** | maximumm price available for physical product | [optional] 
+**ActivatePrice** | Pointer to **decimal.Decimal** | price that the card has been activated with | [optional] 
 **ActivatedTime** | Pointer to **string** | time of activation | [optional] 
 **Currency** | Pointer to **string** | currency of physical product | [optional] 
 
@@ -86,20 +86,20 @@ HasProduct returns a boolean if a field has been set.
 
 ### GetSku
 
-`func (o *CardsCheckGet200Response) GetSku() float32`
+`func (o *CardsCheckGet200Response) GetSku() int32`
 
 GetSku returns the Sku field if non-nil, zero value otherwise.
 
 ### GetSkuOk
 
-`func (o *CardsCheckGet200Response) GetSkuOk() (*float32, bool)`
+`func (o *CardsCheckGet200Response) GetSkuOk() (*int32, bool)`
 
 GetSkuOk returns a tuple with the Sku field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSku
 
-`func (o *CardsCheckGet200Response) SetSku(v float32)`
+`func (o *CardsCheckGet200Response) SetSku(v int32)`
 
 SetSku sets Sku field to given value.
 
@@ -136,20 +136,20 @@ HasStatusText returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *CardsCheckGet200Response) GetStatus() float32`
+`func (o *CardsCheckGet200Response) GetStatus() int32`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *CardsCheckGet200Response) GetStatusOk() (*float32, bool)`
+`func (o *CardsCheckGet200Response) GetStatusOk() (*int32, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *CardsCheckGet200Response) SetStatus(v float32)`
+`func (o *CardsCheckGet200Response) SetStatus(v int32)`
 
 SetStatus sets Status field to given value.
 
@@ -161,20 +161,20 @@ HasStatus returns a boolean if a field has been set.
 
 ### GetMinPrice
 
-`func (o *CardsCheckGet200Response) GetMinPrice() float32`
+`func (o *CardsCheckGet200Response) GetMinPrice() decimal.Decimal`
 
 GetMinPrice returns the MinPrice field if non-nil, zero value otherwise.
 
 ### GetMinPriceOk
 
-`func (o *CardsCheckGet200Response) GetMinPriceOk() (*float32, bool)`
+`func (o *CardsCheckGet200Response) GetMinPriceOk() (*decimal.Decimal, bool)`
 
 GetMinPriceOk returns a tuple with the MinPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMinPrice
 
-`func (o *CardsCheckGet200Response) SetMinPrice(v float32)`
+`func (o *CardsCheckGet200Response) SetMinPrice(v decimal.Decimal)`
 
 SetMinPrice sets MinPrice field to given value.
 
@@ -186,20 +186,20 @@ HasMinPrice returns a boolean if a field has been set.
 
 ### GetMaxPrice
 
-`func (o *CardsCheckGet200Response) GetMaxPrice() float32`
+`func (o *CardsCheckGet200Response) GetMaxPrice() decimal.Decimal`
 
 GetMaxPrice returns the MaxPrice field if non-nil, zero value otherwise.
 
 ### GetMaxPriceOk
 
-`func (o *CardsCheckGet200Response) GetMaxPriceOk() (*float32, bool)`
+`func (o *CardsCheckGet200Response) GetMaxPriceOk() (*decimal.Decimal, bool)`
 
 GetMaxPriceOk returns a tuple with the MaxPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMaxPrice
 
-`func (o *CardsCheckGet200Response) SetMaxPrice(v float32)`
+`func (o *CardsCheckGet200Response) SetMaxPrice(v decimal.Decimal)`
 
 SetMaxPrice sets MaxPrice field to given value.
 
@@ -211,20 +211,20 @@ HasMaxPrice returns a boolean if a field has been set.
 
 ### GetActivatePrice
 
-`func (o *CardsCheckGet200Response) GetActivatePrice() float32`
+`func (o *CardsCheckGet200Response) GetActivatePrice() decimal.Decimal`
 
 GetActivatePrice returns the ActivatePrice field if non-nil, zero value otherwise.
 
 ### GetActivatePriceOk
 
-`func (o *CardsCheckGet200Response) GetActivatePriceOk() (*float32, bool)`
+`func (o *CardsCheckGet200Response) GetActivatePriceOk() (*decimal.Decimal, bool)`
 
 GetActivatePriceOk returns a tuple with the ActivatePrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetActivatePrice
 
-`func (o *CardsCheckGet200Response) SetActivatePrice(v float32)`
+`func (o *CardsCheckGet200Response) SetActivatePrice(v decimal.Decimal)`
 
 SetActivatePrice sets ActivatePrice field to given value.
 

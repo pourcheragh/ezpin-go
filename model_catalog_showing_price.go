@@ -12,6 +12,8 @@ package ezpin
 
 import (
 	"encoding/json"
+
+	"github.com/shopspring/decimal"
 )
 
 // checks if the CatalogShowingPrice type satisfies the MappedNullable interface at compile time
@@ -20,7 +22,7 @@ var _ MappedNullable = &CatalogShowingPrice{}
 // CatalogShowingPrice struct for CatalogShowingPrice
 type CatalogShowingPrice struct {
 	// showing price
-	Price *float32 `json:"price,omitempty"`
+	Price *decimal.Decimal `json:"price,omitempty"`
 	ShowingCurrency []ShowingCurrency `json:"showing_currency,omitempty"`
 }
 
@@ -42,9 +44,9 @@ func NewCatalogShowingPriceWithDefaults() *CatalogShowingPrice {
 }
 
 // GetPrice returns the Price field value if set, zero value otherwise.
-func (o *CatalogShowingPrice) GetPrice() float32 {
+func (o *CatalogShowingPrice) GetPrice() decimal.Decimal {
 	if o == nil || IsNil(o.Price) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.Price
@@ -52,7 +54,7 @@ func (o *CatalogShowingPrice) GetPrice() float32 {
 
 // GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CatalogShowingPrice) GetPriceOk() (*float32, bool) {
+func (o *CatalogShowingPrice) GetPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.Price) {
 		return nil, false
 	}
@@ -68,8 +70,8 @@ func (o *CatalogShowingPrice) HasPrice() bool {
 	return false
 }
 
-// SetPrice gets a reference to the given float32 and assigns it to the Price field.
-func (o *CatalogShowingPrice) SetPrice(v float32) {
+// SetPrice gets a reference to the given decimal.Decimal and assigns it to the Price field.
+func (o *CatalogShowingPrice) SetPrice(v decimal.Decimal) {
 	o.Price = &v
 }
 

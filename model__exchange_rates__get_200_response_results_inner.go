@@ -12,6 +12,8 @@ package ezpin
 
 import (
 	"encoding/json"
+
+	"github.com/shopspring/decimal"
 )
 
 // checks if the ExchangeRatesGet200ResponseResultsInner type satisfies the MappedNullable interface at compile time
@@ -22,7 +24,7 @@ type ExchangeRatesGet200ResponseResultsInner struct {
 	FromCurrency *ExchangeRatesGet200ResponseResultsInnerFromCurrency `json:"from_currency,omitempty"`
 	ToCurrency *ExchangeRatesGet200ResponseResultsInnerToCurrency `json:"to_currency,omitempty"`
 	// rate of exchange
-	Rate *float32 `json:"rate,omitempty"`
+	Rate *decimal.Decimal `json:"rate,omitempty"`
 }
 
 // NewExchangeRatesGet200ResponseResultsInner instantiates a new ExchangeRatesGet200ResponseResultsInner object
@@ -107,9 +109,9 @@ func (o *ExchangeRatesGet200ResponseResultsInner) SetToCurrency(v ExchangeRatesG
 }
 
 // GetRate returns the Rate field value if set, zero value otherwise.
-func (o *ExchangeRatesGet200ResponseResultsInner) GetRate() float32 {
+func (o *ExchangeRatesGet200ResponseResultsInner) GetRate() decimal.Decimal {
 	if o == nil || IsNil(o.Rate) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.Rate
@@ -117,7 +119,7 @@ func (o *ExchangeRatesGet200ResponseResultsInner) GetRate() float32 {
 
 // GetRateOk returns a tuple with the Rate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ExchangeRatesGet200ResponseResultsInner) GetRateOk() (*float32, bool) {
+func (o *ExchangeRatesGet200ResponseResultsInner) GetRateOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.Rate) {
 		return nil, false
 	}
@@ -133,8 +135,8 @@ func (o *ExchangeRatesGet200ResponseResultsInner) HasRate() bool {
 	return false
 }
 
-// SetRate gets a reference to the given float32 and assigns it to the Rate field.
-func (o *ExchangeRatesGet200ResponseResultsInner) SetRate(v float32) {
+// SetRate gets a reference to the given decimal.Decimal and assigns it to the Rate field.
+func (o *ExchangeRatesGet200ResponseResultsInner) SetRate(v decimal.Decimal) {
 	o.Rate = &v
 }
 

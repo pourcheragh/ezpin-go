@@ -20,7 +20,7 @@ var _ MappedNullable = &Product{}
 // Product struct for Product
 type Product struct {
 	// sku of the product
-	Sku *float32 `json:"sku,omitempty"`
+	Sku *int32 `json:"sku,omitempty"`
 	// title of the product
 	Title *string `json:"title,omitempty"`
 }
@@ -43,9 +43,9 @@ func NewProductWithDefaults() *Product {
 }
 
 // GetSku returns the Sku field value if set, zero value otherwise.
-func (o *Product) GetSku() float32 {
+func (o *Product) GetSku() int32 {
 	if o == nil || IsNil(o.Sku) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Sku
@@ -53,7 +53,7 @@ func (o *Product) GetSku() float32 {
 
 // GetSkuOk returns a tuple with the Sku field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Product) GetSkuOk() (*float32, bool) {
+func (o *Product) GetSkuOk() (*int32, bool) {
 	if o == nil || IsNil(o.Sku) {
 		return nil, false
 	}
@@ -69,8 +69,8 @@ func (o *Product) HasSku() bool {
 	return false
 }
 
-// SetSku gets a reference to the given float32 and assigns it to the Sku field.
-func (o *Product) SetSku(v float32) {
+// SetSku gets a reference to the given int32 and assigns it to the Sku field.
+func (o *Product) SetSku(v int32) {
 	o.Sku = &v
 }
 

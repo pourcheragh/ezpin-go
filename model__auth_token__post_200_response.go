@@ -22,7 +22,7 @@ type AuthTokenPost200Response struct {
 	// Access token for APIs
 	Access *string `json:"access,omitempty"`
 	// Token expire time in (ms)
-	Expire *float32 `json:"expire,omitempty"`
+	Expire *float64 `json:"expire,omitempty"`
 }
 
 // NewAuthTokenPost200Response instantiates a new AuthTokenPost200Response object
@@ -75,9 +75,9 @@ func (o *AuthTokenPost200Response) SetAccess(v string) {
 }
 
 // GetExpire returns the Expire field value if set, zero value otherwise.
-func (o *AuthTokenPost200Response) GetExpire() float32 {
+func (o *AuthTokenPost200Response) GetExpire() float64 {
 	if o == nil || IsNil(o.Expire) {
-		var ret float32
+		var ret float64
 		return ret
 	}
 	return *o.Expire
@@ -85,7 +85,7 @@ func (o *AuthTokenPost200Response) GetExpire() float32 {
 
 // GetExpireOk returns a tuple with the Expire field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AuthTokenPost200Response) GetExpireOk() (*float32, bool) {
+func (o *AuthTokenPost200Response) GetExpireOk() (*float64, bool) {
 	if o == nil || IsNil(o.Expire) {
 		return nil, false
 	}
@@ -101,8 +101,8 @@ func (o *AuthTokenPost200Response) HasExpire() bool {
 	return false
 }
 
-// SetExpire gets a reference to the given float32 and assigns it to the Expire field.
-func (o *AuthTokenPost200Response) SetExpire(v float32) {
+// SetExpire gets a reference to the given float64 and assigns it to the Expire field.
+func (o *AuthTokenPost200Response) SetExpire(v float64) {
 	o.Expire = &v
 }
 

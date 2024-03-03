@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Detail** | Pointer to **string** | detail of returned response | [optional] 
-**Code** | Pointer to **float32** | error code | [optional] 
+**Code** | Pointer to **int32** | error code | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasDetail returns a boolean if a field has been set.
 
 ### GetCode
 
-`func (o *OrdersPost400Response) GetCode() float32`
+`func (o *OrdersPost400Response) GetCode() int32`
 
 GetCode returns the Code field if non-nil, zero value otherwise.
 
 ### GetCodeOk
 
-`func (o *OrdersPost400Response) GetCodeOk() (*float32, bool)`
+`func (o *OrdersPost400Response) GetCodeOk() (*int32, bool)`
 
 GetCodeOk returns a tuple with the Code field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCode
 
-`func (o *OrdersPost400Response) SetCode(v float32)`
+`func (o *OrdersPost400Response) SetCode(v int32)`
 
 SetCode sets Code field to given value.
 

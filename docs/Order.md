@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderId** | Pointer to **float32** | id of order | [optional] 
-**DeliveryType** | Pointer to **float32** | type of delivery | [optional] 
+**OrderId** | Pointer to **int32** | id of order | [optional] 
+**DeliveryType** | Pointer to **int32** | * &#x60;0&#x60; None *&#x60;1&#x60; email *&#x60;2&#x60; SMS *&#x60;3&#x60; WhatsApp | [optional] 
 **Destination** | Pointer to **string** | E-mail or Phone/Whatsapp number you want the order to be delivered to. | [optional] 
-**Status** | Pointer to **float32** | pending(0) , accept(1) , reject(-1) | [optional] 
+**Status** | Pointer to **int32** | *&#x60;-1&#x60; Reject *&#x60;0&#x60; Pending *&#x60;1&#x60; Accept | [optional] 
 **StatusText** | Pointer to **string** | status of order | [optional] 
 **CreatedTime** | Pointer to **string** | time of order creation | [optional] 
-**TerminalId** | Pointer to **float32** | terminal id of sub user | [optional] 
+**TerminalId** | Pointer to **int32** | terminal id of sub user | [optional] 
 **ReferenceCode** | Pointer to **string** | reference code of order | [optional] 
 **Product** | Pointer to [**Product**](Product.md) |  | [optional] 
-**Count** | Pointer to **float32** | order quantity | [optional] 
-**TotalFaceValue** | Pointer to **float32** | total of product original prices | [optional] 
-**TotalFees** | Pointer to **float32** | sum of activation fees | [optional] 
-**TotalDiscounts** | Pointer to **float32** | sum of discounts | [optional] 
-**TotalCustomerCost** | Pointer to **float32** | total price customer should pay | [optional] 
+**Count** | Pointer to **int32** | order quantity | [optional] 
+**TotalFaceValue** | Pointer to **decimal.Decimal** | total of product original prices | [optional] 
+**TotalFees** | Pointer to **decimal.Decimal** | sum of activation fees | [optional] 
+**TotalDiscounts** | Pointer to **string** | sum of discounts | [optional] 
+**TotalCustomerCost** | Pointer to **decimal.Decimal** | total price customer should pay | [optional] 
 **IsCompleted** | Pointer to **bool** | is order process completed or not | [optional] 
 **ShareLink** | Pointer to **string** | link of order cards. | [optional] 
 
@@ -42,20 +42,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOrderId
 
-`func (o *Order) GetOrderId() float32`
+`func (o *Order) GetOrderId() int32`
 
 GetOrderId returns the OrderId field if non-nil, zero value otherwise.
 
 ### GetOrderIdOk
 
-`func (o *Order) GetOrderIdOk() (*float32, bool)`
+`func (o *Order) GetOrderIdOk() (*int32, bool)`
 
 GetOrderIdOk returns a tuple with the OrderId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrderId
 
-`func (o *Order) SetOrderId(v float32)`
+`func (o *Order) SetOrderId(v int32)`
 
 SetOrderId sets OrderId field to given value.
 
@@ -67,20 +67,20 @@ HasOrderId returns a boolean if a field has been set.
 
 ### GetDeliveryType
 
-`func (o *Order) GetDeliveryType() float32`
+`func (o *Order) GetDeliveryType() int32`
 
 GetDeliveryType returns the DeliveryType field if non-nil, zero value otherwise.
 
 ### GetDeliveryTypeOk
 
-`func (o *Order) GetDeliveryTypeOk() (*float32, bool)`
+`func (o *Order) GetDeliveryTypeOk() (*int32, bool)`
 
 GetDeliveryTypeOk returns a tuple with the DeliveryType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDeliveryType
 
-`func (o *Order) SetDeliveryType(v float32)`
+`func (o *Order) SetDeliveryType(v int32)`
 
 SetDeliveryType sets DeliveryType field to given value.
 
@@ -117,20 +117,20 @@ HasDestination returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *Order) GetStatus() float32`
+`func (o *Order) GetStatus() int32`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *Order) GetStatusOk() (*float32, bool)`
+`func (o *Order) GetStatusOk() (*int32, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *Order) SetStatus(v float32)`
+`func (o *Order) SetStatus(v int32)`
 
 SetStatus sets Status field to given value.
 
@@ -192,20 +192,20 @@ HasCreatedTime returns a boolean if a field has been set.
 
 ### GetTerminalId
 
-`func (o *Order) GetTerminalId() float32`
+`func (o *Order) GetTerminalId() int32`
 
 GetTerminalId returns the TerminalId field if non-nil, zero value otherwise.
 
 ### GetTerminalIdOk
 
-`func (o *Order) GetTerminalIdOk() (*float32, bool)`
+`func (o *Order) GetTerminalIdOk() (*int32, bool)`
 
 GetTerminalIdOk returns a tuple with the TerminalId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTerminalId
 
-`func (o *Order) SetTerminalId(v float32)`
+`func (o *Order) SetTerminalId(v int32)`
 
 SetTerminalId sets TerminalId field to given value.
 
@@ -267,20 +267,20 @@ HasProduct returns a boolean if a field has been set.
 
 ### GetCount
 
-`func (o *Order) GetCount() float32`
+`func (o *Order) GetCount() int32`
 
 GetCount returns the Count field if non-nil, zero value otherwise.
 
 ### GetCountOk
 
-`func (o *Order) GetCountOk() (*float32, bool)`
+`func (o *Order) GetCountOk() (*int32, bool)`
 
 GetCountOk returns a tuple with the Count field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCount
 
-`func (o *Order) SetCount(v float32)`
+`func (o *Order) SetCount(v int32)`
 
 SetCount sets Count field to given value.
 
@@ -292,20 +292,20 @@ HasCount returns a boolean if a field has been set.
 
 ### GetTotalFaceValue
 
-`func (o *Order) GetTotalFaceValue() float32`
+`func (o *Order) GetTotalFaceValue() decimal.Decimal`
 
 GetTotalFaceValue returns the TotalFaceValue field if non-nil, zero value otherwise.
 
 ### GetTotalFaceValueOk
 
-`func (o *Order) GetTotalFaceValueOk() (*float32, bool)`
+`func (o *Order) GetTotalFaceValueOk() (*decimal.Decimal, bool)`
 
 GetTotalFaceValueOk returns a tuple with the TotalFaceValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalFaceValue
 
-`func (o *Order) SetTotalFaceValue(v float32)`
+`func (o *Order) SetTotalFaceValue(v decimal.Decimal)`
 
 SetTotalFaceValue sets TotalFaceValue field to given value.
 
@@ -317,20 +317,20 @@ HasTotalFaceValue returns a boolean if a field has been set.
 
 ### GetTotalFees
 
-`func (o *Order) GetTotalFees() float32`
+`func (o *Order) GetTotalFees() decimal.Decimal`
 
 GetTotalFees returns the TotalFees field if non-nil, zero value otherwise.
 
 ### GetTotalFeesOk
 
-`func (o *Order) GetTotalFeesOk() (*float32, bool)`
+`func (o *Order) GetTotalFeesOk() (*decimal.Decimal, bool)`
 
 GetTotalFeesOk returns a tuple with the TotalFees field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalFees
 
-`func (o *Order) SetTotalFees(v float32)`
+`func (o *Order) SetTotalFees(v decimal.Decimal)`
 
 SetTotalFees sets TotalFees field to given value.
 
@@ -342,20 +342,20 @@ HasTotalFees returns a boolean if a field has been set.
 
 ### GetTotalDiscounts
 
-`func (o *Order) GetTotalDiscounts() float32`
+`func (o *Order) GetTotalDiscounts() string`
 
 GetTotalDiscounts returns the TotalDiscounts field if non-nil, zero value otherwise.
 
 ### GetTotalDiscountsOk
 
-`func (o *Order) GetTotalDiscountsOk() (*float32, bool)`
+`func (o *Order) GetTotalDiscountsOk() (*string, bool)`
 
 GetTotalDiscountsOk returns a tuple with the TotalDiscounts field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalDiscounts
 
-`func (o *Order) SetTotalDiscounts(v float32)`
+`func (o *Order) SetTotalDiscounts(v string)`
 
 SetTotalDiscounts sets TotalDiscounts field to given value.
 
@@ -367,20 +367,20 @@ HasTotalDiscounts returns a boolean if a field has been set.
 
 ### GetTotalCustomerCost
 
-`func (o *Order) GetTotalCustomerCost() float32`
+`func (o *Order) GetTotalCustomerCost() decimal.Decimal`
 
 GetTotalCustomerCost returns the TotalCustomerCost field if non-nil, zero value otherwise.
 
 ### GetTotalCustomerCostOk
 
-`func (o *Order) GetTotalCustomerCostOk() (*float32, bool)`
+`func (o *Order) GetTotalCustomerCostOk() (*decimal.Decimal, bool)`
 
 GetTotalCustomerCostOk returns a tuple with the TotalCustomerCost field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalCustomerCost
 
-`func (o *Order) SetTotalCustomerCost(v float32)`
+`func (o *Order) SetTotalCustomerCost(v decimal.Decimal)`
 
 SetTotalCustomerCost sets TotalCustomerCost field to given value.
 

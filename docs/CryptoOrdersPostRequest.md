@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CurrencyId** | Pointer to **int32** | ID of Fiat currency | [optional] 
 **CryptoCurrencyId** | Pointer to **int32** | ID of Crypto Currency | [optional] 
-**RequestedPrice** | Pointer to **int32** | The amount you need to exchange from fiat currency to Cryptocurrency | [optional] 
+**RequestedPrice** | Pointer to **decimal.Decimal** | The amount you need to exchange from fiat currency to Cryptocurrency | [optional] 
 **ReferenceCode** | Pointer to **string** | A unique UUID v4 reference code must be included in request | [optional] 
-**TerminalId** | Pointer to **float32** | Terminal ID of the sub-users that can be defined in setting section in user panel | [optional] 
-**TerminalPin** | Pointer to **float32** | Pin defined for sub-user | [optional] 
+**TerminalId** | Pointer to **int32** | Terminal ID of the sub-users that can be defined in setting section in user panel | [optional] 
+**TerminalPin** | Pointer to **int32** | Pin defined for sub-user | [optional] 
 
 ## Methods
 
@@ -82,20 +82,20 @@ HasCryptoCurrencyId returns a boolean if a field has been set.
 
 ### GetRequestedPrice
 
-`func (o *CryptoOrdersPostRequest) GetRequestedPrice() int32`
+`func (o *CryptoOrdersPostRequest) GetRequestedPrice() decimal.Decimal`
 
 GetRequestedPrice returns the RequestedPrice field if non-nil, zero value otherwise.
 
 ### GetRequestedPriceOk
 
-`func (o *CryptoOrdersPostRequest) GetRequestedPriceOk() (*int32, bool)`
+`func (o *CryptoOrdersPostRequest) GetRequestedPriceOk() (*decimal.Decimal, bool)`
 
 GetRequestedPriceOk returns a tuple with the RequestedPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRequestedPrice
 
-`func (o *CryptoOrdersPostRequest) SetRequestedPrice(v int32)`
+`func (o *CryptoOrdersPostRequest) SetRequestedPrice(v decimal.Decimal)`
 
 SetRequestedPrice sets RequestedPrice field to given value.
 
@@ -132,20 +132,20 @@ HasReferenceCode returns a boolean if a field has been set.
 
 ### GetTerminalId
 
-`func (o *CryptoOrdersPostRequest) GetTerminalId() float32`
+`func (o *CryptoOrdersPostRequest) GetTerminalId() int32`
 
 GetTerminalId returns the TerminalId field if non-nil, zero value otherwise.
 
 ### GetTerminalIdOk
 
-`func (o *CryptoOrdersPostRequest) GetTerminalIdOk() (*float32, bool)`
+`func (o *CryptoOrdersPostRequest) GetTerminalIdOk() (*int32, bool)`
 
 GetTerminalIdOk returns a tuple with the TerminalId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTerminalId
 
-`func (o *CryptoOrdersPostRequest) SetTerminalId(v float32)`
+`func (o *CryptoOrdersPostRequest) SetTerminalId(v int32)`
 
 SetTerminalId sets TerminalId field to given value.
 
@@ -157,20 +157,20 @@ HasTerminalId returns a boolean if a field has been set.
 
 ### GetTerminalPin
 
-`func (o *CryptoOrdersPostRequest) GetTerminalPin() float32`
+`func (o *CryptoOrdersPostRequest) GetTerminalPin() int32`
 
 GetTerminalPin returns the TerminalPin field if non-nil, zero value otherwise.
 
 ### GetTerminalPinOk
 
-`func (o *CryptoOrdersPostRequest) GetTerminalPinOk() (*float32, bool)`
+`func (o *CryptoOrdersPostRequest) GetTerminalPinOk() (*int32, bool)`
 
 GetTerminalPinOk returns a tuple with the TerminalPin field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTerminalPin
 
-`func (o *CryptoOrdersPostRequest) SetTerminalPin(v float32)`
+`func (o *CryptoOrdersPostRequest) SetTerminalPin(v int32)`
 
 SetTerminalPin sets TerminalPin field to given value.
 

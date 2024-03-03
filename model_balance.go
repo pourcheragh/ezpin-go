@@ -21,7 +21,7 @@ var _ MappedNullable = &Balance{}
 type Balance struct {
 	Currency *Currency `json:"currency,omitempty"`
 	// balance of this currency
-	Balance *float32 `json:"balance,omitempty"`
+	Balance *string `json:"balance,omitempty"`
 }
 
 // NewBalance instantiates a new Balance object
@@ -74,9 +74,9 @@ func (o *Balance) SetCurrency(v Currency) {
 }
 
 // GetBalance returns the Balance field value if set, zero value otherwise.
-func (o *Balance) GetBalance() float32 {
+func (o *Balance) GetBalance() string {
 	if o == nil || IsNil(o.Balance) {
-		var ret float32
+		var ret string
 		return ret
 	}
 	return *o.Balance
@@ -84,7 +84,7 @@ func (o *Balance) GetBalance() float32 {
 
 // GetBalanceOk returns a tuple with the Balance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Balance) GetBalanceOk() (*float32, bool) {
+func (o *Balance) GetBalanceOk() (*string, bool) {
 	if o == nil || IsNil(o.Balance) {
 		return nil, false
 	}
@@ -100,8 +100,8 @@ func (o *Balance) HasBalance() bool {
 	return false
 }
 
-// SetBalance gets a reference to the given float32 and assigns it to the Balance field.
-func (o *Balance) SetBalance(v float32) {
+// SetBalance gets a reference to the given string and assigns it to the Balance field.
+func (o *Balance) SetBalance(v string) {
 	o.Balance = &v
 }
 

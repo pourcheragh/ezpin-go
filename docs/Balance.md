@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Currency** | Pointer to [**Currency**](Currency.md) |  | [optional] 
-**Balance** | Pointer to **float32** | balance of this currency | [optional] 
+**Balance** | Pointer to **string** | balance of this currency | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasCurrency returns a boolean if a field has been set.
 
 ### GetBalance
 
-`func (o *Balance) GetBalance() float32`
+`func (o *Balance) GetBalance() string`
 
 GetBalance returns the Balance field if non-nil, zero value otherwise.
 
 ### GetBalanceOk
 
-`func (o *Balance) GetBalanceOk() (*float32, bool)`
+`func (o *Balance) GetBalanceOk() (*string, bool)`
 
 GetBalanceOk returns a tuple with the Balance field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBalance
 
-`func (o *Balance) SetBalance(v float32)`
+`func (o *Balance) SetBalance(v string)`
 
 SetBalance sets Balance field to given value.
 

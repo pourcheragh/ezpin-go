@@ -20,7 +20,7 @@ var _ MappedNullable = &CatalogsGet200Response{}
 // CatalogsGet200Response struct for CatalogsGet200Response
 type CatalogsGet200Response struct {
 	// Number of total catalogs
-	Count *float32 `json:"count,omitempty"`
+	Count *int32 `json:"count,omitempty"`
 	Results []Catalog `json:"results,omitempty"`
 }
 
@@ -42,9 +42,9 @@ func NewCatalogsGet200ResponseWithDefaults() *CatalogsGet200Response {
 }
 
 // GetCount returns the Count field value if set, zero value otherwise.
-func (o *CatalogsGet200Response) GetCount() float32 {
+func (o *CatalogsGet200Response) GetCount() int32 {
 	if o == nil || IsNil(o.Count) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Count
@@ -52,7 +52,7 @@ func (o *CatalogsGet200Response) GetCount() float32 {
 
 // GetCountOk returns a tuple with the Count field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CatalogsGet200Response) GetCountOk() (*float32, bool) {
+func (o *CatalogsGet200Response) GetCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.Count) {
 		return nil, false
 	}
@@ -68,8 +68,8 @@ func (o *CatalogsGet200Response) HasCount() bool {
 	return false
 }
 
-// SetCount gets a reference to the given float32 and assigns it to the Count field.
-func (o *CatalogsGet200Response) SetCount(v float32) {
+// SetCount gets a reference to the given int32 and assigns it to the Count field.
+func (o *CatalogsGet200Response) SetCount(v int32) {
 	o.Count = &v
 }
 

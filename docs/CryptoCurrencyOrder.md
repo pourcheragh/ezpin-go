@@ -4,22 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **float32** | crypto order id | [optional] 
+**Id** | Pointer to **int32** | crypto order id | [optional] 
 **ReferenceCode** | Pointer to **string** | refence code of this crypto order | [optional] 
-**RequestedPrice** | Pointer to **int32** | The amount of crypto you ordered. | [optional] 
-**Price** | Pointer to **int32** | price of this order | [optional] 
+**RequestedPrice** | Pointer to **decimal.Decimal** | The amount of crypto you ordered. | [optional] 
+**Price** | Pointer to **decimal.Decimal** | price of this order | [optional] 
 **CryptoCurrencyId** | Pointer to **int32** | id of this crypto currency | [optional] 
 **CryptoCurrencyData** | Pointer to [**CryptoCurrencyOrderCryptoCurrencyData**](CryptoCurrencyOrderCryptoCurrencyData.md) |  | [optional] 
 **CurrencyId** | Pointer to **int32** | id of fiat currency | [optional] 
 **CurrencyDaya** | Pointer to [**CryptoCurrencyOrderCurrencyDaya**](CryptoCurrencyOrderCurrencyDaya.md) |  | [optional] 
-**Status** | Pointer to **int32** | accept(1) , waiting(0) , reject(-1) , expired(-5) | [optional] 
+**Status** | Pointer to **int32** | *&#x60;-5&#x60; Expired *&#x60;-1&#x60; Reject *&#x60;0&#x60; Waiting *&#x60;1&#x60; Accept | [optional] 
 **CryptoWallet** | Pointer to **string** | The destination wallet. | [optional] 
 **StatusText** | Pointer to **string** | text of status | [optional] 
-**CommissionPercent** | Pointer to **float32** | percentage of commission defined for this user | [optional] 
-**CommissionPrice** | Pointer to **int32** | price of commission defined for this user. | [optional] 
-**NetworkFee** | Pointer to **float32** | commission of network. | [optional] 
-**CryptoAmount** | Pointer to **int32** | amount of crypto. | [optional] 
-**CryptoPrice** | Pointer to **int32** | last price of that crypto currency that you want to buy. | [optional] 
+**CommissionPercent** | Pointer to **decimal.Decimal** | percentage of commission defined for this user | [optional] 
+**CommissionPrice** | Pointer to **decimal.Decimal** | price of commission defined for this user. | [optional] 
+**NetworkFee** | Pointer to **decimal.Decimal** | commission of network. | [optional] 
+**CryptoAmount** | Pointer to **decimal.Decimal** | amount of crypto. | [optional] 
+**CryptoPrice** | Pointer to **decimal.Decimal** | last price of that crypto currency that you want to buy. | [optional] 
 **CanPay** | Pointer to **bool** | can this order be payed or not. | [optional] 
 **IsUsed** | Pointer to **bool** | is order redeemed or not. | [optional] 
 **UsedTime** | Pointer to **string** | the time of redemption of order. | [optional] 
@@ -47,20 +47,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *CryptoCurrencyOrder) GetId() float32`
+`func (o *CryptoCurrencyOrder) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *CryptoCurrencyOrder) GetIdOk() (*float32, bool)`
+`func (o *CryptoCurrencyOrder) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *CryptoCurrencyOrder) SetId(v float32)`
+`func (o *CryptoCurrencyOrder) SetId(v int32)`
 
 SetId sets Id field to given value.
 
@@ -97,20 +97,20 @@ HasReferenceCode returns a boolean if a field has been set.
 
 ### GetRequestedPrice
 
-`func (o *CryptoCurrencyOrder) GetRequestedPrice() int32`
+`func (o *CryptoCurrencyOrder) GetRequestedPrice() decimal.Decimal`
 
 GetRequestedPrice returns the RequestedPrice field if non-nil, zero value otherwise.
 
 ### GetRequestedPriceOk
 
-`func (o *CryptoCurrencyOrder) GetRequestedPriceOk() (*int32, bool)`
+`func (o *CryptoCurrencyOrder) GetRequestedPriceOk() (*decimal.Decimal, bool)`
 
 GetRequestedPriceOk returns a tuple with the RequestedPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRequestedPrice
 
-`func (o *CryptoCurrencyOrder) SetRequestedPrice(v int32)`
+`func (o *CryptoCurrencyOrder) SetRequestedPrice(v decimal.Decimal)`
 
 SetRequestedPrice sets RequestedPrice field to given value.
 
@@ -122,20 +122,20 @@ HasRequestedPrice returns a boolean if a field has been set.
 
 ### GetPrice
 
-`func (o *CryptoCurrencyOrder) GetPrice() int32`
+`func (o *CryptoCurrencyOrder) GetPrice() decimal.Decimal`
 
 GetPrice returns the Price field if non-nil, zero value otherwise.
 
 ### GetPriceOk
 
-`func (o *CryptoCurrencyOrder) GetPriceOk() (*int32, bool)`
+`func (o *CryptoCurrencyOrder) GetPriceOk() (*decimal.Decimal, bool)`
 
 GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrice
 
-`func (o *CryptoCurrencyOrder) SetPrice(v int32)`
+`func (o *CryptoCurrencyOrder) SetPrice(v decimal.Decimal)`
 
 SetPrice sets Price field to given value.
 
@@ -322,20 +322,20 @@ HasStatusText returns a boolean if a field has been set.
 
 ### GetCommissionPercent
 
-`func (o *CryptoCurrencyOrder) GetCommissionPercent() float32`
+`func (o *CryptoCurrencyOrder) GetCommissionPercent() decimal.Decimal`
 
 GetCommissionPercent returns the CommissionPercent field if non-nil, zero value otherwise.
 
 ### GetCommissionPercentOk
 
-`func (o *CryptoCurrencyOrder) GetCommissionPercentOk() (*float32, bool)`
+`func (o *CryptoCurrencyOrder) GetCommissionPercentOk() (*decimal.Decimal, bool)`
 
 GetCommissionPercentOk returns a tuple with the CommissionPercent field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCommissionPercent
 
-`func (o *CryptoCurrencyOrder) SetCommissionPercent(v float32)`
+`func (o *CryptoCurrencyOrder) SetCommissionPercent(v decimal.Decimal)`
 
 SetCommissionPercent sets CommissionPercent field to given value.
 
@@ -347,20 +347,20 @@ HasCommissionPercent returns a boolean if a field has been set.
 
 ### GetCommissionPrice
 
-`func (o *CryptoCurrencyOrder) GetCommissionPrice() int32`
+`func (o *CryptoCurrencyOrder) GetCommissionPrice() decimal.Decimal`
 
 GetCommissionPrice returns the CommissionPrice field if non-nil, zero value otherwise.
 
 ### GetCommissionPriceOk
 
-`func (o *CryptoCurrencyOrder) GetCommissionPriceOk() (*int32, bool)`
+`func (o *CryptoCurrencyOrder) GetCommissionPriceOk() (*decimal.Decimal, bool)`
 
 GetCommissionPriceOk returns a tuple with the CommissionPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCommissionPrice
 
-`func (o *CryptoCurrencyOrder) SetCommissionPrice(v int32)`
+`func (o *CryptoCurrencyOrder) SetCommissionPrice(v decimal.Decimal)`
 
 SetCommissionPrice sets CommissionPrice field to given value.
 
@@ -372,20 +372,20 @@ HasCommissionPrice returns a boolean if a field has been set.
 
 ### GetNetworkFee
 
-`func (o *CryptoCurrencyOrder) GetNetworkFee() float32`
+`func (o *CryptoCurrencyOrder) GetNetworkFee() decimal.Decimal`
 
 GetNetworkFee returns the NetworkFee field if non-nil, zero value otherwise.
 
 ### GetNetworkFeeOk
 
-`func (o *CryptoCurrencyOrder) GetNetworkFeeOk() (*float32, bool)`
+`func (o *CryptoCurrencyOrder) GetNetworkFeeOk() (*decimal.Decimal, bool)`
 
 GetNetworkFeeOk returns a tuple with the NetworkFee field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetworkFee
 
-`func (o *CryptoCurrencyOrder) SetNetworkFee(v float32)`
+`func (o *CryptoCurrencyOrder) SetNetworkFee(v decimal.Decimal)`
 
 SetNetworkFee sets NetworkFee field to given value.
 
@@ -397,20 +397,20 @@ HasNetworkFee returns a boolean if a field has been set.
 
 ### GetCryptoAmount
 
-`func (o *CryptoCurrencyOrder) GetCryptoAmount() int32`
+`func (o *CryptoCurrencyOrder) GetCryptoAmount() decimal.Decimal`
 
 GetCryptoAmount returns the CryptoAmount field if non-nil, zero value otherwise.
 
 ### GetCryptoAmountOk
 
-`func (o *CryptoCurrencyOrder) GetCryptoAmountOk() (*int32, bool)`
+`func (o *CryptoCurrencyOrder) GetCryptoAmountOk() (*decimal.Decimal, bool)`
 
 GetCryptoAmountOk returns a tuple with the CryptoAmount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCryptoAmount
 
-`func (o *CryptoCurrencyOrder) SetCryptoAmount(v int32)`
+`func (o *CryptoCurrencyOrder) SetCryptoAmount(v decimal.Decimal)`
 
 SetCryptoAmount sets CryptoAmount field to given value.
 
@@ -422,20 +422,20 @@ HasCryptoAmount returns a boolean if a field has been set.
 
 ### GetCryptoPrice
 
-`func (o *CryptoCurrencyOrder) GetCryptoPrice() int32`
+`func (o *CryptoCurrencyOrder) GetCryptoPrice() decimal.Decimal`
 
 GetCryptoPrice returns the CryptoPrice field if non-nil, zero value otherwise.
 
 ### GetCryptoPriceOk
 
-`func (o *CryptoCurrencyOrder) GetCryptoPriceOk() (*int32, bool)`
+`func (o *CryptoCurrencyOrder) GetCryptoPriceOk() (*decimal.Decimal, bool)`
 
 GetCryptoPriceOk returns a tuple with the CryptoPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCryptoPrice
 
-`func (o *CryptoCurrencyOrder) SetCryptoPrice(v int32)`
+`func (o *CryptoCurrencyOrder) SetCryptoPrice(v decimal.Decimal)`
 
 SetCryptoPrice sets CryptoPrice field to given value.
 

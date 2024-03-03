@@ -101,7 +101,7 @@ func Test_ezpin_DefaultAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var productSku float32
+		var productSku int32
 
 		resp, httpRes, err := apiClient.DefaultAPI.CatalogsProductSkuAvailabilityGet(context.Background(), productSku).Execute()
 

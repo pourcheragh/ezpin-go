@@ -65,7 +65,7 @@ paths:
         required: true
         schema:
           example: 2785
-          type: number
+          type: integer
         style: simple
       - description: Number of items
         explode: true
@@ -74,7 +74,7 @@ paths:
         required: true
         schema:
           example: 10
-          type: number
+          type: integer
         style: form
       - description: Product price
         explode: true
@@ -82,8 +82,9 @@ paths:
         name: price
         required: true
         schema:
-          example: 10
-          type: number
+          example: "10"
+          format: decimal
+          type: string
         style: form
       responses:
         "200":
@@ -104,7 +105,7 @@ paths:
         required: false
         schema:
           example: 10
-          type: number
+          type: integer
         style: form
       - description: Offset number of list
         explode: true
@@ -113,7 +114,7 @@ paths:
         required: false
         schema:
           example: 1
-          type: number
+          type: integer
         style: form
       - description: Report Start Date
         explode: true
@@ -320,7 +321,7 @@ paths:
         required: false
         schema:
           example: 10
-          type: number
+          type: integer
         style: form
       - description: Offset number in results
         explode: true
@@ -329,7 +330,7 @@ paths:
         required: false
         schema:
           example: 1
-          type: number
+          type: integer
         style: form
       - description: Report Start Date
         explode: true
@@ -352,9 +353,15 @@ paths:
       - description: Status of the order
         explode: true
         in: query
-        name: staus
+        name: status
         required: false
         schema:
+          description: '*`-5` Expired *`-1` Reject *`0` Waiting *`1` Accept'
+          enum:
+          - -5
+          - -1
+          - 0
+          - 1
           example: 1
           type: integer
         style: form
@@ -476,14 +483,14 @@ components:
   schemas:
     Catalog:
       example:
-        percentage_of_buying_price: 20
+        percentage_of_buying_price: "20"
         image: http://media.ezpaypin.com/media/products/images/2019/11/Image33_QPLZZ6q.jpg
         regions:
         - code: GLC
           name: Global
         - code: GLC
           name: Global
-        upc: 659245724761
+        upc: "659245724761"
         description: "null"
         pre_order: false
         showing_price:
@@ -494,11 +501,11 @@ components:
           - symbol: $
             code: USD
             currency: Dollar
-          price: 35
+          price: "35"
         title: iTunes $400
-        max_price: 400
-        min_price: 400
-        activation_fee: 0
+        max_price: "400"
+        min_price: "400"
+        activation_fee: "0"
         currency:
           symbol: $
           code: USD
@@ -511,35 +518,39 @@ components:
         sku:
           description: sku of product
           example: 23
-          type: number
+          type: integer
         upc:
           description: upc of product
-          example: 659245724761
-          type: number
+          example: "659245724761"
+          type: string
         title:
           description: title of product
           example: iTunes $400
           type: string
         min_price:
           description: product minimumm price
-          example: 400
-          type: number
+          example: "400"
+          format: decimal
+          type: string
         max_price:
           description: product maximumm price
-          example: 400
-          type: number
+          example: "400"
+          format: decimal
+          type: string
         pre_order:
           description: product has preorder feature or not.
           example: false
           type: boolean
         activation_fee:
           description: fixed activation fee of product
-          example: 0
-          type: number
+          example: "0"
+          format: decimal
+          type: string
         percentage_of_buying_price:
           description: discount applied on buying price
-          example: 20
-          type: number
+          example: "20"
+          format: decimal
+          type: string
         currency:
           $ref: '#/components/schemas/Currency'
         categories:
@@ -563,7 +574,7 @@ components:
       type: object
     Balance:
       example:
-        balance: 123.45
+        balance: "123.45"
         currency:
           symbol: $
           code: USD
@@ -573,8 +584,8 @@ components:
           $ref: '#/components/schemas/Currency'
         balance:
           description: balance of this currency
-          example: 123.45
-          type: number
+          example: "123.45"
+          type: string
       type: object
     Currency:
       example:
@@ -645,7 +656,7 @@ components:
         sku:
           description: sku of the product
           example: 76
-          type: number
+          type: integer
         title:
           description: title of the product
           example: iTunes $10
@@ -657,38 +668,47 @@ components:
         product:
           sku: 76
           title: iTunes $10
-        total_fees: 0
+        total_fees: "0"
         destination: "18004441234"
         count: 1
         is_completed: true
-        total_discounts: 0.42
+        total_discounts: "0.42"
         share_link: http://vc.ezpaypin.com/01c79b97-8ab4-423c-a11d-225897f2135a
-        delivery_type: 3
-        total_customer_cost: 3.42
+        delivery_type: 1
+        total_customer_cost: "3.42"
         reference_code: 046ed58d-53b1-4ec5-be46-693096a0bb98
         status_text: accept
         order_id: 89
         terminal_id: 96
-        total_face_value: 3
+        total_face_value: "3"
         status: 1
       properties:
         order_id:
           description: id of order
           example: 89
-          type: number
+          type: integer
         delivery_type:
-          description: type of delivery
-          example: 3
-          type: number
+          description: '* `0` None *`1` email *`2` SMS *`3` WhatsApp'
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          example: 1
+          type: integer
         destination:
           description: E-mail or Phone/Whatsapp number you want the order to be delivered
             to.
           example: "18004441234"
           type: string
         status:
-          description: "pending(0) , accept(1) , reject(-1)"
+          description: '*`-1` Reject *`0` Pending *`1` Accept'
+          enum:
+          - -1
+          - 0
+          - 1
           example: 1
-          type: number
+          type: integer
         status_text:
           description: status of order
           example: accept
@@ -700,7 +720,7 @@ components:
         terminal_id:
           description: terminal id of sub user
           example: 96
-          type: number
+          type: integer
         reference_code:
           description: reference code of order
           example: 046ed58d-53b1-4ec5-be46-693096a0bb98
@@ -710,23 +730,26 @@ components:
         count:
           description: order quantity
           example: 1
-          type: number
+          type: integer
         total_face_value:
           description: total of product original prices
-          example: 3
-          type: number
+          example: "3"
+          format: decimal
+          type: string
         total_fees:
           description: sum of activation fees
-          example: 0
-          type: number
+          example: "0"
+          format: decimal
+          type: string
         total_discounts:
           description: sum of discounts
-          example: 0.42
-          type: number
+          example: "0.42"
+          type: string
         total_customer_cost:
           description: total price customer should pay
-          example: 3.42
-          type: number
+          example: "3.42"
+          format: decimal
+          type: string
         is_completed:
           description: is order process completed or not
           example: true
@@ -760,21 +783,21 @@ components:
         transaction_id: 50
         created_time: 2020-02-03T13:27:12.250248
         product: iTunes $10
-        total_fees: 0
-        total_discounts: 0.25
-        total_customer_cost: 25.25
+        total_fees: "0"
+        total_discounts: "0.25"
+        total_customer_cost: "25.25"
         reference_code: 046ed58d-53b1-4ec5-be46-693096a0bb98
         currency: USD
         status_text: Pending
         barcode: "12567312867231868"
-        total_face_value: 25
+        total_face_value: "25"
         terminal_id: 96
-        status: -1
+        status: 1
       properties:
         transaction_id:
           description: id of activation transaction
           example: 50
-          type: number
+          type: integer
         barcode:
           description: barcode of physical card
           example: "12567312867231868"
@@ -784,33 +807,41 @@ components:
           example: iTunes $10
           type: string
         status:
-          description: "Pending(-1) , Activated(1) , Inactive(0)"
-          example: -1
-          type: number
+          description: '*`-1` Pending *`0` Inactive *`1` Activated'
+          enum:
+          - -1
+          - 0
+          - 1
+          example: 1
+          type: integer
         status_text:
           description: status of activation order
           example: Pending
           type: string
         total_face_value:
           description: physical card price
-          example: 25
-          type: number
+          example: "25"
+          format: decimal
+          type: string
         total_fees:
           description: activation fee of physical card
-          example: 0
-          type: number
+          example: "0"
+          format: decimal
+          type: string
         total_discounts:
           description: discount of physical card
-          example: 0.25
-          type: number
+          example: "0.25"
+          format: decimal
+          type: string
         total_customer_cost:
           description: price that customer should pay
-          example: 25.25
-          type: number
+          example: "25.25"
+          format: decimal
+          type: string
         terminal_id:
           description: Terminal ID of the sub-user
           example: 96
-          type: number
+          type: integer
         currency:
           description: name of currency
           example: USD
@@ -843,10 +874,10 @@ components:
         symbol: $
         code: USD
         crypto_title: bitcoin
-        price: 33784.7
-        min_amount: 20
+        price: "33784.7"
+        min_amount: "20"
         currency_title: Dollars
-        max_amount: 100
+        max_amount: "100"
         crypto_currency_id: "1"
         crypto_symbol: ₿
         crypto_code: BTC
@@ -855,7 +886,7 @@ components:
         currency_id:
           description: id of the fiat currency
           example: 1
-          type: number
+          type: integer
         currency_title:
           description: Title of the fiat currency
           example: Dollars
@@ -870,17 +901,20 @@ components:
           type: string
         price:
           description: Price of crypto that you want to buy
-          example: 33784.7
-          type: number
+          example: "33784.7"
+          format: decimal
+          type: string
         min_amount:
           description: Minumumm amount that you can buy more than this price.
-          example: 20
-          type: number
+          example: "20"
+          format: decimal
+          type: string
         max_amount:
           description: Maximumm amount that you can buy this crpto currency less than
             this amount
-          example: 100
-          type: number
+          example: "100"
+          format: decimal
+          type: string
         crypto_currency_id:
           description: id of this crypto currency
           example: "1"
@@ -900,9 +934,9 @@ components:
       type: object
     CryptoCurrencyOrder:
       example:
-        requested_price: 20
+        requested_price: "20"
         created_time: 2021-09-20T11:33:33.568306
-        crypto_price: 6
+        crypto_price: "44126.2"
         crypto_currency_data:
           symbol: ₿
           code: BTC
@@ -911,14 +945,14 @@ components:
           symbol: $
           code: USD
           currency: Dollars
-        crypto_amount: 0
+        crypto_amount: "0.00030575"
         crypto_wallet: crypto_wallet
-        network_fee: 0.0001475
-        commission_price: 1
-        commission_percent: 5
+        network_fee: ' 0.0001475'
+        commission_price: "1"
+        commission_percent: "5"
         is_used: true
         can_pay: true
-        price: 21
+        price: "21"
         used_time: 2021-09-20T11:33:33.568306
         reference_code: bb715b4e-6792-45ca-9ca5-2d708f41a6d4
         crypto_currency_id: 1
@@ -926,24 +960,26 @@ components:
         status_text: waiting
         currency_id: 1
         terminal_id: 92
-        status: 0
+        status: 1
       properties:
         id:
           description: crypto order id
           example: 1538
-          type: number
+          type: integer
         reference_code:
           description: refence code of this crypto order
           example: bb715b4e-6792-45ca-9ca5-2d708f41a6d4
           type: string
         requested_price:
           description: The amount of crypto you ordered.
-          example: 20
-          type: integer
+          example: "20"
+          format: decimal
+          type: string
         price:
           description: price of this order
-          example: 21
-          type: integer
+          example: "21"
+          format: decimal
+          type: string
         crypto_currency_id:
           description: id of this crypto currency
           example: 1
@@ -957,8 +993,13 @@ components:
         currency_daya:
           $ref: '#/components/schemas/CryptoCurrencyOrder_currency_daya'
         status:
-          description: "accept(1) , waiting(0) , reject(-1) , expired(-5)"
-          example: 0
+          description: '*`-5` Expired *`-1` Reject *`0` Waiting *`1` Accept'
+          enum:
+          - -5
+          - -1
+          - 0
+          - 1
+          example: 1
           type: integer
         crypto_wallet:
           description: The destination wallet.
@@ -970,22 +1011,29 @@ components:
           type: string
         commission_percent:
           description: percentage of commission defined for this user
-          example: 5
-          type: number
+          example: "5"
+          format: decimal
+          type: string
         commission_price:
           description: price of commission defined for this user.
-          example: 1
-          type: integer
+          example: "1"
+          format: decimal
+          type: string
         network_fee:
           description: commission of network.
-          example: 0.0001475
-          type: number
+          example: ' 0.0001475'
+          format: decimal
+          type: string
         crypto_amount:
           description: amount of crypto.
-          type: integer
+          example: "0.00030575"
+          format: decimal
+          type: string
         crypto_price:
           description: last price of that crypto currency that you want to buy.
-          type: integer
+          example: "44126.2"
+          format: decimal
+          type: string
         can_pay:
           description: can this order be payed or not.
           example: true
@@ -1030,6 +1078,7 @@ components:
         expire:
           description: Token expire time in (ms)
           example: 312645
+          format: double
           type: number
       type: object
     _auth_token__post_400_response:
@@ -1044,20 +1093,20 @@ components:
         code:
           description: error code
           example: 615
-          type: number
+          type: integer
       type: object
     _catalogs__get_200_response:
       example:
         count: 256
         results:
-        - percentage_of_buying_price: 20
+        - percentage_of_buying_price: "20"
           image: http://media.ezpaypin.com/media/products/images/2019/11/Image33_QPLZZ6q.jpg
           regions:
           - code: GLC
             name: Global
           - code: GLC
             name: Global
-          upc: 659245724761
+          upc: "659245724761"
           description: "null"
           pre_order: false
           showing_price:
@@ -1068,11 +1117,11 @@ components:
             - symbol: $
               code: USD
               currency: Dollar
-            price: 35
+            price: "35"
           title: iTunes $400
-          max_price: 400
-          min_price: 400
-          activation_fee: 0
+          max_price: "400"
+          min_price: "400"
+          activation_fee: "0"
           currency:
             symbol: $
             code: USD
@@ -1081,14 +1130,14 @@ components:
           - name: iTunes US
           - name: iTunes US
           sku: 23
-        - percentage_of_buying_price: 20
+        - percentage_of_buying_price: "20"
           image: http://media.ezpaypin.com/media/products/images/2019/11/Image33_QPLZZ6q.jpg
           regions:
           - code: GLC
             name: Global
           - code: GLC
             name: Global
-          upc: 659245724761
+          upc: "659245724761"
           description: "null"
           pre_order: false
           showing_price:
@@ -1099,11 +1148,11 @@ components:
             - symbol: $
               code: USD
               currency: Dollar
-            price: 35
+            price: "35"
           title: iTunes $400
-          max_price: 400
-          min_price: 400
-          activation_fee: 0
+          max_price: "400"
+          min_price: "400"
+          activation_fee: "0"
           currency:
             symbol: $
             code: USD
@@ -1116,7 +1165,7 @@ components:
         count:
           description: Number of total catalogs
           example: 256
-          type: number
+          type: integer
         results:
           items:
             $ref: '#/components/schemas/Catalog'
@@ -1146,43 +1195,43 @@ components:
           product:
             sku: 76
             title: iTunes $10
-          total_fees: 0
+          total_fees: "0"
           destination: "18004441234"
           count: 1
           is_completed: true
-          total_discounts: 0.42
+          total_discounts: "0.42"
           share_link: http://vc.ezpaypin.com/01c79b97-8ab4-423c-a11d-225897f2135a
-          delivery_type: 3
-          total_customer_cost: 3.42
+          delivery_type: 1
+          total_customer_cost: "3.42"
           reference_code: 046ed58d-53b1-4ec5-be46-693096a0bb98
           status_text: accept
           order_id: 89
           terminal_id: 96
-          total_face_value: 3
+          total_face_value: "3"
           status: 1
         - created_time: 2020-02-01T10:58:34.430613
           product:
             sku: 76
             title: iTunes $10
-          total_fees: 0
+          total_fees: "0"
           destination: "18004441234"
           count: 1
           is_completed: true
-          total_discounts: 0.42
+          total_discounts: "0.42"
           share_link: http://vc.ezpaypin.com/01c79b97-8ab4-423c-a11d-225897f2135a
-          delivery_type: 3
-          total_customer_cost: 3.42
+          delivery_type: 1
+          total_customer_cost: "3.42"
           reference_code: 046ed58d-53b1-4ec5-be46-693096a0bb98
           status_text: accept
           order_id: 89
           terminal_id: 96
-          total_face_value: 3
+          total_face_value: "3"
           status: 1
       properties:
         count:
           description: Number of total orders
           example: 256
-          type: number
+          type: integer
         next:
           description: next page of order list
           example: https://api.ezpaypin.com/vendors/v1/orders/?end_date=2020-05-27T08%3A41%3A59.098734&limit=10&offset=10&start_date=2020-02-27T08%3A41%3A59.098734
@@ -1201,11 +1250,11 @@ components:
         sku:
           description: Catalog SKU
           example: 321
-          type: number
+          type: integer
         quantity:
           description: Item count
           example: 1
-          type: number
+          type: integer
         pre_oder:
           description: To determine whether you want to pre order your request or
             not. The product must support pre order mood. if you pass true your cards
@@ -1214,12 +1263,18 @@ components:
           type: boolean
         price:
           description: Item price
-          example: 10
-          type: number
+          example: "10"
+          format: decimal
+          type: string
         delivery_type:
-          description: 0-None 1-E-mail 2-SMS 3-WhatsApp
+          description: '* `0` None *`1` email *`2` SMS *`3` WhatsApp'
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
           example: 1
-          type: number
+          type: integer
         destination:
           description: E-mail or Phone/Whatsapp number you want the order to be delivered
             to.
@@ -1229,11 +1284,11 @@ components:
           description: Terminal ID of the sub-users that can be defined in setting
             section in user panel
           example: 45
-          type: number
+          type: integer
         terminal_pin:
           description: Pin defined for sub-user
           example: 1111
-          type: number
+          type: integer
         reference_code:
           description: Refernce code. A unique UUID V4 referece code must be included
             in request
@@ -1254,7 +1309,7 @@ components:
         code:
           description: error code
           example: 621
-          type: number
+          type: integer
       type: object
     _orders__post_406_response:
       example:
@@ -1268,7 +1323,7 @@ components:
         code:
           description: error code
           example: 617
-          type: number
+          type: integer
       type: object
     _exchange_rates__get_200_response_results_inner_from_currency:
       description: exchange will be done from this currency
@@ -1312,7 +1367,7 @@ components:
       type: object
     _exchange_rates__get_200_response_results_inner:
       example:
-        rate: 0.75
+        rate: "0.75"
         from_currency:
           symbol: $
           code: USD
@@ -1328,12 +1383,13 @@ components:
           $ref: '#/components/schemas/_exchange_rates__get_200_response_results_inner_to_currency'
         rate:
           description: rate of exchange
-          example: 0.75
-          type: number
+          example: "0.75"
+          format: decimal
+          type: string
     _exchange_rates__get_200_response:
       example:
         results:
-        - rate: 0.75
+        - rate: "0.75"
           from_currency:
             symbol: $
             code: USD
@@ -1342,7 +1398,7 @@ components:
             symbol: £
             code: GBP
             currency: Pounds
-        - rate: 0.75
+        - rate: "0.75"
           from_currency:
             symbol: $
             code: USD
@@ -1375,14 +1431,14 @@ components:
     _cards_check__get_200_response:
       example:
         product: iTunes $10
-        max_price: 200.0
-        min_price: 10.0
+        max_price: "200.0"
+        min_price: "10.0"
         activated_time: 2019-11-20T13:24:26.862624
         currency: USD
         status_text: Activated
         sku: 15
         barcode: "12567312867231868"
-        activate_price: 10
+        activate_price: "10"
         status: 1
       properties:
         barcode:
@@ -1396,27 +1452,34 @@ components:
         sku:
           description: sku of the physical product
           example: 15
-          type: number
+          type: integer
         status_text:
           description: status of activation process
           example: Activated
           type: string
         status:
-          description: "Pending(-1) , Activated(1) , Inactive(0)"
+          description: '*`-1` Pending *`0` Inactive *`1` Activated'
+          enum:
+          - -1
+          - 0
+          - 1
           example: 1
-          type: number
+          type: integer
         min_price:
           description: minimumm price available for physical product
-          example: 10.0
-          type: number
+          example: "10.0"
+          format: decimal
+          type: string
         max_price:
           description: maximumm price available for physical product
-          example: 200.0
-          type: number
+          example: "200.0"
+          format: decimal
+          type: string
         activate_price:
           description: price that the card has been activated with
-          example: 10
-          type: number
+          example: "10"
+          format: decimal
+          type: string
         activated_time:
           description: time of activation
           example: 2019-11-20T13:24:26.862624
@@ -1435,20 +1498,21 @@ components:
         sku:
           description: SKU Of Product
           example: 5432341
-          type: number
+          type: integer
         price:
           description: Item price
-          example: 9.89
-          type: number
+          example: "9.89"
+          format: decimal
+          type: string
         terminal_id:
           description: Terminal ID of the sub-users that can be defined in setting
             section in user panel.
           example: 45
-          type: number
+          type: integer
         terminal_pin:
           description: Pin defined for sub-user
           example: 1144
-          type: number
+          type: integer
         reference_code:
           description: A unique UUID v4 referece code must be included in request
           example: 046ed58d-53b1-4ec5-be46-693096a0bb98
@@ -1461,10 +1525,10 @@ components:
         - symbol: $
           code: USD
           crypto_title: bitcoin
-          price: 33784.7
-          min_amount: 20
+          price: "33784.7"
+          min_amount: "20"
           currency_title: Dollars
-          max_amount: 100
+          max_amount: "100"
           crypto_currency_id: "1"
           crypto_symbol: ₿
           crypto_code: BTC
@@ -1472,10 +1536,10 @@ components:
         - symbol: $
           code: USD
           crypto_title: bitcoin
-          price: 33784.7
-          min_amount: 20
+          price: "33784.7"
+          min_amount: "20"
           currency_title: Dollars
-          max_amount: 100
+          max_amount: "100"
           crypto_currency_id: "1"
           crypto_symbol: ₿
           crypto_code: BTC
@@ -1484,7 +1548,7 @@ components:
         count:
           description: Number of total catalogs
           example: 1
-          type: number
+          type: integer
         results:
           items:
             $ref: '#/components/schemas/CryptoCurrencyCatalog'
@@ -1496,9 +1560,9 @@ components:
         previous: "null"
         count: 256
         results:
-        - requested_price: 20
+        - requested_price: "20"
           created_time: 2021-09-20T11:33:33.568306
-          crypto_price: 6
+          crypto_price: "44126.2"
           crypto_currency_data:
             symbol: ₿
             code: BTC
@@ -1507,14 +1571,14 @@ components:
             symbol: $
             code: USD
             currency: Dollars
-          crypto_amount: 0
+          crypto_amount: "0.00030575"
           crypto_wallet: crypto_wallet
-          network_fee: 0.0001475
-          commission_price: 1
-          commission_percent: 5
+          network_fee: ' 0.0001475'
+          commission_price: "1"
+          commission_percent: "5"
           is_used: true
           can_pay: true
-          price: 21
+          price: "21"
           used_time: 2021-09-20T11:33:33.568306
           reference_code: bb715b4e-6792-45ca-9ca5-2d708f41a6d4
           crypto_currency_id: 1
@@ -1522,10 +1586,10 @@ components:
           status_text: waiting
           currency_id: 1
           terminal_id: 92
-          status: 0
-        - requested_price: 20
+          status: 1
+        - requested_price: "20"
           created_time: 2021-09-20T11:33:33.568306
-          crypto_price: 6
+          crypto_price: "44126.2"
           crypto_currency_data:
             symbol: ₿
             code: BTC
@@ -1534,14 +1598,14 @@ components:
             symbol: $
             code: USD
             currency: Dollars
-          crypto_amount: 0
+          crypto_amount: "0.00030575"
           crypto_wallet: crypto_wallet
-          network_fee: 0.0001475
-          commission_price: 1
-          commission_percent: 5
+          network_fee: ' 0.0001475'
+          commission_price: "1"
+          commission_percent: "5"
           is_used: true
           can_pay: true
-          price: 21
+          price: "21"
           used_time: 2021-09-20T11:33:33.568306
           reference_code: bb715b4e-6792-45ca-9ca5-2d708f41a6d4
           crypto_currency_id: 1
@@ -1549,12 +1613,12 @@ components:
           status_text: waiting
           currency_id: 1
           terminal_id: 92
-          status: 0
+          status: 1
       properties:
         count:
           description: Number of total orders
           example: 256
-          type: number
+          type: integer
         next:
           description: next page of orders
           example: https://api.ezpaypin.com/vendors/v2/crypto/orders/?limit=1&offset=1
@@ -1580,8 +1644,8 @@ components:
           type: integer
         requested_price:
           description: The amount you need to exchange from fiat currency to Cryptocurrency
-          example: 20
-          type: integer
+          format: decimal
+          type: string
         reference_code:
           description: A unique UUID v4 reference code must be included in request
           example: 85735ace-99f2-486a-9d1d-8e8b6c2b32dc
@@ -1590,11 +1654,11 @@ components:
           description: Terminal ID of the sub-users that can be defined in setting
             section in user panel
           example: 92
-          type: number
+          type: integer
         terminal_pin:
           description: Pin defined for sub-user
           example: 1148
-          type: number
+          type: integer
       type: object
     _crypto_orders__reference_code__finalize__post_request:
       properties:
@@ -1615,7 +1679,7 @@ components:
         code:
           description: message code
           example: 823
-          type: number
+          type: integer
       type: object
     _notification_config__post_200_response:
       example:
@@ -1640,12 +1704,13 @@ components:
         - symbol: $
           code: USD
           currency: Dollar
-        price: 35
+        price: "35"
       properties:
         price:
           description: showing price
-          example: 35
-          type: number
+          example: "35"
+          format: decimal
+          type: string
         showing_currency:
           items:
             $ref: '#/components/schemas/ShowingCurrency'

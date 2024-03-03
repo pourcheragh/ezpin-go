@@ -20,7 +20,7 @@ var _ MappedNullable = &OrdersGet200Response{}
 // OrdersGet200Response struct for OrdersGet200Response
 type OrdersGet200Response struct {
 	// Number of total orders
-	Count *float32 `json:"count,omitempty"`
+	Count *int32 `json:"count,omitempty"`
 	// next page of order list
 	Next *string `json:"next,omitempty"`
 	// previous page of order list
@@ -46,9 +46,9 @@ func NewOrdersGet200ResponseWithDefaults() *OrdersGet200Response {
 }
 
 // GetCount returns the Count field value if set, zero value otherwise.
-func (o *OrdersGet200Response) GetCount() float32 {
+func (o *OrdersGet200Response) GetCount() int32 {
 	if o == nil || IsNil(o.Count) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Count
@@ -56,7 +56,7 @@ func (o *OrdersGet200Response) GetCount() float32 {
 
 // GetCountOk returns a tuple with the Count field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrdersGet200Response) GetCountOk() (*float32, bool) {
+func (o *OrdersGet200Response) GetCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.Count) {
 		return nil, false
 	}
@@ -72,8 +72,8 @@ func (o *OrdersGet200Response) HasCount() bool {
 	return false
 }
 
-// SetCount gets a reference to the given float32 and assigns it to the Count field.
-func (o *OrdersGet200Response) SetCount(v float32) {
+// SetCount gets a reference to the given int32 and assigns it to the Count field.
+func (o *OrdersGet200Response) SetCount(v int32) {
 	o.Count = &v
 }
 

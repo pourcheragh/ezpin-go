@@ -12,6 +12,8 @@ package ezpin
 
 import (
 	"encoding/json"
+
+	"github.com/shopspring/decimal"
 )
 
 // checks if the Transaction type satisfies the MappedNullable interface at compile time
@@ -20,25 +22,25 @@ var _ MappedNullable = &Transaction{}
 // Transaction struct for Transaction
 type Transaction struct {
 	// id of activation transaction
-	TransactionId *float32 `json:"transaction_id,omitempty"`
+	TransactionId *int32 `json:"transaction_id,omitempty"`
 	// barcode of physical card
 	Barcode *string `json:"barcode,omitempty"`
 	// name of product
 	Product *string `json:"product,omitempty"`
-	// Pending(-1) , Activated(1) , Inactive(0)
-	Status *float32 `json:"status,omitempty"`
+	// *`-1` Pending *`0` Inactive *`1` Activated
+	Status *int32 `json:"status,omitempty"`
 	// status of activation order
 	StatusText *string `json:"status_text,omitempty"`
 	// physical card price
-	TotalFaceValue *float32 `json:"total_face_value,omitempty"`
+	TotalFaceValue *decimal.Decimal `json:"total_face_value,omitempty"`
 	// activation fee of physical card
-	TotalFees *float32 `json:"total_fees,omitempty"`
+	TotalFees *decimal.Decimal `json:"total_fees,omitempty"`
 	// discount of physical card
-	TotalDiscounts *float32 `json:"total_discounts,omitempty"`
+	TotalDiscounts *decimal.Decimal `json:"total_discounts,omitempty"`
 	// price that customer should pay
-	TotalCustomerCost *float32 `json:"total_customer_cost,omitempty"`
+	TotalCustomerCost *decimal.Decimal `json:"total_customer_cost,omitempty"`
 	// Terminal ID of the sub-user
-	TerminalId *float32 `json:"terminal_id,omitempty"`
+	TerminalId *int32 `json:"terminal_id,omitempty"`
 	// name of currency
 	Currency *string `json:"currency,omitempty"`
 	// time of activation
@@ -65,9 +67,9 @@ func NewTransactionWithDefaults() *Transaction {
 }
 
 // GetTransactionId returns the TransactionId field value if set, zero value otherwise.
-func (o *Transaction) GetTransactionId() float32 {
+func (o *Transaction) GetTransactionId() int32 {
 	if o == nil || IsNil(o.TransactionId) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.TransactionId
@@ -75,7 +77,7 @@ func (o *Transaction) GetTransactionId() float32 {
 
 // GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetTransactionIdOk() (*float32, bool) {
+func (o *Transaction) GetTransactionIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.TransactionId) {
 		return nil, false
 	}
@@ -91,8 +93,8 @@ func (o *Transaction) HasTransactionId() bool {
 	return false
 }
 
-// SetTransactionId gets a reference to the given float32 and assigns it to the TransactionId field.
-func (o *Transaction) SetTransactionId(v float32) {
+// SetTransactionId gets a reference to the given int32 and assigns it to the TransactionId field.
+func (o *Transaction) SetTransactionId(v int32) {
 	o.TransactionId = &v
 }
 
@@ -161,9 +163,9 @@ func (o *Transaction) SetProduct(v string) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *Transaction) GetStatus() float32 {
+func (o *Transaction) GetStatus() int32 {
 	if o == nil || IsNil(o.Status) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Status
@@ -171,7 +173,7 @@ func (o *Transaction) GetStatus() float32 {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetStatusOk() (*float32, bool) {
+func (o *Transaction) GetStatusOk() (*int32, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -187,8 +189,8 @@ func (o *Transaction) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given float32 and assigns it to the Status field.
-func (o *Transaction) SetStatus(v float32) {
+// SetStatus gets a reference to the given int32 and assigns it to the Status field.
+func (o *Transaction) SetStatus(v int32) {
 	o.Status = &v
 }
 
@@ -225,9 +227,9 @@ func (o *Transaction) SetStatusText(v string) {
 }
 
 // GetTotalFaceValue returns the TotalFaceValue field value if set, zero value otherwise.
-func (o *Transaction) GetTotalFaceValue() float32 {
+func (o *Transaction) GetTotalFaceValue() decimal.Decimal {
 	if o == nil || IsNil(o.TotalFaceValue) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.TotalFaceValue
@@ -235,7 +237,7 @@ func (o *Transaction) GetTotalFaceValue() float32 {
 
 // GetTotalFaceValueOk returns a tuple with the TotalFaceValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetTotalFaceValueOk() (*float32, bool) {
+func (o *Transaction) GetTotalFaceValueOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.TotalFaceValue) {
 		return nil, false
 	}
@@ -251,15 +253,15 @@ func (o *Transaction) HasTotalFaceValue() bool {
 	return false
 }
 
-// SetTotalFaceValue gets a reference to the given float32 and assigns it to the TotalFaceValue field.
-func (o *Transaction) SetTotalFaceValue(v float32) {
+// SetTotalFaceValue gets a reference to the given decimal.Decimal and assigns it to the TotalFaceValue field.
+func (o *Transaction) SetTotalFaceValue(v decimal.Decimal) {
 	o.TotalFaceValue = &v
 }
 
 // GetTotalFees returns the TotalFees field value if set, zero value otherwise.
-func (o *Transaction) GetTotalFees() float32 {
+func (o *Transaction) GetTotalFees() decimal.Decimal {
 	if o == nil || IsNil(o.TotalFees) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.TotalFees
@@ -267,7 +269,7 @@ func (o *Transaction) GetTotalFees() float32 {
 
 // GetTotalFeesOk returns a tuple with the TotalFees field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetTotalFeesOk() (*float32, bool) {
+func (o *Transaction) GetTotalFeesOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.TotalFees) {
 		return nil, false
 	}
@@ -283,15 +285,15 @@ func (o *Transaction) HasTotalFees() bool {
 	return false
 }
 
-// SetTotalFees gets a reference to the given float32 and assigns it to the TotalFees field.
-func (o *Transaction) SetTotalFees(v float32) {
+// SetTotalFees gets a reference to the given decimal.Decimal and assigns it to the TotalFees field.
+func (o *Transaction) SetTotalFees(v decimal.Decimal) {
 	o.TotalFees = &v
 }
 
 // GetTotalDiscounts returns the TotalDiscounts field value if set, zero value otherwise.
-func (o *Transaction) GetTotalDiscounts() float32 {
+func (o *Transaction) GetTotalDiscounts() decimal.Decimal {
 	if o == nil || IsNil(o.TotalDiscounts) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.TotalDiscounts
@@ -299,7 +301,7 @@ func (o *Transaction) GetTotalDiscounts() float32 {
 
 // GetTotalDiscountsOk returns a tuple with the TotalDiscounts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetTotalDiscountsOk() (*float32, bool) {
+func (o *Transaction) GetTotalDiscountsOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.TotalDiscounts) {
 		return nil, false
 	}
@@ -315,15 +317,15 @@ func (o *Transaction) HasTotalDiscounts() bool {
 	return false
 }
 
-// SetTotalDiscounts gets a reference to the given float32 and assigns it to the TotalDiscounts field.
-func (o *Transaction) SetTotalDiscounts(v float32) {
+// SetTotalDiscounts gets a reference to the given decimal.Decimal and assigns it to the TotalDiscounts field.
+func (o *Transaction) SetTotalDiscounts(v decimal.Decimal) {
 	o.TotalDiscounts = &v
 }
 
 // GetTotalCustomerCost returns the TotalCustomerCost field value if set, zero value otherwise.
-func (o *Transaction) GetTotalCustomerCost() float32 {
+func (o *Transaction) GetTotalCustomerCost() decimal.Decimal {
 	if o == nil || IsNil(o.TotalCustomerCost) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.TotalCustomerCost
@@ -331,7 +333,7 @@ func (o *Transaction) GetTotalCustomerCost() float32 {
 
 // GetTotalCustomerCostOk returns a tuple with the TotalCustomerCost field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetTotalCustomerCostOk() (*float32, bool) {
+func (o *Transaction) GetTotalCustomerCostOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.TotalCustomerCost) {
 		return nil, false
 	}
@@ -347,15 +349,15 @@ func (o *Transaction) HasTotalCustomerCost() bool {
 	return false
 }
 
-// SetTotalCustomerCost gets a reference to the given float32 and assigns it to the TotalCustomerCost field.
-func (o *Transaction) SetTotalCustomerCost(v float32) {
+// SetTotalCustomerCost gets a reference to the given decimal.Decimal and assigns it to the TotalCustomerCost field.
+func (o *Transaction) SetTotalCustomerCost(v decimal.Decimal) {
 	o.TotalCustomerCost = &v
 }
 
 // GetTerminalId returns the TerminalId field value if set, zero value otherwise.
-func (o *Transaction) GetTerminalId() float32 {
+func (o *Transaction) GetTerminalId() int32 {
 	if o == nil || IsNil(o.TerminalId) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.TerminalId
@@ -363,7 +365,7 @@ func (o *Transaction) GetTerminalId() float32 {
 
 // GetTerminalIdOk returns a tuple with the TerminalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetTerminalIdOk() (*float32, bool) {
+func (o *Transaction) GetTerminalIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.TerminalId) {
 		return nil, false
 	}
@@ -379,8 +381,8 @@ func (o *Transaction) HasTerminalId() bool {
 	return false
 }
 
-// SetTerminalId gets a reference to the given float32 and assigns it to the TerminalId field.
-func (o *Transaction) SetTerminalId(v float32) {
+// SetTerminalId gets a reference to the given int32 and assigns it to the TerminalId field.
+func (o *Transaction) SetTerminalId(v int32) {
 	o.TerminalId = &v
 }
 

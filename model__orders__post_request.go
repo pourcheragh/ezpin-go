@@ -12,6 +12,8 @@ package ezpin
 
 import (
 	"encoding/json"
+
+	"github.com/shopspring/decimal"
 )
 
 // checks if the OrdersPostRequest type satisfies the MappedNullable interface at compile time
@@ -20,21 +22,21 @@ var _ MappedNullable = &OrdersPostRequest{}
 // OrdersPostRequest struct for OrdersPostRequest
 type OrdersPostRequest struct {
 	// Catalog SKU
-	Sku *float32 `json:"sku,omitempty"`
+	Sku *int32 `json:"sku,omitempty"`
 	// Item count
-	Quantity *int `json:"quantity,omitempty"`
+	Quantity *int32 `json:"quantity,omitempty"`
 	// To determine whether you want to pre order your request or not. The product must support pre order mood. if you pass true your cards will get ready in the future.
 	PreOder *bool `json:"pre_oder,omitempty"`
 	// Item price
-	Price *float64 `json:"price,omitempty"`
-	// 0-None 1-E-mail 2-SMS 3-WhatsApp
-	DeliveryType *float32 `json:"delivery_type,omitempty"`
+	Price *decimal.Decimal `json:"price,omitempty"`
+	// * `0` None *`1` email *`2` SMS *`3` WhatsApp
+	DeliveryType *int32 `json:"delivery_type,omitempty"`
 	// E-mail or Phone/Whatsapp number you want the order to be delivered to.
 	Destination *string `json:"destination,omitempty"`
 	// Terminal ID of the sub-users that can be defined in setting section in user panel
-	TerminalId *float32 `json:"terminal_id,omitempty"`
+	TerminalId *int32 `json:"terminal_id,omitempty"`
 	// Pin defined for sub-user
-	TerminalPin *float32 `json:"terminal_pin,omitempty"`
+	TerminalPin *int32 `json:"terminal_pin,omitempty"`
 	// Refernce code. A unique UUID V4 referece code must be included in request
 	ReferenceCode *string `json:"reference_code,omitempty"`
 }
@@ -57,9 +59,9 @@ func NewOrdersPostRequestWithDefaults() *OrdersPostRequest {
 }
 
 // GetSku returns the Sku field value if set, zero value otherwise.
-func (o *OrdersPostRequest) GetSku() float32 {
+func (o *OrdersPostRequest) GetSku() int32 {
 	if o == nil || IsNil(o.Sku) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Sku
@@ -67,7 +69,7 @@ func (o *OrdersPostRequest) GetSku() float32 {
 
 // GetSkuOk returns a tuple with the Sku field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrdersPostRequest) GetSkuOk() (*float32, bool) {
+func (o *OrdersPostRequest) GetSkuOk() (*int32, bool) {
 	if o == nil || IsNil(o.Sku) {
 		return nil, false
 	}
@@ -83,15 +85,15 @@ func (o *OrdersPostRequest) HasSku() bool {
 	return false
 }
 
-// SetSku gets a reference to the given float32 and assigns it to the Sku field.
-func (o *OrdersPostRequest) SetSku(v float32) {
+// SetSku gets a reference to the given int32 and assigns it to the Sku field.
+func (o *OrdersPostRequest) SetSku(v int32) {
 	o.Sku = &v
 }
 
 // GetQuantity returns the Quantity field value if set, zero value otherwise.
-func (o *OrdersPostRequest) GetQuantity() int {
+func (o *OrdersPostRequest) GetQuantity() int32 {
 	if o == nil || IsNil(o.Quantity) {
-		var ret int
+		var ret int32
 		return ret
 	}
 	return *o.Quantity
@@ -99,7 +101,7 @@ func (o *OrdersPostRequest) GetQuantity() int {
 
 // GetQuantityOk returns a tuple with the Quantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrdersPostRequest) GetQuantityOk() (*int, bool) {
+func (o *OrdersPostRequest) GetQuantityOk() (*int32, bool) {
 	if o == nil || IsNil(o.Quantity) {
 		return nil, false
 	}
@@ -115,8 +117,8 @@ func (o *OrdersPostRequest) HasQuantity() bool {
 	return false
 }
 
-// SetQuantity gets a reference to the given float32 and assigns it to the Quantity field.
-func (o *OrdersPostRequest) SetQuantity(v int) {
+// SetQuantity gets a reference to the given int32 and assigns it to the Quantity field.
+func (o *OrdersPostRequest) SetQuantity(v int32) {
 	o.Quantity = &v
 }
 
@@ -153,9 +155,9 @@ func (o *OrdersPostRequest) SetPreOder(v bool) {
 }
 
 // GetPrice returns the Price field value if set, zero value otherwise.
-func (o *OrdersPostRequest) GetPrice() float64 {
+func (o *OrdersPostRequest) GetPrice() decimal.Decimal {
 	if o == nil || IsNil(o.Price) {
-		var ret float64
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.Price
@@ -163,7 +165,7 @@ func (o *OrdersPostRequest) GetPrice() float64 {
 
 // GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrdersPostRequest) GetPriceOk() (*float64, bool) {
+func (o *OrdersPostRequest) GetPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.Price) {
 		return nil, false
 	}
@@ -179,15 +181,15 @@ func (o *OrdersPostRequest) HasPrice() bool {
 	return false
 }
 
-// SetPrice gets a reference to the given float32 and assigns it to the Price field.
-func (o *OrdersPostRequest) SetPrice(v float64) {
+// SetPrice gets a reference to the given decimal.Decimal and assigns it to the Price field.
+func (o *OrdersPostRequest) SetPrice(v decimal.Decimal) {
 	o.Price = &v
 }
 
 // GetDeliveryType returns the DeliveryType field value if set, zero value otherwise.
-func (o *OrdersPostRequest) GetDeliveryType() float32 {
+func (o *OrdersPostRequest) GetDeliveryType() int32 {
 	if o == nil || IsNil(o.DeliveryType) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.DeliveryType
@@ -195,7 +197,7 @@ func (o *OrdersPostRequest) GetDeliveryType() float32 {
 
 // GetDeliveryTypeOk returns a tuple with the DeliveryType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrdersPostRequest) GetDeliveryTypeOk() (*float32, bool) {
+func (o *OrdersPostRequest) GetDeliveryTypeOk() (*int32, bool) {
 	if o == nil || IsNil(o.DeliveryType) {
 		return nil, false
 	}
@@ -211,8 +213,8 @@ func (o *OrdersPostRequest) HasDeliveryType() bool {
 	return false
 }
 
-// SetDeliveryType gets a reference to the given float32 and assigns it to the DeliveryType field.
-func (o *OrdersPostRequest) SetDeliveryType(v float32) {
+// SetDeliveryType gets a reference to the given int32 and assigns it to the DeliveryType field.
+func (o *OrdersPostRequest) SetDeliveryType(v int32) {
 	o.DeliveryType = &v
 }
 
@@ -249,9 +251,9 @@ func (o *OrdersPostRequest) SetDestination(v string) {
 }
 
 // GetTerminalId returns the TerminalId field value if set, zero value otherwise.
-func (o *OrdersPostRequest) GetTerminalId() float32 {
+func (o *OrdersPostRequest) GetTerminalId() int32 {
 	if o == nil || IsNil(o.TerminalId) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.TerminalId
@@ -259,7 +261,7 @@ func (o *OrdersPostRequest) GetTerminalId() float32 {
 
 // GetTerminalIdOk returns a tuple with the TerminalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrdersPostRequest) GetTerminalIdOk() (*float32, bool) {
+func (o *OrdersPostRequest) GetTerminalIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.TerminalId) {
 		return nil, false
 	}
@@ -275,15 +277,15 @@ func (o *OrdersPostRequest) HasTerminalId() bool {
 	return false
 }
 
-// SetTerminalId gets a reference to the given float32 and assigns it to the TerminalId field.
-func (o *OrdersPostRequest) SetTerminalId(v float32) {
+// SetTerminalId gets a reference to the given int32 and assigns it to the TerminalId field.
+func (o *OrdersPostRequest) SetTerminalId(v int32) {
 	o.TerminalId = &v
 }
 
 // GetTerminalPin returns the TerminalPin field value if set, zero value otherwise.
-func (o *OrdersPostRequest) GetTerminalPin() float32 {
+func (o *OrdersPostRequest) GetTerminalPin() int32 {
 	if o == nil || IsNil(o.TerminalPin) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.TerminalPin
@@ -291,7 +293,7 @@ func (o *OrdersPostRequest) GetTerminalPin() float32 {
 
 // GetTerminalPinOk returns a tuple with the TerminalPin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrdersPostRequest) GetTerminalPinOk() (*float32, bool) {
+func (o *OrdersPostRequest) GetTerminalPinOk() (*int32, bool) {
 	if o == nil || IsNil(o.TerminalPin) {
 		return nil, false
 	}
@@ -307,8 +309,8 @@ func (o *OrdersPostRequest) HasTerminalPin() bool {
 	return false
 }
 
-// SetTerminalPin gets a reference to the given float32 and assigns it to the TerminalPin field.
-func (o *OrdersPostRequest) SetTerminalPin(v float32) {
+// SetTerminalPin gets a reference to the given int32 and assigns it to the TerminalPin field.
+func (o *OrdersPostRequest) SetTerminalPin(v int32) {
 	o.TerminalPin = &v
 }
 

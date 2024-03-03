@@ -22,7 +22,7 @@ type AuthTokenPost400Response struct {
 	// API error details
 	Detail *string `json:"detail,omitempty"`
 	// error code
-	Code *float32 `json:"code,omitempty"`
+	Code *int32 `json:"code,omitempty"`
 }
 
 // NewAuthTokenPost400Response instantiates a new AuthTokenPost400Response object
@@ -75,9 +75,9 @@ func (o *AuthTokenPost400Response) SetDetail(v string) {
 }
 
 // GetCode returns the Code field value if set, zero value otherwise.
-func (o *AuthTokenPost400Response) GetCode() float32 {
+func (o *AuthTokenPost400Response) GetCode() int32 {
 	if o == nil || IsNil(o.Code) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Code
@@ -85,7 +85,7 @@ func (o *AuthTokenPost400Response) GetCode() float32 {
 
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AuthTokenPost400Response) GetCodeOk() (*float32, bool) {
+func (o *AuthTokenPost400Response) GetCodeOk() (*int32, bool) {
 	if o == nil || IsNil(o.Code) {
 		return nil, false
 	}
@@ -101,8 +101,8 @@ func (o *AuthTokenPost400Response) HasCode() bool {
 	return false
 }
 
-// SetCode gets a reference to the given float32 and assigns it to the Code field.
-func (o *AuthTokenPost400Response) SetCode(v float32) {
+// SetCode gets a reference to the given int32 and assigns it to the Code field.
+func (o *AuthTokenPost400Response) SetCode(v int32) {
 	o.Code = &v
 }
 

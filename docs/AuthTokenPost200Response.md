@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Access** | Pointer to **string** | Access token for APIs | [optional] 
-**Expire** | Pointer to **float32** | Token expire time in (ms) | [optional] 
+**Expire** | Pointer to **decimal.Decimal** | Token expire time in (ms) | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasAccess returns a boolean if a field has been set.
 
 ### GetExpire
 
-`func (o *AuthTokenPost200Response) GetExpire() float32`
+`func (o *AuthTokenPost200Response) GetExpire() decimal.Decimal`
 
 GetExpire returns the Expire field if non-nil, zero value otherwise.
 
 ### GetExpireOk
 
-`func (o *AuthTokenPost200Response) GetExpireOk() (*float32, bool)`
+`func (o *AuthTokenPost200Response) GetExpireOk() (*decimal.Decimal, bool)`
 
 GetExpireOk returns a tuple with the Expire field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpire
 
-`func (o *AuthTokenPost200Response) SetExpire(v float32)`
+`func (o *AuthTokenPost200Response) SetExpire(v decimal.Decimal)`
 
 SetExpire sets Expire field to given value.
 

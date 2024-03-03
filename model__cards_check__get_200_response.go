@@ -12,6 +12,8 @@ package ezpin
 
 import (
 	"encoding/json"
+
+	"github.com/shopspring/decimal"
 )
 
 // checks if the CardsCheckGet200Response type satisfies the MappedNullable interface at compile time
@@ -24,17 +26,17 @@ type CardsCheckGet200Response struct {
 	// name of the physical product
 	Product *string `json:"product,omitempty"`
 	// sku of the physical product
-	Sku *float32 `json:"sku,omitempty"`
+	Sku *int32 `json:"sku,omitempty"`
 	// status of activation process
 	StatusText *string `json:"status_text,omitempty"`
-	// Pending(-1) , Activated(1) , Inactive(0)
-	Status *float32 `json:"status,omitempty"`
+	// *`-1` Pending *`0` Inactive *`1` Activated
+	Status *int32 `json:"status,omitempty"`
 	// minimumm price available for physical product
-	MinPrice *float32 `json:"min_price,omitempty"`
+	MinPrice *decimal.Decimal `json:"min_price,omitempty"`
 	// maximumm price available for physical product
-	MaxPrice *float32 `json:"max_price,omitempty"`
+	MaxPrice *decimal.Decimal `json:"max_price,omitempty"`
 	// price that the card has been activated with
-	ActivatePrice *float32 `json:"activate_price,omitempty"`
+	ActivatePrice *decimal.Decimal `json:"activate_price,omitempty"`
 	// time of activation
 	ActivatedTime *string `json:"activated_time,omitempty"`
 	// currency of physical product
@@ -123,9 +125,9 @@ func (o *CardsCheckGet200Response) SetProduct(v string) {
 }
 
 // GetSku returns the Sku field value if set, zero value otherwise.
-func (o *CardsCheckGet200Response) GetSku() float32 {
+func (o *CardsCheckGet200Response) GetSku() int32 {
 	if o == nil || IsNil(o.Sku) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Sku
@@ -133,7 +135,7 @@ func (o *CardsCheckGet200Response) GetSku() float32 {
 
 // GetSkuOk returns a tuple with the Sku field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardsCheckGet200Response) GetSkuOk() (*float32, bool) {
+func (o *CardsCheckGet200Response) GetSkuOk() (*int32, bool) {
 	if o == nil || IsNil(o.Sku) {
 		return nil, false
 	}
@@ -149,8 +151,8 @@ func (o *CardsCheckGet200Response) HasSku() bool {
 	return false
 }
 
-// SetSku gets a reference to the given float32 and assigns it to the Sku field.
-func (o *CardsCheckGet200Response) SetSku(v float32) {
+// SetSku gets a reference to the given int32 and assigns it to the Sku field.
+func (o *CardsCheckGet200Response) SetSku(v int32) {
 	o.Sku = &v
 }
 
@@ -187,9 +189,9 @@ func (o *CardsCheckGet200Response) SetStatusText(v string) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *CardsCheckGet200Response) GetStatus() float32 {
+func (o *CardsCheckGet200Response) GetStatus() int32 {
 	if o == nil || IsNil(o.Status) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Status
@@ -197,7 +199,7 @@ func (o *CardsCheckGet200Response) GetStatus() float32 {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardsCheckGet200Response) GetStatusOk() (*float32, bool) {
+func (o *CardsCheckGet200Response) GetStatusOk() (*int32, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -213,15 +215,15 @@ func (o *CardsCheckGet200Response) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given float32 and assigns it to the Status field.
-func (o *CardsCheckGet200Response) SetStatus(v float32) {
+// SetStatus gets a reference to the given int32 and assigns it to the Status field.
+func (o *CardsCheckGet200Response) SetStatus(v int32) {
 	o.Status = &v
 }
 
 // GetMinPrice returns the MinPrice field value if set, zero value otherwise.
-func (o *CardsCheckGet200Response) GetMinPrice() float32 {
+func (o *CardsCheckGet200Response) GetMinPrice() decimal.Decimal {
 	if o == nil || IsNil(o.MinPrice) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.MinPrice
@@ -229,7 +231,7 @@ func (o *CardsCheckGet200Response) GetMinPrice() float32 {
 
 // GetMinPriceOk returns a tuple with the MinPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardsCheckGet200Response) GetMinPriceOk() (*float32, bool) {
+func (o *CardsCheckGet200Response) GetMinPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.MinPrice) {
 		return nil, false
 	}
@@ -245,15 +247,15 @@ func (o *CardsCheckGet200Response) HasMinPrice() bool {
 	return false
 }
 
-// SetMinPrice gets a reference to the given float32 and assigns it to the MinPrice field.
-func (o *CardsCheckGet200Response) SetMinPrice(v float32) {
+// SetMinPrice gets a reference to the given decimal.Decimal and assigns it to the MinPrice field.
+func (o *CardsCheckGet200Response) SetMinPrice(v decimal.Decimal) {
 	o.MinPrice = &v
 }
 
 // GetMaxPrice returns the MaxPrice field value if set, zero value otherwise.
-func (o *CardsCheckGet200Response) GetMaxPrice() float32 {
+func (o *CardsCheckGet200Response) GetMaxPrice() decimal.Decimal {
 	if o == nil || IsNil(o.MaxPrice) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.MaxPrice
@@ -261,7 +263,7 @@ func (o *CardsCheckGet200Response) GetMaxPrice() float32 {
 
 // GetMaxPriceOk returns a tuple with the MaxPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardsCheckGet200Response) GetMaxPriceOk() (*float32, bool) {
+func (o *CardsCheckGet200Response) GetMaxPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.MaxPrice) {
 		return nil, false
 	}
@@ -277,15 +279,15 @@ func (o *CardsCheckGet200Response) HasMaxPrice() bool {
 	return false
 }
 
-// SetMaxPrice gets a reference to the given float32 and assigns it to the MaxPrice field.
-func (o *CardsCheckGet200Response) SetMaxPrice(v float32) {
+// SetMaxPrice gets a reference to the given decimal.Decimal and assigns it to the MaxPrice field.
+func (o *CardsCheckGet200Response) SetMaxPrice(v decimal.Decimal) {
 	o.MaxPrice = &v
 }
 
 // GetActivatePrice returns the ActivatePrice field value if set, zero value otherwise.
-func (o *CardsCheckGet200Response) GetActivatePrice() float32 {
+func (o *CardsCheckGet200Response) GetActivatePrice() decimal.Decimal {
 	if o == nil || IsNil(o.ActivatePrice) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.ActivatePrice
@@ -293,7 +295,7 @@ func (o *CardsCheckGet200Response) GetActivatePrice() float32 {
 
 // GetActivatePriceOk returns a tuple with the ActivatePrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardsCheckGet200Response) GetActivatePriceOk() (*float32, bool) {
+func (o *CardsCheckGet200Response) GetActivatePriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.ActivatePrice) {
 		return nil, false
 	}
@@ -309,8 +311,8 @@ func (o *CardsCheckGet200Response) HasActivatePrice() bool {
 	return false
 }
 
-// SetActivatePrice gets a reference to the given float32 and assigns it to the ActivatePrice field.
-func (o *CardsCheckGet200Response) SetActivatePrice(v float32) {
+// SetActivatePrice gets a reference to the given decimal.Decimal and assigns it to the ActivatePrice field.
+func (o *CardsCheckGet200Response) SetActivatePrice(v decimal.Decimal) {
 	o.ActivatePrice = &v
 }
 

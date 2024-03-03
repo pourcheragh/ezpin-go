@@ -44,6 +44,7 @@
                                         },
                                         "expire": {
                                             "type": "number",
+                                            "format": "double",
                                             "example": 312645,
                                             "description": "Token expire time in (ms)"
                                         }
@@ -65,7 +66,7 @@
                                             "description": "API error details"
                                         },
                                         "code": {
-                                            "type": "number",
+                                            "type": "integer",
                                             "example": 615,
                                             "description": "error code"
                                         }
@@ -93,7 +94,7 @@
                                     "type": "object",
                                     "properties": {
                                         "count": {
-                                            "type": "number",
+                                            "type": "integer",
                                             "example": 256,
                                             "description": "Number of total catalogs"
                                         },
@@ -149,7 +150,7 @@
                         "required": true,
                         "description": "SKU of desired product",
                         "schema": {
-                            "type": "number",
+                            "type": "integer",
                             "example": 2785
                         }
                     },
@@ -159,7 +160,7 @@
                         "required": true,
                         "description": "Number of items",
                         "schema": {
-                            "type": "number",
+                            "type": "integer",
                             "example": 10
                         }
                     },
@@ -169,8 +170,9 @@
                         "description": "Product price",
                         "required": true,
                         "schema": {
-                            "type": "number",
-                            "example": 10
+                            "type": "string",
+                            "format": "decimal",
+                            "example": "10"
                         }
                     }
                 ],
@@ -214,12 +216,12 @@
                                 "type": "object",
                                 "properties": {
                                     "sku": {
-                                        "type": "number",
+                                        "type": "integer",
                                         "description": "Catalog SKU",
                                         "example": 321
                                     },
                                     "quantity": {
-                                        "type": "number",
+                                        "type": "integer",
                                         "description": "Item count",
                                         "example": 1
                                     },
@@ -230,13 +232,15 @@
                                     },
                                     "price": {
                                         "description": "Item price",
-                                        "type": "number",
-                                        "example": 10
+                                        "type": "string",
+                                        "format": "decimal",
+                                        "example": "10"
                                     },
                                     "delivery_type": {
-                                        "type": "number",
+                                        "type": "integer",
+                                        "enum": [0, 1, 2, 3],
                                         "example": 1,
-                                        "description": "0-None 1-E-mail 2-SMS 3-WhatsApp"
+                                        "description": "* `0` None *`1` email *`2` SMS *`3` WhatsApp"
                                     },
                                     "destination": {
                                         "type": "string",
@@ -244,12 +248,12 @@
                                         "example": "support@ezpin.com"
                                     },
                                     "terminal_id": {
-                                        "type": "number",
+                                        "type": "integer",
                                         "description": "Terminal ID of the sub-users that can be defined in setting section in user panel",
                                         "example": 45
                                     },
                                     "terminal_pin": {
-                                        "type": "number",
+                                        "type": "integer",
                                         "description": "Pin defined for sub-user",
                                         "example": 1111
                                     },
@@ -287,7 +291,7 @@
                                             "description": "detail of returned response"
                                         },
                                         "code": {
-                                            "type": "number",
+                                            "type": "integer",
                                             "example": 621,
                                             "description": "error code"
                                         }
@@ -309,7 +313,7 @@
                                             "description": "detail of returned response"
                                         },
                                         "code": {
-                                            "type": "number",
+                                            "type": "integer",
                                             "example": 617,
                                             "description": "error code"
                                         }
@@ -332,7 +336,7 @@
                         "name": "limit",
                         "description": "Number of items in list",
                         "schema": {
-                            "type": "number",
+                            "type": "integer",
                             "example": 10
                         }
                     },
@@ -341,7 +345,7 @@
                         "name": "offset",
                         "description": "Offset number of list",
                         "schema": {
-                            "type": "number",
+                            "type": "integer",
                             "example": 1
                         }
                     },
@@ -373,7 +377,7 @@
                                     "type": "object",
                                     "properties": {
                                         "count": {
-                                            "type": "number",
+                                            "type": "integer",
                                             "example": 256,
                                             "description": "Number of total orders"
                                         },
@@ -463,8 +467,9 @@
                                                         }
                                                     },
                                                     "rate": {
-                                                        "type": "number",
-                                                        "example": 0.75,
+                                                        "type": "string",
+                                                        "format": "decimal",
+                                                        "example": "0.75",
                                                         "description": "rate of exchange"
                                                     }
                                                 }
@@ -590,7 +595,7 @@
                                             "description": "name of the physical product"
                                         },
                                         "sku": {
-                                            "type": "number",
+                                            "type": "integer",
                                             "example": 15,
                                             "description": "sku of the physical product"
                                         },
@@ -600,23 +605,27 @@
                                             "description": "status of activation process"
                                         },
                                         "status": {
-                                            "type": "number",
+                                            "type": "integer",
+                                            "enum": [-1, 0, 1],
                                             "example": 1,
-                                            "description": "Pending(-1) , Activated(1) , Inactive(0)"
+                                            "description": "*`-1` Pending *`0` Inactive *`1` Activated"
                                         },
                                         "min_price": {
-                                            "type": "number",
+                                            "type": "string",
+                                            "format": "decimal",
                                             "example": "10.0",
                                             "description": "minimumm price available for physical product"
                                         },
                                         "max_price": {
-                                            "type": "number",
+                                            "type": "string",
+                                            "format": "decimal",
                                             "example": "200.0",
                                             "description": "maximumm price available for physical product"
                                         },
                                         "activate_price": {
-                                            "type": "number",
-                                            "example": 10,
+                                            "type": "string",
+                                            "format": "decimal",
+                                            "example": "10",
                                             "description": "price that the card has been activated with"
                                         },
                                         "activated_time": {
@@ -657,21 +666,22 @@
                                     },
                                     "sku": {
                                         "description": "SKU Of Product",
-                                        "type": "number",
+                                        "type": "integer",
                                         "example": 5432341
                                     },
                                     "price": {
                                         "description": "Item price",
-                                        "type": "number",
-                                        "example": 9.89
+                                        "type": "string",
+                                        "format": "decimal",
+                                        "example": "9.89"
                                     },
                                     "terminal_id": {
                                         "description": "Terminal ID of the sub-users that can be defined in setting section in user panel.",
-                                        "type": "number",
+                                        "type": "integer",
                                         "example": 45
                                     },
                                     "terminal_pin": {
-                                        "type": "number",
+                                        "type": "integer",
                                         "example": 1144,
                                         "description": "Pin defined for sub-user"
                                     },
@@ -749,7 +759,7 @@
                                     "type": "object",
                                     "properties": {
                                         "count": {
-                                            "type": "number",
+                                            "type": "integer",
                                             "example": 1,
                                             "description": "Number of total catalogs"
                                         },
@@ -791,8 +801,8 @@
                                         "description": "ID of Crypto Currency"
                                     },
                                     "requested_price": {
-                                        "type": "integer",
-                                        "example": 20,
+                                        "type": "string",
+                                        "format": "decimal",
                                         "description": "The amount you need to exchange from fiat currency to Cryptocurrency"
                                     },
                                     "reference_code": {
@@ -801,12 +811,12 @@
                                         "description": "A unique UUID v4 reference code must be included in request"
                                     },
                                     "terminal_id": {
-                                        "type": "number",
+                                        "type": "integer",
                                         "example": 92,
                                         "description": "Terminal ID of the sub-users that can be defined in setting section in user panel"
                                     },
                                     "terminal_pin": {
-                                        "type": "number",
+                                        "type": "integer",
                                         "example": 1148,
                                         "description": "Pin defined for sub-user"
                                     }
@@ -840,7 +850,7 @@
                         "name": "limit",
                         "description": "Maximum number of results",
                         "schema": {
-                            "type": "number",
+                            "type": "integer",
                             "example": 10
                         }
                     },
@@ -849,7 +859,7 @@
                         "name": "offset",
                         "description": "Offset number in results",
                         "schema": {
-                            "type": "number",
+                            "type": "integer",
                             "example": 1
                         }
                     },
@@ -873,11 +883,13 @@
                     },
                     {
                         "in": "query",
-                        "name": "staus",
+                        "name": "status",
                         "description": "Status of the order",
                         "schema": {
                             "type": "integer",
-                            "example": 1
+                            "enum": [-5, -1, 0, 1],
+                            "example": 1,
+                            "description": "*`-5` Expired *`-1` Reject *`0` Waiting *`1` Accept"
                         }
                     },
                     {
@@ -899,7 +911,7 @@
                                     "type": "object",
                                     "properties": {
                                         "count": {
-                                            "type": "number",
+                                            "type": "integer",
                                             "example": 256,
                                             "description": "Number of total orders"
                                         },
@@ -1009,7 +1021,7 @@
                                             "description": "result of finaliz"
                                         },
                                         "code": {
-                                            "type": "number",
+                                            "type": "integer",
                                             "example": 823,
                                             "description": "message code"
                                         }
@@ -1099,12 +1111,12 @@
                 "type": "object",
                 "properties": {
                     "sku": {
-                        "type": "number",
+                        "type": "integer",
                         "example": 23,
                         "description": "sku of product"
                     },
                     "upc": {
-                        "type": "number",
+                        "type": "string",
                         "example": 659245724761,
                         "description": "upc of product"
                     },
@@ -1114,13 +1126,15 @@
                         "description": "title of product"
                     },
                     "min_price": {
-                        "type": "number",
-                        "example": 400,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "400",
                         "description": "product minimumm price"
                     },
                     "max_price": {
-                        "type": "number",
-                        "example": 400,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "400",
                         "description": "product maximumm price"
                     },
                     "pre_order": {
@@ -1129,13 +1143,15 @@
                         "description": "product has preorder feature or not."
                     },
                     "activation_fee": {
-                        "type": "number",
-                        "example": 0,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "0",
                         "description": "fixed activation fee of product"
                     },
                     "percentage_of_buying_price": {
-                        "type": "number",
-                        "example": 20,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "20",
                         "description": "discount applied on buying price"
                     },
                     "currency": {
@@ -1167,8 +1183,9 @@
                         "type": "object",
                         "properties": {
                             "price": {
-                                "type": "number",
-                                "example": 35,
+                                "type": "string",
+                                "format": "decimal",
+                                "example": "35",
                                 "description": "showing price"
                             },
                             "showing_currency": {
@@ -1188,8 +1205,8 @@
                         "$ref": "#/components/schemas/Currency"
                     },
                     "balance": {
-                        "type": "number",
-                        "example": 123.45,
+                        "type": "string",
+                        "example": "123.45",
                         "description": "balance of this currency"
                     }
                 }
@@ -1263,7 +1280,7 @@
                 "type": "object",
                 "properties": {
                     "sku": {
-                        "type": "number",
+                        "type": "integer",
                         "example": 76,
                         "description": "sku of the product"
                     },
@@ -1278,14 +1295,15 @@
                 "type": "object",
                 "properties": {
                     "order_id": {
-                        "type": "number",
+                        "type": "integer",
                         "example": 89,
                         "description": "id of order"
                     },
                     "delivery_type": {
-                        "type": "number",
-                        "example": 3,
-                        "description": "type of delivery"
+                        "type": "integer",
+                        "enum": [0, 1, 2, 3],
+                        "example": 1,
+                        "description": "* `0` None *`1` email *`2` SMS *`3` WhatsApp"
                     },
                     "destination": {
                         "type": "string",
@@ -1293,9 +1311,10 @@
                         "description": "E-mail or Phone/Whatsapp number you want the order to be delivered to."
                     },
                     "status": {
-                        "type": "number",
+                        "type": "integer",
+                        "enum": [-1, 0, 1],
                         "example": 1,
-                        "description": "pending(0) , accept(1) , reject(-1)"
+                        "description": "*`-1` Reject *`0` Pending *`1` Accept"
                     },
                     "status_text": {
                         "type": "string",
@@ -1308,7 +1327,7 @@
                         "description": "time of order creation"
                     },
                     "terminal_id": {
-                        "type": "number",
+                        "type": "integer",
                         "example": 96,
                         "description": "terminal id of sub user"
                     },
@@ -1321,28 +1340,31 @@
                         "$ref": "#/components/schemas/Product"
                     },
                     "count": {
-                        "type": "number",
+                        "type": "integer",
                         "example": 1,
                         "description": "order quantity"
                     },
                     "total_face_value": {
-                        "type": "number",
-                        "example": 3,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "3",
                         "description": "total of product original prices"
                     },
                     "total_fees": {
-                        "type": "number",
-                        "example": 0,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "0",
                         "description": "sum of activation fees"
                     },
                     "total_discounts": {
-                        "type": "number",
-                        "example": 0.42,
+                        "type": "string",
+                        "example": "0.42",
                         "description": "sum of discounts"
                     },
                     "total_customer_cost": {
-                        "type": "number",
-                        "example": 3.42,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "3.42",
                         "description": "total price customer should pay"
                     },
                     "is_completed": {
@@ -1381,7 +1403,7 @@
                 "type": "object",
                 "properties": {
                     "transaction_id": {
-                        "type": "number",
+                        "type": "integer",
                         "example": 50,
                         "description": "id of activation transaction"
                     },
@@ -1396,9 +1418,10 @@
                         "description": "name of product"
                     },
                     "status": {
-                        "type": "number",
-                        "example": -1,
-                        "description": "Pending(-1) , Activated(1) , Inactive(0)"
+                        "type": "integer",
+                        "enum": [-1, 0, 1],
+                        "example": 1,
+                        "description": "*`-1` Pending *`0` Inactive *`1` Activated"
                     },
                     "status_text": {
                         "type": "string",
@@ -1406,27 +1429,31 @@
                         "description": "status of activation order"
                     },
                     "total_face_value": {
-                        "type": "number",
-                        "example": 25,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "25",
                         "description": "physical card price"
                     },
                     "total_fees": {
-                        "type": "number",
-                        "example": 0,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "0",
                         "description": "activation fee of physical card"
                     },
                     "total_discounts": {
-                        "type": "number",
-                        "example": 0.25,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "0.25",
                         "description": "discount of physical card"
                     },
                     "total_customer_cost": {
-                        "type": "number",
-                        "example": 25.25,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "25.25",
                         "description": "price that customer should pay"
                     },
                     "terminal_id": {
-                        "type": "number",
+                        "type": "integer",
                         "example": 96,
                         "description": "Terminal ID of the sub-user"
                     },
@@ -1466,7 +1493,7 @@
                 "type": "object",
                 "properties": {
                     "currency_id": {
-                        "type": "number",
+                        "type": "integer",
                         "description": "id of the fiat currency",
                         "example": 1
                     },
@@ -1486,19 +1513,22 @@
                         "description": "code of this fiat currency"
                     },
                     "price": {
-                        "type": "number",
-                        "example": 33784.7,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "33784.7",
                         "description": "Price of crypto that you want to buy"
                     },
                     "min_amount": {
-                        "type": "number",
-                        "example": 20,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "20",
                         "description": "Minumumm amount that you can buy more than this price."
                     },
                     "max_amount": {
-                        "type": "number",
+                        "type": "string",
+                        "format": "decimal",
                         "description": "Maximumm amount that you can buy this crpto currency less than this amount",
-                        "example": 100
+                        "example": "100"
                     },
                     "crypto_currency_id": {
                         "type": "string",
@@ -1526,7 +1556,7 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "number",
+                        "type": "integer",
                         "example": 1538,
                         "description": "crypto order id"
                     },
@@ -1536,14 +1566,16 @@
                         "description": "refence code of this crypto order"
                     },
                     "requested_price": {
-                        "type": "integer",
+                        "type": "string",
+                        "format": "decimal",
                         "description": "The amount of crypto you ordered.",
-                        "example": 20
+                        "example": "20"
                     },
                     "price": {
-                        "type": "integer",
+                        "type": "string",
+                        "format": "decimal",
                         "description": "price of this order",
-                        "example": 21
+                        "example": "21"
                     },
                     "crypto_currency_id": {
                         "type": "integer",
@@ -1597,8 +1629,9 @@
                     },
                     "status": {
                         "type": "integer",
-                        "example": 0,
-                        "description": "accept(1) , waiting(0) , reject(-1) , expired(-5)"
+                        "enum": [-5, -1, 0, 1],
+                        "example": 1,
+                        "description": "*`-5` Expired *`-1` Reject *`0` Waiting *`1` Accept"
                     },
                     "crypto_wallet": {
                         "type": "string",
@@ -1611,28 +1644,33 @@
                         "description": "text of status"
                     },
                     "commission_percent": {
-                        "type": "number",
-                        "example": 5,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "5",
                         "description": "percentage of commission defined for this user"
                     },
                     "commission_price": {
-                        "type": "integer",
-                        "example": 1,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "1",
                         "description": "price of commission defined for this user."
                     },
                     "network_fee": {
-                        "type": "number",
-                        "example": 0.0001475,
+                        "type": "string",
+                        "format": "decimal",
+                        "example":" 0.0001475",
                         "description": "commission of network."
                     },
                     "crypto_amount": {
-                        "type": "integer",
-                        "example": 0.00030575,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "0.00030575",
                         "description": "amount of crypto."
                     },
                     "crypto_price": {
-                        "type": "integer",
-                        "example": 44126.2,
+                        "type": "string",
+                        "format": "decimal",
+                        "example": "44126.2",
                         "description": "last price of that crypto currency that you want to buy."
                     },
                     "can_pay": {

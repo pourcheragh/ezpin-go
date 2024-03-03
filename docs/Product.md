@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Sku** | Pointer to **float32** | sku of the product | [optional] 
+**Sku** | Pointer to **int32** | sku of the product | [optional] 
 **Title** | Pointer to **string** | title of the product | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetSku
 
-`func (o *Product) GetSku() float32`
+`func (o *Product) GetSku() int32`
 
 GetSku returns the Sku field if non-nil, zero value otherwise.
 
 ### GetSkuOk
 
-`func (o *Product) GetSkuOk() (*float32, bool)`
+`func (o *Product) GetSkuOk() (*int32, bool)`
 
 GetSkuOk returns a tuple with the Sku field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSku
 
-`func (o *Product) SetSku(v float32)`
+`func (o *Product) SetSku(v int32)`
 
 SetSku sets Sku field to given value.
 

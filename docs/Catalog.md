@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Sku** | Pointer to **float32** | sku of product | [optional] 
-**Upc** | Pointer to **float32** | upc of product | [optional] 
+**Sku** | Pointer to **int32** | sku of product | [optional] 
+**Upc** | Pointer to **string** | upc of product | [optional] 
 **Title** | Pointer to **string** | title of product | [optional] 
-**MinPrice** | Pointer to **float32** | product minimumm price | [optional] 
-**MaxPrice** | Pointer to **float32** | product maximumm price | [optional] 
+**MinPrice** | Pointer to **decimal.Decimal** | product minimumm price | [optional] 
+**MaxPrice** | Pointer to **decimal.Decimal** | product maximumm price | [optional] 
 **PreOrder** | Pointer to **bool** | product has preorder feature or not. | [optional] 
-**ActivationFee** | Pointer to **float32** | fixed activation fee of product | [optional] 
-**PercentageOfBuyingPrice** | Pointer to **float32** | discount applied on buying price | [optional] 
+**ActivationFee** | Pointer to **decimal.Decimal** | fixed activation fee of product | [optional] 
+**PercentageOfBuyingPrice** | Pointer to **decimal.Decimal** | discount applied on buying price | [optional] 
 **Currency** | Pointer to [**Currency**](Currency.md) |  | [optional] 
 **Categories** | Pointer to [**[]Category**](Category.md) |  | [optional] 
 **Regions** | Pointer to [**[]Regions**](Regions.md) |  | [optional] 
@@ -40,20 +40,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetSku
 
-`func (o *Catalog) GetSku() float32`
+`func (o *Catalog) GetSku() int32`
 
 GetSku returns the Sku field if non-nil, zero value otherwise.
 
 ### GetSkuOk
 
-`func (o *Catalog) GetSkuOk() (*float32, bool)`
+`func (o *Catalog) GetSkuOk() (*int32, bool)`
 
 GetSkuOk returns a tuple with the Sku field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSku
 
-`func (o *Catalog) SetSku(v float32)`
+`func (o *Catalog) SetSku(v int32)`
 
 SetSku sets Sku field to given value.
 
@@ -65,20 +65,20 @@ HasSku returns a boolean if a field has been set.
 
 ### GetUpc
 
-`func (o *Catalog) GetUpc() float32`
+`func (o *Catalog) GetUpc() string`
 
 GetUpc returns the Upc field if non-nil, zero value otherwise.
 
 ### GetUpcOk
 
-`func (o *Catalog) GetUpcOk() (*float32, bool)`
+`func (o *Catalog) GetUpcOk() (*string, bool)`
 
 GetUpcOk returns a tuple with the Upc field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpc
 
-`func (o *Catalog) SetUpc(v float32)`
+`func (o *Catalog) SetUpc(v string)`
 
 SetUpc sets Upc field to given value.
 
@@ -115,20 +115,20 @@ HasTitle returns a boolean if a field has been set.
 
 ### GetMinPrice
 
-`func (o *Catalog) GetMinPrice() float32`
+`func (o *Catalog) GetMinPrice() decimal.Decimal`
 
 GetMinPrice returns the MinPrice field if non-nil, zero value otherwise.
 
 ### GetMinPriceOk
 
-`func (o *Catalog) GetMinPriceOk() (*float32, bool)`
+`func (o *Catalog) GetMinPriceOk() (*decimal.Decimal, bool)`
 
 GetMinPriceOk returns a tuple with the MinPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMinPrice
 
-`func (o *Catalog) SetMinPrice(v float32)`
+`func (o *Catalog) SetMinPrice(v decimal.Decimal)`
 
 SetMinPrice sets MinPrice field to given value.
 
@@ -140,20 +140,20 @@ HasMinPrice returns a boolean if a field has been set.
 
 ### GetMaxPrice
 
-`func (o *Catalog) GetMaxPrice() float32`
+`func (o *Catalog) GetMaxPrice() decimal.Decimal`
 
 GetMaxPrice returns the MaxPrice field if non-nil, zero value otherwise.
 
 ### GetMaxPriceOk
 
-`func (o *Catalog) GetMaxPriceOk() (*float32, bool)`
+`func (o *Catalog) GetMaxPriceOk() (*decimal.Decimal, bool)`
 
 GetMaxPriceOk returns a tuple with the MaxPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMaxPrice
 
-`func (o *Catalog) SetMaxPrice(v float32)`
+`func (o *Catalog) SetMaxPrice(v decimal.Decimal)`
 
 SetMaxPrice sets MaxPrice field to given value.
 
@@ -190,20 +190,20 @@ HasPreOrder returns a boolean if a field has been set.
 
 ### GetActivationFee
 
-`func (o *Catalog) GetActivationFee() float32`
+`func (o *Catalog) GetActivationFee() decimal.Decimal`
 
 GetActivationFee returns the ActivationFee field if non-nil, zero value otherwise.
 
 ### GetActivationFeeOk
 
-`func (o *Catalog) GetActivationFeeOk() (*float32, bool)`
+`func (o *Catalog) GetActivationFeeOk() (*decimal.Decimal, bool)`
 
 GetActivationFeeOk returns a tuple with the ActivationFee field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetActivationFee
 
-`func (o *Catalog) SetActivationFee(v float32)`
+`func (o *Catalog) SetActivationFee(v decimal.Decimal)`
 
 SetActivationFee sets ActivationFee field to given value.
 
@@ -215,20 +215,20 @@ HasActivationFee returns a boolean if a field has been set.
 
 ### GetPercentageOfBuyingPrice
 
-`func (o *Catalog) GetPercentageOfBuyingPrice() float32`
+`func (o *Catalog) GetPercentageOfBuyingPrice() decimal.Decimal`
 
 GetPercentageOfBuyingPrice returns the PercentageOfBuyingPrice field if non-nil, zero value otherwise.
 
 ### GetPercentageOfBuyingPriceOk
 
-`func (o *Catalog) GetPercentageOfBuyingPriceOk() (*float32, bool)`
+`func (o *Catalog) GetPercentageOfBuyingPriceOk() (*decimal.Decimal, bool)`
 
 GetPercentageOfBuyingPriceOk returns a tuple with the PercentageOfBuyingPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPercentageOfBuyingPrice
 
-`func (o *Catalog) SetPercentageOfBuyingPrice(v float32)`
+`func (o *Catalog) SetPercentageOfBuyingPrice(v decimal.Decimal)`
 
 SetPercentageOfBuyingPrice sets PercentageOfBuyingPrice field to given value.
 

@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CurrencyId** | Pointer to **float32** | id of the fiat currency | [optional] 
+**CurrencyId** | Pointer to **int32** | id of the fiat currency | [optional] 
 **CurrencyTitle** | Pointer to **string** | Title of the fiat currency | [optional] 
 **Symbol** | Pointer to **string** | symbol of this fiat currency | [optional] 
 **Code** | Pointer to **string** | code of this fiat currency | [optional] 
-**Price** | Pointer to **float32** | Price of crypto that you want to buy | [optional] 
-**MinAmount** | Pointer to **float32** | Minumumm amount that you can buy more than this price. | [optional] 
-**MaxAmount** | Pointer to **float32** | Maximumm amount that you can buy this crpto currency less than this amount | [optional] 
+**Price** | Pointer to **decimal.Decimal** | Price of crypto that you want to buy | [optional] 
+**MinAmount** | Pointer to **decimal.Decimal** | Minumumm amount that you can buy more than this price. | [optional] 
+**MaxAmount** | Pointer to **decimal.Decimal** | Maximumm amount that you can buy this crpto currency less than this amount | [optional] 
 **CryptoCurrencyId** | Pointer to **string** | id of this crypto currency | [optional] 
 **CryptoTitle** | Pointer to **string** | name of this crypto currency | [optional] 
 **CryptoSymbol** | Pointer to **string** | symbol of this crypto currency | [optional] 
@@ -37,20 +37,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCurrencyId
 
-`func (o *CryptoCurrencyCatalog) GetCurrencyId() float32`
+`func (o *CryptoCurrencyCatalog) GetCurrencyId() int32`
 
 GetCurrencyId returns the CurrencyId field if non-nil, zero value otherwise.
 
 ### GetCurrencyIdOk
 
-`func (o *CryptoCurrencyCatalog) GetCurrencyIdOk() (*float32, bool)`
+`func (o *CryptoCurrencyCatalog) GetCurrencyIdOk() (*int32, bool)`
 
 GetCurrencyIdOk returns a tuple with the CurrencyId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrencyId
 
-`func (o *CryptoCurrencyCatalog) SetCurrencyId(v float32)`
+`func (o *CryptoCurrencyCatalog) SetCurrencyId(v int32)`
 
 SetCurrencyId sets CurrencyId field to given value.
 
@@ -137,20 +137,20 @@ HasCode returns a boolean if a field has been set.
 
 ### GetPrice
 
-`func (o *CryptoCurrencyCatalog) GetPrice() float32`
+`func (o *CryptoCurrencyCatalog) GetPrice() decimal.Decimal`
 
 GetPrice returns the Price field if non-nil, zero value otherwise.
 
 ### GetPriceOk
 
-`func (o *CryptoCurrencyCatalog) GetPriceOk() (*float32, bool)`
+`func (o *CryptoCurrencyCatalog) GetPriceOk() (*decimal.Decimal, bool)`
 
 GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrice
 
-`func (o *CryptoCurrencyCatalog) SetPrice(v float32)`
+`func (o *CryptoCurrencyCatalog) SetPrice(v decimal.Decimal)`
 
 SetPrice sets Price field to given value.
 
@@ -162,20 +162,20 @@ HasPrice returns a boolean if a field has been set.
 
 ### GetMinAmount
 
-`func (o *CryptoCurrencyCatalog) GetMinAmount() float32`
+`func (o *CryptoCurrencyCatalog) GetMinAmount() decimal.Decimal`
 
 GetMinAmount returns the MinAmount field if non-nil, zero value otherwise.
 
 ### GetMinAmountOk
 
-`func (o *CryptoCurrencyCatalog) GetMinAmountOk() (*float32, bool)`
+`func (o *CryptoCurrencyCatalog) GetMinAmountOk() (*decimal.Decimal, bool)`
 
 GetMinAmountOk returns a tuple with the MinAmount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMinAmount
 
-`func (o *CryptoCurrencyCatalog) SetMinAmount(v float32)`
+`func (o *CryptoCurrencyCatalog) SetMinAmount(v decimal.Decimal)`
 
 SetMinAmount sets MinAmount field to given value.
 
@@ -187,20 +187,20 @@ HasMinAmount returns a boolean if a field has been set.
 
 ### GetMaxAmount
 
-`func (o *CryptoCurrencyCatalog) GetMaxAmount() float32`
+`func (o *CryptoCurrencyCatalog) GetMaxAmount() decimal.Decimal`
 
 GetMaxAmount returns the MaxAmount field if non-nil, zero value otherwise.
 
 ### GetMaxAmountOk
 
-`func (o *CryptoCurrencyCatalog) GetMaxAmountOk() (*float32, bool)`
+`func (o *CryptoCurrencyCatalog) GetMaxAmountOk() (*decimal.Decimal, bool)`
 
 GetMaxAmountOk returns a tuple with the MaxAmount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMaxAmount
 
-`func (o *CryptoCurrencyCatalog) SetMaxAmount(v float32)`
+`func (o *CryptoCurrencyCatalog) SetMaxAmount(v decimal.Decimal)`
 
 SetMaxAmount sets MaxAmount field to given value.
 

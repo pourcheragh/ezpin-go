@@ -12,6 +12,8 @@ package ezpin
 
 import (
 	"encoding/json"
+
+	"github.com/shopspring/decimal"
 )
 
 // checks if the Catalog type satisfies the MappedNullable interface at compile time
@@ -20,21 +22,21 @@ var _ MappedNullable = &Catalog{}
 // Catalog struct for Catalog
 type Catalog struct {
 	// sku of product
-	Sku *float32 `json:"sku,omitempty"`
+	Sku *int32 `json:"sku,omitempty"`
 	// upc of product
-	Upc *float32 `json:"upc,omitempty"`
+	Upc *string `json:"upc,omitempty"`
 	// title of product
 	Title *string `json:"title,omitempty"`
 	// product minimumm price
-	MinPrice *float32 `json:"min_price,omitempty"`
+	MinPrice *decimal.Decimal `json:"min_price,omitempty"`
 	// product maximumm price
-	MaxPrice *float32 `json:"max_price,omitempty"`
+	MaxPrice *decimal.Decimal `json:"max_price,omitempty"`
 	// product has preorder feature or not.
 	PreOrder *bool `json:"pre_order,omitempty"`
 	// fixed activation fee of product
-	ActivationFee *float32 `json:"activation_fee,omitempty"`
+	ActivationFee *decimal.Decimal `json:"activation_fee,omitempty"`
 	// discount applied on buying price
-	PercentageOfBuyingPrice *float32 `json:"percentage_of_buying_price,omitempty"`
+	PercentageOfBuyingPrice *decimal.Decimal `json:"percentage_of_buying_price,omitempty"`
 	Currency *Currency `json:"currency,omitempty"`
 	Categories []Category `json:"categories,omitempty"`
 	Regions []Regions `json:"regions,omitempty"`
@@ -63,9 +65,9 @@ func NewCatalogWithDefaults() *Catalog {
 }
 
 // GetSku returns the Sku field value if set, zero value otherwise.
-func (o *Catalog) GetSku() float32 {
+func (o *Catalog) GetSku() int32 {
 	if o == nil || IsNil(o.Sku) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Sku
@@ -73,7 +75,7 @@ func (o *Catalog) GetSku() float32 {
 
 // GetSkuOk returns a tuple with the Sku field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Catalog) GetSkuOk() (*float32, bool) {
+func (o *Catalog) GetSkuOk() (*int32, bool) {
 	if o == nil || IsNil(o.Sku) {
 		return nil, false
 	}
@@ -89,15 +91,15 @@ func (o *Catalog) HasSku() bool {
 	return false
 }
 
-// SetSku gets a reference to the given float32 and assigns it to the Sku field.
-func (o *Catalog) SetSku(v float32) {
+// SetSku gets a reference to the given int32 and assigns it to the Sku field.
+func (o *Catalog) SetSku(v int32) {
 	o.Sku = &v
 }
 
 // GetUpc returns the Upc field value if set, zero value otherwise.
-func (o *Catalog) GetUpc() float32 {
+func (o *Catalog) GetUpc() string {
 	if o == nil || IsNil(o.Upc) {
-		var ret float32
+		var ret string
 		return ret
 	}
 	return *o.Upc
@@ -105,7 +107,7 @@ func (o *Catalog) GetUpc() float32 {
 
 // GetUpcOk returns a tuple with the Upc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Catalog) GetUpcOk() (*float32, bool) {
+func (o *Catalog) GetUpcOk() (*string, bool) {
 	if o == nil || IsNil(o.Upc) {
 		return nil, false
 	}
@@ -121,8 +123,8 @@ func (o *Catalog) HasUpc() bool {
 	return false
 }
 
-// SetUpc gets a reference to the given float32 and assigns it to the Upc field.
-func (o *Catalog) SetUpc(v float32) {
+// SetUpc gets a reference to the given string and assigns it to the Upc field.
+func (o *Catalog) SetUpc(v string) {
 	o.Upc = &v
 }
 
@@ -159,9 +161,9 @@ func (o *Catalog) SetTitle(v string) {
 }
 
 // GetMinPrice returns the MinPrice field value if set, zero value otherwise.
-func (o *Catalog) GetMinPrice() float32 {
+func (o *Catalog) GetMinPrice() decimal.Decimal {
 	if o == nil || IsNil(o.MinPrice) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.MinPrice
@@ -169,7 +171,7 @@ func (o *Catalog) GetMinPrice() float32 {
 
 // GetMinPriceOk returns a tuple with the MinPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Catalog) GetMinPriceOk() (*float32, bool) {
+func (o *Catalog) GetMinPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.MinPrice) {
 		return nil, false
 	}
@@ -185,15 +187,15 @@ func (o *Catalog) HasMinPrice() bool {
 	return false
 }
 
-// SetMinPrice gets a reference to the given float32 and assigns it to the MinPrice field.
-func (o *Catalog) SetMinPrice(v float32) {
+// SetMinPrice gets a reference to the given decimal.Decimal and assigns it to the MinPrice field.
+func (o *Catalog) SetMinPrice(v decimal.Decimal) {
 	o.MinPrice = &v
 }
 
 // GetMaxPrice returns the MaxPrice field value if set, zero value otherwise.
-func (o *Catalog) GetMaxPrice() float32 {
+func (o *Catalog) GetMaxPrice() decimal.Decimal {
 	if o == nil || IsNil(o.MaxPrice) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.MaxPrice
@@ -201,7 +203,7 @@ func (o *Catalog) GetMaxPrice() float32 {
 
 // GetMaxPriceOk returns a tuple with the MaxPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Catalog) GetMaxPriceOk() (*float32, bool) {
+func (o *Catalog) GetMaxPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.MaxPrice) {
 		return nil, false
 	}
@@ -217,8 +219,8 @@ func (o *Catalog) HasMaxPrice() bool {
 	return false
 }
 
-// SetMaxPrice gets a reference to the given float32 and assigns it to the MaxPrice field.
-func (o *Catalog) SetMaxPrice(v float32) {
+// SetMaxPrice gets a reference to the given decimal.Decimal and assigns it to the MaxPrice field.
+func (o *Catalog) SetMaxPrice(v decimal.Decimal) {
 	o.MaxPrice = &v
 }
 
@@ -255,9 +257,9 @@ func (o *Catalog) SetPreOrder(v bool) {
 }
 
 // GetActivationFee returns the ActivationFee field value if set, zero value otherwise.
-func (o *Catalog) GetActivationFee() float32 {
+func (o *Catalog) GetActivationFee() decimal.Decimal {
 	if o == nil || IsNil(o.ActivationFee) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.ActivationFee
@@ -265,7 +267,7 @@ func (o *Catalog) GetActivationFee() float32 {
 
 // GetActivationFeeOk returns a tuple with the ActivationFee field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Catalog) GetActivationFeeOk() (*float32, bool) {
+func (o *Catalog) GetActivationFeeOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.ActivationFee) {
 		return nil, false
 	}
@@ -281,15 +283,15 @@ func (o *Catalog) HasActivationFee() bool {
 	return false
 }
 
-// SetActivationFee gets a reference to the given float32 and assigns it to the ActivationFee field.
-func (o *Catalog) SetActivationFee(v float32) {
+// SetActivationFee gets a reference to the given decimal.Decimal and assigns it to the ActivationFee field.
+func (o *Catalog) SetActivationFee(v decimal.Decimal) {
 	o.ActivationFee = &v
 }
 
 // GetPercentageOfBuyingPrice returns the PercentageOfBuyingPrice field value if set, zero value otherwise.
-func (o *Catalog) GetPercentageOfBuyingPrice() float32 {
+func (o *Catalog) GetPercentageOfBuyingPrice() decimal.Decimal {
 	if o == nil || IsNil(o.PercentageOfBuyingPrice) {
-		var ret float32
+		var ret decimal.Decimal
 		return ret
 	}
 	return *o.PercentageOfBuyingPrice
@@ -297,7 +299,7 @@ func (o *Catalog) GetPercentageOfBuyingPrice() float32 {
 
 // GetPercentageOfBuyingPriceOk returns a tuple with the PercentageOfBuyingPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Catalog) GetPercentageOfBuyingPriceOk() (*float32, bool) {
+func (o *Catalog) GetPercentageOfBuyingPriceOk() (*decimal.Decimal, bool) {
 	if o == nil || IsNil(o.PercentageOfBuyingPrice) {
 		return nil, false
 	}
@@ -313,8 +315,8 @@ func (o *Catalog) HasPercentageOfBuyingPrice() bool {
 	return false
 }
 
-// SetPercentageOfBuyingPrice gets a reference to the given float32 and assigns it to the PercentageOfBuyingPrice field.
-func (o *Catalog) SetPercentageOfBuyingPrice(v float32) {
+// SetPercentageOfBuyingPrice gets a reference to the given decimal.Decimal and assigns it to the PercentageOfBuyingPrice field.
+func (o *Catalog) SetPercentageOfBuyingPrice(v decimal.Decimal) {
 	o.PercentageOfBuyingPrice = &v
 }
 
