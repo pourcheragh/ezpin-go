@@ -1,0 +1,1679 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "v2.0.0",
+        "title": "EZPin Access API V2",
+        "description": ""
+    },
+    "paths": {
+        "/auth/token/": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "client_id": {
+                                        "type": "string",
+                                        "example": "13319",
+                                        "description": "Client ID provided by EZpin"
+                                    },
+                                    "secret_key": {
+                                        "type": "string",
+                                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzayI6IjYxZGZmNmU4LTY3YTctNG",
+                                        "description": "Secret key provided by EZpin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An access token provides access to EZPin API for a specified amount of time. When the access token expires, clients must obtain another one.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "access": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2Nlc3NfaWQiOj",
+                                            "description": "Access token for APIs"
+                                        },
+                                        "expire": {
+                                            "type": "number",
+                                            "example": 312645,
+                                            "description": "Token expire time in (ms)"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "detail": {
+                                            "type": "string",
+                                            "example": "user not found. please enter correct data",
+                                            "description": "API error details"
+                                        },
+                                        "code": {
+                                            "type": "number",
+                                            "example": 615,
+                                            "description": "error code"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/catalogs/": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Gets a list of all fixed price and range-priced product catalogs.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "count": {
+                                            "type": "number",
+                                            "example": 256,
+                                            "description": "Number of total catalogs"
+                                        },
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Catalog"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/balance/": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns account balance of various currencies.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Balance"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/catalogs/{product_sku}/availability/": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "product_sku",
+                        "required": true,
+                        "description": "SKU of desired product",
+                        "schema": {
+                            "type": "number",
+                            "example": 2785
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "item_count",
+                        "required": true,
+                        "description": "Number of items",
+                        "schema": {
+                            "type": "number",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "price",
+                        "description": "Product price",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Checks if enough cards are available for a specific product.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "availability": {
+                                            "type": "boolean",
+                                            "example": false,
+                                            "description": "Availability status"
+                                        },
+                                        "detail": {
+                                            "type": "string",
+                                            "example": "This catalog is not available.",
+                                            "description": "Detailed information"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/orders/": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "sku": {
+                                        "type": "number",
+                                        "description": "Catalog SKU",
+                                        "example": 321
+                                    },
+                                    "quantity": {
+                                        "type": "number",
+                                        "description": "Item count",
+                                        "example": 1
+                                    },
+                                    "pre_oder": {
+                                        "type": "boolean",
+                                        "description": "To determine whether you want to pre order your request or not. The product must support pre order mood. if you pass true your cards will get ready in the future.",
+                                        "example": false
+                                    },
+                                    "price": {
+                                        "description": "Item price",
+                                        "type": "number",
+                                        "example": 10
+                                    },
+                                    "delivery_type": {
+                                        "type": "number",
+                                        "example": 1,
+                                        "description": "0-None 1-E-mail 2-SMS 3-WhatsApp"
+                                    },
+                                    "destination": {
+                                        "type": "string",
+                                        "description": "E-mail or Phone/Whatsapp number you want the order to be delivered to.",
+                                        "example": "support@ezpin.com"
+                                    },
+                                    "terminal_id": {
+                                        "type": "number",
+                                        "description": "Terminal ID of the sub-users that can be defined in setting section in user panel",
+                                        "example": 45
+                                    },
+                                    "terminal_pin": {
+                                        "type": "number",
+                                        "description": "Pin defined for sub-user",
+                                        "example": 1111
+                                    },
+                                    "reference_code": {
+                                        "type": "string",
+                                        "description": "Refernce code. A unique UUID V4 referece code must be included in request",
+                                        "example": "046ed58d-53b1-4ec5-be46-693096a0bb98"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "You must include a valid access token in the Authorization header and a valid catalog SKU in the                   body of the POST request. A successful POST returns the Order ID and creation time. When pre-order is true, you can create order if the product is out of stock. When pre-order flag is false, you can order digital cards for immediate use at the point of sale. An immediate order is limited to a total of five digital cards.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "detail": {
+                                            "type": "string",
+                                            "example": "Some error happened. Please try again later. If issue persists, please contact your account manager.",
+                                            "description": "detail of returned response"
+                                        },
+                                        "code": {
+                                            "type": "number",
+                                            "example": 621,
+                                            "description": "error code"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Pin or terminal error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "detail": {
+                                            "type": "string",
+                                            "example": "wrong pin or terminal",
+                                            "description": "detail of returned response"
+                                        },
+                                        "code": {
+                                            "type": "number",
+                                            "example": 617,
+                                            "description": "error code"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Number of items in list",
+                        "schema": {
+                            "type": "number",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Offset number of list",
+                        "schema": {
+                            "type": "number",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "start_date",
+                        "description": "Report Start Date",
+                        "schema": {
+                            "type": "string",
+                            "example": "2020-01-03T04:00:00.000Z"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "end_date",
+                        "description": "Report End Date",
+                        "schema": {
+                            "type": "string",
+                            "example": "2020-01-07T11:00:00.000Z"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "lets you retrieve your list of orders. A successful GET returns information about the orders history.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "count": {
+                                            "type": "number",
+                                            "example": 256,
+                                            "description": "Number of total orders"
+                                        },
+                                        "next": {
+                                            "type": "string",
+                                            "example": "https://api.ezpaypin.com/vendors/v1/orders/?end_date=2020-05-27T08%3A41%3A59.098734&limit=10&offset=10&start_date=2020-02-27T08%3A41%3A59.098734",
+                                            "description": "next page of order list"
+                                        },
+                                        "previous": {
+                                            "type": "string",
+                                            "example": "https://api.ezpaypin.com/vendors/v1/orders/?end_date=2020-05-27T08%3A41%3A59.098734&limit=10&offset=10&start_date=2020-02-27T08%3A41%3A59.098734",
+                                            "description": "previous page of order list"
+                                        },
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Order"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/exchange_rates/": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "When you order a product with a currency from which you don’t have enough balance, an exchange happens from one currency you have enough from, to the required one, provided that a rate exists in EZ PIN for this exchange. Calling this API, you will receive all the available exchange rates.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "from_currency": {
+                                                        "description": "exchange will be done from this currency",
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "currency": {
+                                                                "type": "string",
+                                                                "example": "Dollars",
+                                                                "description": "name of currency"
+                                                            },
+                                                            "symbol": {
+                                                                "type": "string",
+                                                                "example": "$",
+                                                                "description": "symbol of currency"
+                                                            },
+                                                            "code": {
+                                                                "type": "string",
+                                                                "example": "USD",
+                                                                "description": "code of currency"
+                                                            }
+                                                        }
+                                                    },
+                                                    "to_currency": {
+                                                        "description": "exchange will be done from this currency",
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "currency": {
+                                                                "type": "string",
+                                                                "example": "Pounds",
+                                                                "description": "name of currency"
+                                                            },
+                                                            "symbol": {
+                                                                "type": "string",
+                                                                "example": "£",
+                                                                "description": "sumbol of currency"
+                                                            },
+                                                            "code": {
+                                                                "type": "string",
+                                                                "example": "GBP",
+                                                                "description": "code of currency"
+                                                            }
+                                                        }
+                                                    },
+                                                    "rate": {
+                                                        "type": "number",
+                                                        "example": 0.75,
+                                                        "description": "rate of exchange"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/orders/{reference_code}/": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "reference_code",
+                        "description": "Reference Code of the order",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "046ed58d-53b1-4ec5-be46-693096a0bb98"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful GET returns information about the order.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/orders/{reference_code}/cards/": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "reference_code",
+                        "description": "Reference Code of the order",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "046ed58d-53b1-4ec5-be46-693096a0bb98"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "lets you retrieve a list of cards in an order using the Reference Code. A successful GET returns information about the cards in the order.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Card"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cards/check/": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "barcode",
+                        "description": "Barcode Number Of Physical Card",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "888462551206058120006239903648"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Client can check physical card status using VAN16 barcode number on the back of the physical card.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "barcode": {
+                                            "type": "string",
+                                            "example": 12567312867231868,
+                                            "description": "barcode of the physical card"
+                                        },
+                                        "product": {
+                                            "type": "string",
+                                            "example": "iTunes $10",
+                                            "description": "name of the physical product"
+                                        },
+                                        "sku": {
+                                            "type": "number",
+                                            "example": 15,
+                                            "description": "sku of the physical product"
+                                        },
+                                        "status_text": {
+                                            "type": "string",
+                                            "example": "Activated",
+                                            "description": "status of activation process"
+                                        },
+                                        "status": {
+                                            "type": "number",
+                                            "example": 1,
+                                            "description": "Pending(-1) , Activated(1) , Inactive(0)"
+                                        },
+                                        "min_price": {
+                                            "type": "number",
+                                            "example": "10.0",
+                                            "description": "minimumm price available for physical product"
+                                        },
+                                        "max_price": {
+                                            "type": "number",
+                                            "example": "200.0",
+                                            "description": "maximumm price available for physical product"
+                                        },
+                                        "activate_price": {
+                                            "type": "number",
+                                            "example": 10,
+                                            "description": "price that the card has been activated with"
+                                        },
+                                        "activated_time": {
+                                            "type": "string",
+                                            "example": "2019-11-20T13:24:26.862624",
+                                            "description": "time of activation"
+                                        },
+                                        "currency": {
+                                            "type": "string",
+                                            "example": "USD",
+                                            "description": "currency of physical product"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cards/activate/": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "barcode": {
+                                        "description": "Barcode Number Of Physical Card",
+                                        "type": "string",
+                                        "example": "12567312867231868"
+                                    },
+                                    "sku": {
+                                        "description": "SKU Of Product",
+                                        "type": "number",
+                                        "example": 5432341
+                                    },
+                                    "price": {
+                                        "description": "Item price",
+                                        "type": "number",
+                                        "example": 9.89
+                                    },
+                                    "terminal_id": {
+                                        "description": "Terminal ID of the sub-users that can be defined in setting section in user panel.",
+                                        "type": "number",
+                                        "example": 45
+                                    },
+                                    "terminal_pin": {
+                                        "type": "number",
+                                        "example": 1144,
+                                        "description": "Pin defined for sub-user"
+                                    },
+                                    "reference_code": {
+                                        "type": "string",
+                                        "description": "A unique UUID v4 referece code must be included in request",
+                                        "example": "046ed58d-53b1-4ec5-be46-693096a0bb98"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Client can activate physical card using VAN16 barcode number on the back of the physical card. sku and price must be retrieved from check API first. request will be processed within maximum 40 seconds and the result will be returned to the client.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Transaction"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cards/{reference_code}/": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "reference_code",
+                        "description": "Reference Code of the activation",
+                        "schema": {
+                            "type": "string",
+                            "example": "046ed58d-53b1-4ec5-be46-693096a0bb98"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Client can check physical card activation status using the Reference Code of the activation process.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Transaction"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/crypto/catalog/": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "lets you retrieve a list of available crypto currencies. A successful GET returns information about crypto currencies.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "count": {
+                                            "type": "number",
+                                            "example": 1,
+                                            "description": "Number of total catalogs"
+                                        },
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CryptoCurrencyCatalog"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/crypto/orders/": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "currency_id": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "description": "ID of Fiat currency"
+                                    },
+                                    "crypto_currency_id": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "description": "ID of Crypto Currency"
+                                    },
+                                    "requested_price": {
+                                        "type": "integer",
+                                        "example": 20,
+                                        "description": "The amount you need to exchange from fiat currency to Cryptocurrency"
+                                    },
+                                    "reference_code": {
+                                        "type": "string",
+                                        "example": "85735ace-99f2-486a-9d1d-8e8b6c2b32dc",
+                                        "description": "A unique UUID v4 reference code must be included in request"
+                                    },
+                                    "terminal_id": {
+                                        "type": "number",
+                                        "example": 92,
+                                        "description": "Terminal ID of the sub-users that can be defined in setting section in user panel"
+                                    },
+                                    "terminal_pin": {
+                                        "type": "number",
+                                        "example": 1148,
+                                        "description": "Pin defined for sub-user"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lets you create a crypto currency order with your specified amount of fiat currency.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CryptoCurrencyOrder"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Maximum number of results",
+                        "schema": {
+                            "type": "number",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Offset number in results",
+                        "schema": {
+                            "type": "number",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "start_date",
+                        "description": "Report Start Date",
+                        "schema": {
+                            "type": "string",
+                            "example": "2020-01-03T04:00:00.000Z"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "end_date",
+                        "description": "Report End Date",
+                        "schema": {
+                            "type": "string",
+                            "example": "2020-01-07T11:00:00.000Z"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "staus",
+                        "description": "Status of the order",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "can_pay",
+                        "description": "Shows if order can be finalized and has not been rejected or expired",
+                        "schema": {
+                            "type": "boolean",
+                            "example": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns the list of your crypto currency orders based on specified filters.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "count": {
+                                            "type": "number",
+                                            "example": 256,
+                                            "description": "Number of total orders"
+                                        },
+                                        "next": {
+                                            "type": "string",
+                                            "example": "https://api.ezpaypin.com/vendors/v2/crypto/orders/?limit=1&offset=1",
+                                            "description": "next page of orders"
+                                        },
+                                        "previous": {
+                                            "type": "string",
+                                            "example": "null",
+                                            "description": "previous page of orders"
+                                        },
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CryptoCurrencyOrder"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/crypto/orders/{reference_code}/": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "reference_code",
+                        "description": "reference code of cryptocurrency order",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "046ed58d-53b1-4ec5-be46-693096a0bb98"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns the details of the specified crypto currency order.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CryptoCurrencyOrder"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/crypto/orders/{reference_code}/finalize/": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "reference_code",
+                        "description": "Reference code of cryptocurrency order",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "046ed58d-53b1-4ec5-be46-693096a0bb98"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "crypto_wallet": {
+                                        "type": "string",
+                                        "example": "bc1q7yu6tdqnm82xp544qntxnek4zllwv2a0wdqs26",
+                                        "description": "Cryptocurrency wallet, which will receive the order amount"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lets you finalize the crypto currency order you have created.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "detail": {
+                                            "type": "string",
+                                            "example": "Request is in process.",
+                                            "description": "result of finaliz"
+                                        },
+                                        "code": {
+                                            "type": "number",
+                                            "example": 823,
+                                            "description": "message code"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/notification_config/": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful GET returns information about your notification settings.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Notification"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Notification"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Adjust this api if you want to be notified after the digital or crypto order has been accepted or rejected.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "detail": {
+                                            "type": "string",
+                                            "description": "API message",
+                                            "example": "API setting added successfully"
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 801,
+                                            "description": "the status code of notification config"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "servers": [
+        {
+            "description": "SwaggerHub API Auto Mocking",
+            "url": "https://api.ezpaypin.com/vendors/v2"
+        },
+        {
+            "description": "SwaggerHub API Auto Mocking",
+            "url": "https://virtserver.swaggerhub.com/Hes44/V2.0.0.0/v2.0.0"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "Catalog": {
+                "type": "object",
+                "properties": {
+                    "sku": {
+                        "type": "number",
+                        "example": 23,
+                        "description": "sku of product"
+                    },
+                    "upc": {
+                        "type": "number",
+                        "example": 659245724761,
+                        "description": "upc of product"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "iTunes $400",
+                        "description": "title of product"
+                    },
+                    "min_price": {
+                        "type": "number",
+                        "example": 400,
+                        "description": "product minimumm price"
+                    },
+                    "max_price": {
+                        "type": "number",
+                        "example": 400,
+                        "description": "product maximumm price"
+                    },
+                    "pre_order": {
+                        "type": "boolean",
+                        "example": false,
+                        "description": "product has preorder feature or not."
+                    },
+                    "activation_fee": {
+                        "type": "number",
+                        "example": 0,
+                        "description": "fixed activation fee of product"
+                    },
+                    "percentage_of_buying_price": {
+                        "type": "number",
+                        "example": 20,
+                        "description": "discount applied on buying price"
+                    },
+                    "currency": {
+                        "$ref": "#/components/schemas/Currency"
+                    },
+                    "categories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Category"
+                        }
+                    },
+                    "regions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Regions"
+                        }
+                    },
+                    "image": {
+                        "type": "string",
+                        "example": "http://media.ezpaypin.com/media/products/images/2019/11/Image33_QPLZZ6q.jpg",
+                        "description": "image link of product"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "null",
+                        "description": "product discription"
+                    },
+                    "showing_price": {
+                        "type": "object",
+                        "properties": {
+                            "price": {
+                                "type": "number",
+                                "example": 35,
+                                "description": "showing price"
+                            },
+                            "showing_currency": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/ShowingCurrency"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Balance": {
+                "type": "object",
+                "properties": {
+                    "currency": {
+                        "$ref": "#/components/schemas/Currency"
+                    },
+                    "balance": {
+                        "type": "number",
+                        "example": 123.45,
+                        "description": "balance of this currency"
+                    }
+                }
+            },
+            "Currency": {
+                "type": "object",
+                "properties": {
+                    "currency": {
+                        "type": "string",
+                        "example": "Dollar",
+                        "description": "name of currency"
+                    },
+                    "symbol": {
+                        "type": "string",
+                        "example": "$",
+                        "description": "symbol of currency"
+                    },
+                    "code": {
+                        "type": "string",
+                        "example": "USD",
+                        "description": "code of currency"
+                    }
+                }
+            },
+            "ShowingCurrency": {
+                "type": "object",
+                "properties": {
+                    "currency": {
+                        "type": "string",
+                        "example": "Dollar",
+                        "description": "name of showing currency"
+                    },
+                    "symbol": {
+                        "type": "string",
+                        "example": "$",
+                        "description": "symbol of showing currency"
+                    },
+                    "code": {
+                        "type": "string",
+                        "example": "USD",
+                        "description": "code of showing currency"
+                    }
+                }
+            },
+            "Regions": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Global",
+                        "description": "name of region"
+                    },
+                    "code": {
+                        "type": "string",
+                        "example": "GLC",
+                        "description": "code of region"
+                    }
+                }
+            },
+            "Category": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "iTunes US",
+                        "description": "name of category"
+                    }
+                }
+            },
+            "Product": {
+                "type": "object",
+                "properties": {
+                    "sku": {
+                        "type": "number",
+                        "example": 76,
+                        "description": "sku of the product"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "iTunes $10",
+                        "description": "title of the product"
+                    }
+                }
+            },
+            "Order": {
+                "type": "object",
+                "properties": {
+                    "order_id": {
+                        "type": "number",
+                        "example": 89,
+                        "description": "id of order"
+                    },
+                    "delivery_type": {
+                        "type": "number",
+                        "example": 3,
+                        "description": "type of delivery"
+                    },
+                    "destination": {
+                        "type": "string",
+                        "example": 18004441234,
+                        "description": "E-mail or Phone/Whatsapp number you want the order to be delivered to."
+                    },
+                    "status": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "pending(0) , accept(1) , reject(-1)"
+                    },
+                    "status_text": {
+                        "type": "string",
+                        "example": "accept",
+                        "description": "status of order"
+                    },
+                    "created_time": {
+                        "type": "string",
+                        "example": "2020-02-01T10:58:34.430613",
+                        "description": "time of order creation"
+                    },
+                    "terminal_id": {
+                        "type": "number",
+                        "example": 96,
+                        "description": "terminal id of sub user"
+                    },
+                    "reference_code": {
+                        "type": "string",
+                        "example": "046ed58d-53b1-4ec5-be46-693096a0bb98",
+                        "description": "reference code of order"
+                    },
+                    "product": {
+                        "$ref": "#/components/schemas/Product"
+                    },
+                    "count": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "order quantity"
+                    },
+                    "total_face_value": {
+                        "type": "number",
+                        "example": 3,
+                        "description": "total of product original prices"
+                    },
+                    "total_fees": {
+                        "type": "number",
+                        "example": 0,
+                        "description": "sum of activation fees"
+                    },
+                    "total_discounts": {
+                        "type": "number",
+                        "example": 0.42,
+                        "description": "sum of discounts"
+                    },
+                    "total_customer_cost": {
+                        "type": "number",
+                        "example": 3.42,
+                        "description": "total price customer should pay"
+                    },
+                    "is_completed": {
+                        "type": "boolean",
+                        "example": true,
+                        "description": "is order process completed or not"
+                    },
+                    "share_link": {
+                        "type": "string",
+                        "example": "http://vc.ezpaypin.com/01c79b97-8ab4-423c-a11d-225897f2135a",
+                        "description": "link of order cards."
+                    }
+                }
+            },
+            "Card": {
+                "type": "object",
+                "properties": {
+                    "card_number": {
+                        "type": "string",
+                        "example": 520868849856,
+                        "description": "gift card number"
+                    },
+                    "pin_code": {
+                        "type": "string",
+                        "example": 3216493287345,
+                        "description": "gift card pin"
+                    },
+                    "claim_url": {
+                        "type": "string",
+                        "example": "https://vc.ezpaypin.com/db095ef3-7d21-4307-8cdc-3b1c0fa300c3",
+                        "description": "link of gift card"
+                    }
+                }
+            },
+            "Transaction": {
+                "type": "object",
+                "properties": {
+                    "transaction_id": {
+                        "type": "number",
+                        "example": 50,
+                        "description": "id of activation transaction"
+                    },
+                    "barcode": {
+                        "type": "string",
+                        "example": 12567312867231868,
+                        "description": "barcode of physical card"
+                    },
+                    "product": {
+                        "type": "string",
+                        "example": "iTunes $10",
+                        "description": "name of product"
+                    },
+                    "status": {
+                        "type": "number",
+                        "example": -1,
+                        "description": "Pending(-1) , Activated(1) , Inactive(0)"
+                    },
+                    "status_text": {
+                        "type": "string",
+                        "example": "Pending",
+                        "description": "status of activation order"
+                    },
+                    "total_face_value": {
+                        "type": "number",
+                        "example": 25,
+                        "description": "physical card price"
+                    },
+                    "total_fees": {
+                        "type": "number",
+                        "example": 0,
+                        "description": "activation fee of physical card"
+                    },
+                    "total_discounts": {
+                        "type": "number",
+                        "example": 0.25,
+                        "description": "discount of physical card"
+                    },
+                    "total_customer_cost": {
+                        "type": "number",
+                        "example": 25.25,
+                        "description": "price that customer should pay"
+                    },
+                    "terminal_id": {
+                        "type": "number",
+                        "example": 96,
+                        "description": "Terminal ID of the sub-user"
+                    },
+                    "currency": {
+                        "type": "string",
+                        "example": "USD",
+                        "description": "name of currency"
+                    },
+                    "created_time": {
+                        "type": "string",
+                        "example": "2020-02-03T13:27:12.250248",
+                        "description": "time of activation"
+                    },
+                    "reference_code": {
+                        "type": "string",
+                        "example": "046ed58d-53b1-4ec5-be46-693096a0bb98",
+                        "description": "reference code of activation"
+                    }
+                }
+            },
+            "Notification": {
+                "type": "object",
+                "properties": {
+                    "endpoint": {
+                        "type": "string",
+                        "example": "https://example.com",
+                        "description": "The URL that status change will be reported to"
+                    },
+                    "confidential_key": {
+                        "type": "string",
+                        "description": "The confidential key that you need for validation in your system",
+                        "example": "ikasd7823q4lmk132jk"
+                    }
+                }
+            },
+            "CryptoCurrencyCatalog": {
+                "type": "object",
+                "properties": {
+                    "currency_id": {
+                        "type": "number",
+                        "description": "id of the fiat currency",
+                        "example": 1
+                    },
+                    "currency_title": {
+                        "type": "string",
+                        "description": "Title of the fiat currency",
+                        "example": "Dollars"
+                    },
+                    "symbol": {
+                        "type": "string",
+                        "example": "$",
+                        "description": "symbol of this fiat currency"
+                    },
+                    "code": {
+                        "type": "string",
+                        "example": "USD",
+                        "description": "code of this fiat currency"
+                    },
+                    "price": {
+                        "type": "number",
+                        "example": 33784.7,
+                        "description": "Price of crypto that you want to buy"
+                    },
+                    "min_amount": {
+                        "type": "number",
+                        "example": 20,
+                        "description": "Minumumm amount that you can buy more than this price."
+                    },
+                    "max_amount": {
+                        "type": "number",
+                        "description": "Maximumm amount that you can buy this crpto currency less than this amount",
+                        "example": 100
+                    },
+                    "crypto_currency_id": {
+                        "type": "string",
+                        "description": "id of this crypto currency",
+                        "example": 1
+                    },
+                    "crypto_title": {
+                        "type": "string",
+                        "example": "bitcoin",
+                        "description": "name of this crypto currency"
+                    },
+                    "crypto_symbol": {
+                        "type": "string",
+                        "example": "₿",
+                        "description": "symbol of this crypto currency"
+                    },
+                    "crypto_code": {
+                        "type": "string",
+                        "example": "BTC",
+                        "description": "code of this crypto currency"
+                    }
+                }
+            },
+            "CryptoCurrencyOrder": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "example": 1538,
+                        "description": "crypto order id"
+                    },
+                    "reference_code": {
+                        "type": "string",
+                        "example": "bb715b4e-6792-45ca-9ca5-2d708f41a6d4",
+                        "description": "refence code of this crypto order"
+                    },
+                    "requested_price": {
+                        "type": "integer",
+                        "description": "The amount of crypto you ordered.",
+                        "example": 20
+                    },
+                    "price": {
+                        "type": "integer",
+                        "description": "price of this order",
+                        "example": 21
+                    },
+                    "crypto_currency_id": {
+                        "type": "integer",
+                        "example": 1,
+                        "description": "id of this crypto currency"
+                    },
+                    "crypto_currency_data": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string",
+                                "example": "bitcoin",
+                                "description": "crypto currency title"
+                            },
+                            "code": {
+                                "type": "string",
+                                "example": "BTC",
+                                "description": "code of this cryptocurreny"
+                            },
+                            "symbol": {
+                                "type": "string",
+                                "example": "₿",
+                                "description": "symbol of this crypto currency"
+                            }
+                        }
+                    },
+                    "currency_id": {
+                        "type": "integer",
+                        "example": 1,
+                        "description": "id of fiat currency"
+                    },
+                    "currency_daya": {
+                        "type": "object",
+                        "properties": {
+                            "currency": {
+                                "type": "string",
+                                "example": "Dollars",
+                                "description": "title of fiat currency"
+                            },
+                            "symbol": {
+                                "type": "string",
+                                "example": "$",
+                                "description": "symbol of this fiat currency"
+                            },
+                            "code": {
+                                "type": "string",
+                                "example": "USD",
+                                "description": "code of this fiat curreny"
+                            }
+                        }
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": 0,
+                        "description": "accept(1) , waiting(0) , reject(-1) , expired(-5)"
+                    },
+                    "crypto_wallet": {
+                        "type": "string",
+                        "example": null,
+                        "description": "The destination wallet."
+                    },
+                    "status_text": {
+                        "type": "string",
+                        "example": "waiting",
+                        "description": "text of status"
+                    },
+                    "commission_percent": {
+                        "type": "number",
+                        "example": 5,
+                        "description": "percentage of commission defined for this user"
+                    },
+                    "commission_price": {
+                        "type": "integer",
+                        "example": 1,
+                        "description": "price of commission defined for this user."
+                    },
+                    "network_fee": {
+                        "type": "number",
+                        "example": 0.0001475,
+                        "description": "commission of network."
+                    },
+                    "crypto_amount": {
+                        "type": "integer",
+                        "example": 0.00030575,
+                        "description": "amount of crypto."
+                    },
+                    "crypto_price": {
+                        "type": "integer",
+                        "example": 44126.2,
+                        "description": "last price of that crypto currency that you want to buy."
+                    },
+                    "can_pay": {
+                        "type": "boolean",
+                        "example": true,
+                        "description": "can this order be payed or not."
+                    },
+                    "is_used": {
+                        "type": "boolean",
+                        "example": true,
+                        "description": "is order redeemed or not."
+                    },
+                    "used_time": {
+                        "type": "string",
+                        "example": "2021-09-20T11:33:33.568306",
+                        "description": "the time of redemption of order."
+                    },
+                    "created_time": {
+                        "type": "string",
+                        "example": "2021-09-20T11:33:33.568306",
+                        "description": "order creation time."
+                    },
+                    "terminal_id": {
+                        "type": "integer",
+                        "example": 92,
+                        "description": "sub user id"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "Bearer"
+            }
+        },
+        "responses": {
+            "UnauthorizedError": {
+                "description": "Access token is missing or invalid"
+            }
+        }
+    }
+}

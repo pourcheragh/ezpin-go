@@ -1,0 +1,1696 @@
+openapi: 3.0.0
+info:
+  description: ""
+  title: EZPin Access API V2
+  version: v2.0.0
+servers:
+- description: SwaggerHub API Auto Mocking
+  url: https://api.ezpaypin.com/vendors/v2
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/Hes44/V2.0.0.0/v2.0.0
+paths:
+  /auth/token/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_auth_token__post_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_auth_token__post_200_response'
+          description: "An access token provides access to EZPin API for a specified\
+            \ amount of time. When the access token expires, clients must obtain another\
+            \ one."
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_auth_token__post_400_response'
+          description: Error
+  /catalogs/:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_catalogs__get_200_response'
+          description: Gets a list of all fixed price and range-priced product catalogs.
+      security:
+      - bearerAuth: []
+  /balance/:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Balance'
+                type: array
+          description: Returns account balance of various currencies.
+      security:
+      - bearerAuth: []
+  /catalogs/{product_sku}/availability/:
+    get:
+      parameters:
+      - description: SKU of desired product
+        explode: false
+        in: path
+        name: product_sku
+        required: true
+        schema:
+          example: 2785
+          type: number
+        style: simple
+      - description: Number of items
+        explode: true
+        in: query
+        name: item_count
+        required: true
+        schema:
+          example: 10
+          type: number
+        style: form
+      - description: Product price
+        explode: true
+        in: query
+        name: price
+        required: true
+        schema:
+          example: 10
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_catalogs__product_sku__availability__get_200_response'
+          description: Checks if enough cards are available for a specific product.
+      security:
+      - bearerAuth: []
+  /orders/:
+    get:
+      parameters:
+      - description: Number of items in list
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          example: 10
+          type: number
+        style: form
+      - description: Offset number of list
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          example: 1
+          type: number
+        style: form
+      - description: Report Start Date
+        explode: true
+        in: query
+        name: start_date
+        required: false
+        schema:
+          example: 2020-01-03T04:00:00.000Z
+          type: string
+        style: form
+      - description: Report End Date
+        explode: true
+        in: query
+        name: end_date
+        required: false
+        schema:
+          example: 2020-01-07T11:00:00.000Z
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_orders__get_200_response'
+          description: lets you retrieve your list of orders. A successful GET returns
+            information about the orders history.
+      security:
+      - bearerAuth: []
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_orders__post_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: "You must include a valid access token in the Authorization\
+            \ header and a valid catalog SKU in the                   body of the\
+            \ POST request. A successful POST returns the Order ID and creation time.\
+            \ When pre-order is true, you can create order if the product is out of\
+            \ stock. When pre-order flag is false, you can order digital cards for\
+            \ immediate use at the point of sale. An immediate order is limited to\
+            \ a total of five digital cards."
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_orders__post_400_response'
+          description: Error
+        "406":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_orders__post_406_response'
+          description: Pin or terminal error
+      security:
+      - bearerAuth: []
+  /exchange_rates/:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_exchange_rates__get_200_response'
+          description: "When you order a product with a currency from which you don’\
+            t have enough balance, an exchange happens from one currency you have\
+            \ enough from, to the required one, provided that a rate exists in EZ\
+            \ PIN for this exchange. Calling this API, you will receive all the available\
+            \ exchange rates."
+      security:
+      - bearerAuth: []
+  /orders/{reference_code}/:
+    get:
+      parameters:
+      - description: Reference Code of the order
+        explode: false
+        in: path
+        name: reference_code
+        required: true
+        schema:
+          example: 046ed58d-53b1-4ec5-be46-693096a0bb98
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: A successful GET returns information about the order.
+      security:
+      - bearerAuth: []
+  /orders/{reference_code}/cards/:
+    get:
+      parameters:
+      - description: Reference Code of the order
+        explode: false
+        in: path
+        name: reference_code
+        required: true
+        schema:
+          example: 046ed58d-53b1-4ec5-be46-693096a0bb98
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_orders__reference_code__cards__get_200_response'
+          description: lets you retrieve a list of cards in an order using the Reference
+            Code. A successful GET returns information about the cards in the order.
+      security:
+      - bearerAuth: []
+  /cards/check/:
+    get:
+      parameters:
+      - description: Barcode Number Of Physical Card
+        explode: true
+        in: query
+        name: barcode
+        required: true
+        schema:
+          example: "888462551206058120006239903648"
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_cards_check__get_200_response'
+          description: Client can check physical card status using VAN16 barcode number
+            on the back of the physical card.
+      security:
+      - bearerAuth: []
+  /cards/activate/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_cards_activate__post_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: Client can activate physical card using VAN16 barcode number
+            on the back of the physical card. sku and price must be retrieved from
+            check API first. request will be processed within maximum 40 seconds and
+            the result will be returned to the client.
+      security:
+      - bearerAuth: []
+  /cards/{reference_code}/:
+    get:
+      parameters:
+      - description: Reference Code of the activation
+        explode: false
+        in: path
+        name: reference_code
+        required: true
+        schema:
+          example: 046ed58d-53b1-4ec5-be46-693096a0bb98
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: Client can check physical card activation status using the
+            Reference Code of the activation process.
+      security:
+      - bearerAuth: []
+  /crypto/catalog/:
+    get:
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_crypto_catalog__get_200_response'
+          description: lets you retrieve a list of available crypto currencies. A
+            successful GET returns information about crypto currencies.
+      security:
+      - bearerAuth: []
+  /crypto/orders/:
+    get:
+      parameters:
+      - description: Maximum number of results
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          example: 10
+          type: number
+        style: form
+      - description: Offset number in results
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          example: 1
+          type: number
+        style: form
+      - description: Report Start Date
+        explode: true
+        in: query
+        name: start_date
+        required: false
+        schema:
+          example: 2020-01-03T04:00:00.000Z
+          type: string
+        style: form
+      - description: Report End Date
+        explode: true
+        in: query
+        name: end_date
+        required: false
+        schema:
+          example: 2020-01-07T11:00:00.000Z
+          type: string
+        style: form
+      - description: Status of the order
+        explode: true
+        in: query
+        name: staus
+        required: false
+        schema:
+          example: 1
+          type: integer
+        style: form
+      - description: Shows if order can be finalized and has not been rejected or
+          expired
+        explode: true
+        in: query
+        name: can_pay
+        required: false
+        schema:
+          example: true
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_crypto_orders__get_200_response'
+          description: Returns the list of your crypto currency orders based on specified
+            filters.
+      security:
+      - bearerAuth: []
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_crypto_orders__post_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CryptoCurrencyOrder'
+          description: Lets you create a crypto currency order with your specified
+            amount of fiat currency.
+      security:
+      - bearerAuth: []
+  /crypto/orders/{reference_code}/:
+    get:
+      parameters:
+      - description: reference code of cryptocurrency order
+        explode: false
+        in: path
+        name: reference_code
+        required: true
+        schema:
+          example: 046ed58d-53b1-4ec5-be46-693096a0bb98
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CryptoCurrencyOrder'
+          description: Returns the details of the specified crypto currency order.
+      security:
+      - bearerAuth: []
+  /crypto/orders/{reference_code}/finalize/:
+    post:
+      parameters:
+      - description: Reference code of cryptocurrency order
+        explode: false
+        in: path
+        name: reference_code
+        required: true
+        schema:
+          example: 046ed58d-53b1-4ec5-be46-693096a0bb98
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_crypto_orders__reference_code__finalize__post_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_crypto_orders__reference_code__finalize__post_200_response'
+          description: Lets you finalize the crypto currency order you have created.
+      security:
+      - bearerAuth: []
+  /notification_config/:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+          description: A successful GET returns information about your notification
+            settings.
+      security:
+      - bearerAuth: []
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_notification_config__post_200_response'
+          description: Adjust this api if you want to be notified after the digital
+            or crypto order has been accepted or rejected.
+      security:
+      - bearerAuth: []
+components:
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+  schemas:
+    Catalog:
+      example:
+        percentage_of_buying_price: 20
+        image: http://media.ezpaypin.com/media/products/images/2019/11/Image33_QPLZZ6q.jpg
+        regions:
+        - code: GLC
+          name: Global
+        - code: GLC
+          name: Global
+        upc: 659245724761
+        description: "null"
+        pre_order: false
+        showing_price:
+          showing_currency:
+          - symbol: $
+            code: USD
+            currency: Dollar
+          - symbol: $
+            code: USD
+            currency: Dollar
+          price: 35
+        title: iTunes $400
+        max_price: 400
+        min_price: 400
+        activation_fee: 0
+        currency:
+          symbol: $
+          code: USD
+          currency: Dollar
+        categories:
+        - name: iTunes US
+        - name: iTunes US
+        sku: 23
+      properties:
+        sku:
+          description: sku of product
+          example: 23
+          type: number
+        upc:
+          description: upc of product
+          example: 659245724761
+          type: number
+        title:
+          description: title of product
+          example: iTunes $400
+          type: string
+        min_price:
+          description: product minimumm price
+          example: 400
+          type: number
+        max_price:
+          description: product maximumm price
+          example: 400
+          type: number
+        pre_order:
+          description: product has preorder feature or not.
+          example: false
+          type: boolean
+        activation_fee:
+          description: fixed activation fee of product
+          example: 0
+          type: number
+        percentage_of_buying_price:
+          description: discount applied on buying price
+          example: 20
+          type: number
+        currency:
+          $ref: '#/components/schemas/Currency'
+        categories:
+          items:
+            $ref: '#/components/schemas/Category'
+          type: array
+        regions:
+          items:
+            $ref: '#/components/schemas/Regions'
+          type: array
+        image:
+          description: image link of product
+          example: http://media.ezpaypin.com/media/products/images/2019/11/Image33_QPLZZ6q.jpg
+          type: string
+        description:
+          description: product discription
+          example: "null"
+          type: string
+        showing_price:
+          $ref: '#/components/schemas/Catalog_showing_price'
+      type: object
+    Balance:
+      example:
+        balance: 123.45
+        currency:
+          symbol: $
+          code: USD
+          currency: Dollar
+      properties:
+        currency:
+          $ref: '#/components/schemas/Currency'
+        balance:
+          description: balance of this currency
+          example: 123.45
+          type: number
+      type: object
+    Currency:
+      example:
+        symbol: $
+        code: USD
+        currency: Dollar
+      properties:
+        currency:
+          description: name of currency
+          example: Dollar
+          type: string
+        symbol:
+          description: symbol of currency
+          example: $
+          type: string
+        code:
+          description: code of currency
+          example: USD
+          type: string
+      type: object
+    ShowingCurrency:
+      example:
+        symbol: $
+        code: USD
+        currency: Dollar
+      properties:
+        currency:
+          description: name of showing currency
+          example: Dollar
+          type: string
+        symbol:
+          description: symbol of showing currency
+          example: $
+          type: string
+        code:
+          description: code of showing currency
+          example: USD
+          type: string
+      type: object
+    Regions:
+      example:
+        code: GLC
+        name: Global
+      properties:
+        name:
+          description: name of region
+          example: Global
+          type: string
+        code:
+          description: code of region
+          example: GLC
+          type: string
+      type: object
+    Category:
+      example:
+        name: iTunes US
+      properties:
+        name:
+          description: name of category
+          example: iTunes US
+          type: string
+      type: object
+    Product:
+      example:
+        sku: 76
+        title: iTunes $10
+      properties:
+        sku:
+          description: sku of the product
+          example: 76
+          type: number
+        title:
+          description: title of the product
+          example: iTunes $10
+          type: string
+      type: object
+    Order:
+      example:
+        created_time: 2020-02-01T10:58:34.430613
+        product:
+          sku: 76
+          title: iTunes $10
+        total_fees: 0
+        destination: "18004441234"
+        count: 1
+        is_completed: true
+        total_discounts: 0.42
+        share_link: http://vc.ezpaypin.com/01c79b97-8ab4-423c-a11d-225897f2135a
+        delivery_type: 3
+        total_customer_cost: 3.42
+        reference_code: 046ed58d-53b1-4ec5-be46-693096a0bb98
+        status_text: accept
+        order_id: 89
+        terminal_id: 96
+        total_face_value: 3
+        status: 1
+      properties:
+        order_id:
+          description: id of order
+          example: 89
+          type: number
+        delivery_type:
+          description: type of delivery
+          example: 3
+          type: number
+        destination:
+          description: E-mail or Phone/Whatsapp number you want the order to be delivered
+            to.
+          example: "18004441234"
+          type: string
+        status:
+          description: "pending(0) , accept(1) , reject(-1)"
+          example: 1
+          type: number
+        status_text:
+          description: status of order
+          example: accept
+          type: string
+        created_time:
+          description: time of order creation
+          example: 2020-02-01T10:58:34.430613
+          type: string
+        terminal_id:
+          description: terminal id of sub user
+          example: 96
+          type: number
+        reference_code:
+          description: reference code of order
+          example: 046ed58d-53b1-4ec5-be46-693096a0bb98
+          type: string
+        product:
+          $ref: '#/components/schemas/Product'
+        count:
+          description: order quantity
+          example: 1
+          type: number
+        total_face_value:
+          description: total of product original prices
+          example: 3
+          type: number
+        total_fees:
+          description: sum of activation fees
+          example: 0
+          type: number
+        total_discounts:
+          description: sum of discounts
+          example: 0.42
+          type: number
+        total_customer_cost:
+          description: total price customer should pay
+          example: 3.42
+          type: number
+        is_completed:
+          description: is order process completed or not
+          example: true
+          type: boolean
+        share_link:
+          description: link of order cards.
+          example: http://vc.ezpaypin.com/01c79b97-8ab4-423c-a11d-225897f2135a
+          type: string
+      type: object
+    Card:
+      example:
+        claim_url: https://vc.ezpaypin.com/db095ef3-7d21-4307-8cdc-3b1c0fa300c3
+        card_number: "520868849856"
+        pin_code: "3216493287345"
+      properties:
+        card_number:
+          description: gift card number
+          example: "520868849856"
+          type: string
+        pin_code:
+          description: gift card pin
+          example: "3216493287345"
+          type: string
+        claim_url:
+          description: link of gift card
+          example: https://vc.ezpaypin.com/db095ef3-7d21-4307-8cdc-3b1c0fa300c3
+          type: string
+      type: object
+    Transaction:
+      example:
+        transaction_id: 50
+        created_time: 2020-02-03T13:27:12.250248
+        product: iTunes $10
+        total_fees: 0
+        total_discounts: 0.25
+        total_customer_cost: 25.25
+        reference_code: 046ed58d-53b1-4ec5-be46-693096a0bb98
+        currency: USD
+        status_text: Pending
+        barcode: "12567312867231868"
+        total_face_value: 25
+        terminal_id: 96
+        status: -1
+      properties:
+        transaction_id:
+          description: id of activation transaction
+          example: 50
+          type: number
+        barcode:
+          description: barcode of physical card
+          example: "12567312867231868"
+          type: string
+        product:
+          description: name of product
+          example: iTunes $10
+          type: string
+        status:
+          description: "Pending(-1) , Activated(1) , Inactive(0)"
+          example: -1
+          type: number
+        status_text:
+          description: status of activation order
+          example: Pending
+          type: string
+        total_face_value:
+          description: physical card price
+          example: 25
+          type: number
+        total_fees:
+          description: activation fee of physical card
+          example: 0
+          type: number
+        total_discounts:
+          description: discount of physical card
+          example: 0.25
+          type: number
+        total_customer_cost:
+          description: price that customer should pay
+          example: 25.25
+          type: number
+        terminal_id:
+          description: Terminal ID of the sub-user
+          example: 96
+          type: number
+        currency:
+          description: name of currency
+          example: USD
+          type: string
+        created_time:
+          description: time of activation
+          example: 2020-02-03T13:27:12.250248
+          type: string
+        reference_code:
+          description: reference code of activation
+          example: 046ed58d-53b1-4ec5-be46-693096a0bb98
+          type: string
+      type: object
+    Notification:
+      example:
+        endpoint: https://example.com
+        confidential_key: ikasd7823q4lmk132jk
+      properties:
+        endpoint:
+          description: The URL that status change will be reported to
+          example: https://example.com
+          type: string
+        confidential_key:
+          description: The confidential key that you need for validation in your system
+          example: ikasd7823q4lmk132jk
+          type: string
+      type: object
+    CryptoCurrencyCatalog:
+      example:
+        symbol: $
+        code: USD
+        crypto_title: bitcoin
+        price: 33784.7
+        min_amount: 20
+        currency_title: Dollars
+        max_amount: 100
+        crypto_currency_id: "1"
+        crypto_symbol: ₿
+        crypto_code: BTC
+        currency_id: 1
+      properties:
+        currency_id:
+          description: id of the fiat currency
+          example: 1
+          type: number
+        currency_title:
+          description: Title of the fiat currency
+          example: Dollars
+          type: string
+        symbol:
+          description: symbol of this fiat currency
+          example: $
+          type: string
+        code:
+          description: code of this fiat currency
+          example: USD
+          type: string
+        price:
+          description: Price of crypto that you want to buy
+          example: 33784.7
+          type: number
+        min_amount:
+          description: Minumumm amount that you can buy more than this price.
+          example: 20
+          type: number
+        max_amount:
+          description: Maximumm amount that you can buy this crpto currency less than
+            this amount
+          example: 100
+          type: number
+        crypto_currency_id:
+          description: id of this crypto currency
+          example: "1"
+          type: string
+        crypto_title:
+          description: name of this crypto currency
+          example: bitcoin
+          type: string
+        crypto_symbol:
+          description: symbol of this crypto currency
+          example: ₿
+          type: string
+        crypto_code:
+          description: code of this crypto currency
+          example: BTC
+          type: string
+      type: object
+    CryptoCurrencyOrder:
+      example:
+        requested_price: 20
+        created_time: 2021-09-20T11:33:33.568306
+        crypto_price: 6
+        crypto_currency_data:
+          symbol: ₿
+          code: BTC
+          title: bitcoin
+        currency_daya:
+          symbol: $
+          code: USD
+          currency: Dollars
+        crypto_amount: 0
+        crypto_wallet: crypto_wallet
+        network_fee: 0.0001475
+        commission_price: 1
+        commission_percent: 5
+        is_used: true
+        can_pay: true
+        price: 21
+        used_time: 2021-09-20T11:33:33.568306
+        reference_code: bb715b4e-6792-45ca-9ca5-2d708f41a6d4
+        crypto_currency_id: 1
+        id: 1538
+        status_text: waiting
+        currency_id: 1
+        terminal_id: 92
+        status: 0
+      properties:
+        id:
+          description: crypto order id
+          example: 1538
+          type: number
+        reference_code:
+          description: refence code of this crypto order
+          example: bb715b4e-6792-45ca-9ca5-2d708f41a6d4
+          type: string
+        requested_price:
+          description: The amount of crypto you ordered.
+          example: 20
+          type: integer
+        price:
+          description: price of this order
+          example: 21
+          type: integer
+        crypto_currency_id:
+          description: id of this crypto currency
+          example: 1
+          type: integer
+        crypto_currency_data:
+          $ref: '#/components/schemas/CryptoCurrencyOrder_crypto_currency_data'
+        currency_id:
+          description: id of fiat currency
+          example: 1
+          type: integer
+        currency_daya:
+          $ref: '#/components/schemas/CryptoCurrencyOrder_currency_daya'
+        status:
+          description: "accept(1) , waiting(0) , reject(-1) , expired(-5)"
+          example: 0
+          type: integer
+        crypto_wallet:
+          description: The destination wallet.
+          type: string
+          example: null
+        status_text:
+          description: text of status
+          example: waiting
+          type: string
+        commission_percent:
+          description: percentage of commission defined for this user
+          example: 5
+          type: number
+        commission_price:
+          description: price of commission defined for this user.
+          example: 1
+          type: integer
+        network_fee:
+          description: commission of network.
+          example: 0.0001475
+          type: number
+        crypto_amount:
+          description: amount of crypto.
+          type: integer
+        crypto_price:
+          description: last price of that crypto currency that you want to buy.
+          type: integer
+        can_pay:
+          description: can this order be payed or not.
+          example: true
+          type: boolean
+        is_used:
+          description: is order redeemed or not.
+          example: true
+          type: boolean
+        used_time:
+          description: the time of redemption of order.
+          example: 2021-09-20T11:33:33.568306
+          type: string
+        created_time:
+          description: order creation time.
+          example: 2021-09-20T11:33:33.568306
+          type: string
+        terminal_id:
+          description: sub user id
+          example: 92
+          type: integer
+      type: object
+    _auth_token__post_request:
+      properties:
+        client_id:
+          description: Client ID provided by EZpin
+          example: "13319"
+          type: string
+        secret_key:
+          description: Secret key provided by EZpin
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzayI6IjYxZGZmNmU4LTY3YTctNG
+          type: string
+      type: object
+    _auth_token__post_200_response:
+      example:
+        access: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2Nlc3NfaWQiOj
+        expire: 312645
+      properties:
+        access:
+          description: Access token for APIs
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2Nlc3NfaWQiOj
+          type: string
+        expire:
+          description: Token expire time in (ms)
+          example: 312645
+          type: number
+      type: object
+    _auth_token__post_400_response:
+      example:
+        code: 615
+        detail: user not found. please enter correct data
+      properties:
+        detail:
+          description: API error details
+          example: user not found. please enter correct data
+          type: string
+        code:
+          description: error code
+          example: 615
+          type: number
+      type: object
+    _catalogs__get_200_response:
+      example:
+        count: 256
+        results:
+        - percentage_of_buying_price: 20
+          image: http://media.ezpaypin.com/media/products/images/2019/11/Image33_QPLZZ6q.jpg
+          regions:
+          - code: GLC
+            name: Global
+          - code: GLC
+            name: Global
+          upc: 659245724761
+          description: "null"
+          pre_order: false
+          showing_price:
+            showing_currency:
+            - symbol: $
+              code: USD
+              currency: Dollar
+            - symbol: $
+              code: USD
+              currency: Dollar
+            price: 35
+          title: iTunes $400
+          max_price: 400
+          min_price: 400
+          activation_fee: 0
+          currency:
+            symbol: $
+            code: USD
+            currency: Dollar
+          categories:
+          - name: iTunes US
+          - name: iTunes US
+          sku: 23
+        - percentage_of_buying_price: 20
+          image: http://media.ezpaypin.com/media/products/images/2019/11/Image33_QPLZZ6q.jpg
+          regions:
+          - code: GLC
+            name: Global
+          - code: GLC
+            name: Global
+          upc: 659245724761
+          description: "null"
+          pre_order: false
+          showing_price:
+            showing_currency:
+            - symbol: $
+              code: USD
+              currency: Dollar
+            - symbol: $
+              code: USD
+              currency: Dollar
+            price: 35
+          title: iTunes $400
+          max_price: 400
+          min_price: 400
+          activation_fee: 0
+          currency:
+            symbol: $
+            code: USD
+            currency: Dollar
+          categories:
+          - name: iTunes US
+          - name: iTunes US
+          sku: 23
+      properties:
+        count:
+          description: Number of total catalogs
+          example: 256
+          type: number
+        results:
+          items:
+            $ref: '#/components/schemas/Catalog'
+          type: array
+      type: object
+    _catalogs__product_sku__availability__get_200_response:
+      example:
+        availability: false
+        detail: This catalog is not available.
+      properties:
+        availability:
+          description: Availability status
+          example: false
+          type: boolean
+        detail:
+          description: Detailed information
+          example: This catalog is not available.
+          type: string
+      type: object
+    _orders__get_200_response:
+      example:
+        next: https://api.ezpaypin.com/vendors/v1/orders/?end_date=2020-05-27T08%3A41%3A59.098734&limit=10&offset=10&start_date=2020-02-27T08%3A41%3A59.098734
+        previous: https://api.ezpaypin.com/vendors/v1/orders/?end_date=2020-05-27T08%3A41%3A59.098734&limit=10&offset=10&start_date=2020-02-27T08%3A41%3A59.098734
+        count: 256
+        results:
+        - created_time: 2020-02-01T10:58:34.430613
+          product:
+            sku: 76
+            title: iTunes $10
+          total_fees: 0
+          destination: "18004441234"
+          count: 1
+          is_completed: true
+          total_discounts: 0.42
+          share_link: http://vc.ezpaypin.com/01c79b97-8ab4-423c-a11d-225897f2135a
+          delivery_type: 3
+          total_customer_cost: 3.42
+          reference_code: 046ed58d-53b1-4ec5-be46-693096a0bb98
+          status_text: accept
+          order_id: 89
+          terminal_id: 96
+          total_face_value: 3
+          status: 1
+        - created_time: 2020-02-01T10:58:34.430613
+          product:
+            sku: 76
+            title: iTunes $10
+          total_fees: 0
+          destination: "18004441234"
+          count: 1
+          is_completed: true
+          total_discounts: 0.42
+          share_link: http://vc.ezpaypin.com/01c79b97-8ab4-423c-a11d-225897f2135a
+          delivery_type: 3
+          total_customer_cost: 3.42
+          reference_code: 046ed58d-53b1-4ec5-be46-693096a0bb98
+          status_text: accept
+          order_id: 89
+          terminal_id: 96
+          total_face_value: 3
+          status: 1
+      properties:
+        count:
+          description: Number of total orders
+          example: 256
+          type: number
+        next:
+          description: next page of order list
+          example: https://api.ezpaypin.com/vendors/v1/orders/?end_date=2020-05-27T08%3A41%3A59.098734&limit=10&offset=10&start_date=2020-02-27T08%3A41%3A59.098734
+          type: string
+        previous:
+          description: previous page of order list
+          example: https://api.ezpaypin.com/vendors/v1/orders/?end_date=2020-05-27T08%3A41%3A59.098734&limit=10&offset=10&start_date=2020-02-27T08%3A41%3A59.098734
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Order'
+          type: array
+      type: object
+    _orders__post_request:
+      properties:
+        sku:
+          description: Catalog SKU
+          example: 321
+          type: number
+        quantity:
+          description: Item count
+          example: 1
+          type: number
+        pre_oder:
+          description: To determine whether you want to pre order your request or
+            not. The product must support pre order mood. if you pass true your cards
+            will get ready in the future.
+          example: false
+          type: boolean
+        price:
+          description: Item price
+          example: 10
+          type: number
+        delivery_type:
+          description: 0-None 1-E-mail 2-SMS 3-WhatsApp
+          example: 1
+          type: number
+        destination:
+          description: E-mail or Phone/Whatsapp number you want the order to be delivered
+            to.
+          example: support@ezpin.com
+          type: string
+        terminal_id:
+          description: Terminal ID of the sub-users that can be defined in setting
+            section in user panel
+          example: 45
+          type: number
+        terminal_pin:
+          description: Pin defined for sub-user
+          example: 1111
+          type: number
+        reference_code:
+          description: Refernce code. A unique UUID V4 referece code must be included
+            in request
+          example: 046ed58d-53b1-4ec5-be46-693096a0bb98
+          type: string
+      type: object
+    _orders__post_400_response:
+      example:
+        code: 621
+        detail: "Some error happened. Please try again later. If issue persists, please\
+          \ contact your account manager."
+      properties:
+        detail:
+          description: detail of returned response
+          example: "Some error happened. Please try again later. If issue persists,\
+            \ please contact your account manager."
+          type: string
+        code:
+          description: error code
+          example: 621
+          type: number
+      type: object
+    _orders__post_406_response:
+      example:
+        code: 617
+        detail: wrong pin or terminal
+      properties:
+        detail:
+          description: detail of returned response
+          example: wrong pin or terminal
+          type: string
+        code:
+          description: error code
+          example: 617
+          type: number
+      type: object
+    _exchange_rates__get_200_response_results_inner_from_currency:
+      description: exchange will be done from this currency
+      example:
+        symbol: $
+        code: USD
+        currency: Dollars
+      properties:
+        currency:
+          description: name of currency
+          example: Dollars
+          type: string
+        symbol:
+          description: symbol of currency
+          example: $
+          type: string
+        code:
+          description: code of currency
+          example: USD
+          type: string
+      type: object
+    _exchange_rates__get_200_response_results_inner_to_currency:
+      description: exchange will be done from this currency
+      example:
+        symbol: £
+        code: GBP
+        currency: Pounds
+      properties:
+        currency:
+          description: name of currency
+          example: Pounds
+          type: string
+        symbol:
+          description: sumbol of currency
+          example: £
+          type: string
+        code:
+          description: code of currency
+          example: GBP
+          type: string
+      type: object
+    _exchange_rates__get_200_response_results_inner:
+      example:
+        rate: 0.75
+        from_currency:
+          symbol: $
+          code: USD
+          currency: Dollars
+        to_currency:
+          symbol: £
+          code: GBP
+          currency: Pounds
+      properties:
+        from_currency:
+          $ref: '#/components/schemas/_exchange_rates__get_200_response_results_inner_from_currency'
+        to_currency:
+          $ref: '#/components/schemas/_exchange_rates__get_200_response_results_inner_to_currency'
+        rate:
+          description: rate of exchange
+          example: 0.75
+          type: number
+    _exchange_rates__get_200_response:
+      example:
+        results:
+        - rate: 0.75
+          from_currency:
+            symbol: $
+            code: USD
+            currency: Dollars
+          to_currency:
+            symbol: £
+            code: GBP
+            currency: Pounds
+        - rate: 0.75
+          from_currency:
+            symbol: $
+            code: USD
+            currency: Dollars
+          to_currency:
+            symbol: £
+            code: GBP
+            currency: Pounds
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/_exchange_rates__get_200_response_results_inner'
+          type: array
+      type: object
+    _orders__reference_code__cards__get_200_response:
+      example:
+        results:
+        - claim_url: https://vc.ezpaypin.com/db095ef3-7d21-4307-8cdc-3b1c0fa300c3
+          card_number: "520868849856"
+          pin_code: "3216493287345"
+        - claim_url: https://vc.ezpaypin.com/db095ef3-7d21-4307-8cdc-3b1c0fa300c3
+          card_number: "520868849856"
+          pin_code: "3216493287345"
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/Card'
+          type: array
+      type: object
+    _cards_check__get_200_response:
+      example:
+        product: iTunes $10
+        max_price: 200.0
+        min_price: 10.0
+        activated_time: 2019-11-20T13:24:26.862624
+        currency: USD
+        status_text: Activated
+        sku: 15
+        barcode: "12567312867231868"
+        activate_price: 10
+        status: 1
+      properties:
+        barcode:
+          description: barcode of the physical card
+          example: "12567312867231868"
+          type: string
+        product:
+          description: name of the physical product
+          example: iTunes $10
+          type: string
+        sku:
+          description: sku of the physical product
+          example: 15
+          type: number
+        status_text:
+          description: status of activation process
+          example: Activated
+          type: string
+        status:
+          description: "Pending(-1) , Activated(1) , Inactive(0)"
+          example: 1
+          type: number
+        min_price:
+          description: minimumm price available for physical product
+          example: 10.0
+          type: number
+        max_price:
+          description: maximumm price available for physical product
+          example: 200.0
+          type: number
+        activate_price:
+          description: price that the card has been activated with
+          example: 10
+          type: number
+        activated_time:
+          description: time of activation
+          example: 2019-11-20T13:24:26.862624
+          type: string
+        currency:
+          description: currency of physical product
+          example: USD
+          type: string
+      type: object
+    _cards_activate__post_request:
+      properties:
+        barcode:
+          description: Barcode Number Of Physical Card
+          example: "12567312867231868"
+          type: string
+        sku:
+          description: SKU Of Product
+          example: 5432341
+          type: number
+        price:
+          description: Item price
+          example: 9.89
+          type: number
+        terminal_id:
+          description: Terminal ID of the sub-users that can be defined in setting
+            section in user panel.
+          example: 45
+          type: number
+        terminal_pin:
+          description: Pin defined for sub-user
+          example: 1144
+          type: number
+        reference_code:
+          description: A unique UUID v4 referece code must be included in request
+          example: 046ed58d-53b1-4ec5-be46-693096a0bb98
+          type: string
+      type: object
+    _crypto_catalog__get_200_response:
+      example:
+        count: 1
+        results:
+        - symbol: $
+          code: USD
+          crypto_title: bitcoin
+          price: 33784.7
+          min_amount: 20
+          currency_title: Dollars
+          max_amount: 100
+          crypto_currency_id: "1"
+          crypto_symbol: ₿
+          crypto_code: BTC
+          currency_id: 1
+        - symbol: $
+          code: USD
+          crypto_title: bitcoin
+          price: 33784.7
+          min_amount: 20
+          currency_title: Dollars
+          max_amount: 100
+          crypto_currency_id: "1"
+          crypto_symbol: ₿
+          crypto_code: BTC
+          currency_id: 1
+      properties:
+        count:
+          description: Number of total catalogs
+          example: 1
+          type: number
+        results:
+          items:
+            $ref: '#/components/schemas/CryptoCurrencyCatalog'
+          type: array
+      type: object
+    _crypto_orders__get_200_response:
+      example:
+        next: https://api.ezpaypin.com/vendors/v2/crypto/orders/?limit=1&offset=1
+        previous: "null"
+        count: 256
+        results:
+        - requested_price: 20
+          created_time: 2021-09-20T11:33:33.568306
+          crypto_price: 6
+          crypto_currency_data:
+            symbol: ₿
+            code: BTC
+            title: bitcoin
+          currency_daya:
+            symbol: $
+            code: USD
+            currency: Dollars
+          crypto_amount: 0
+          crypto_wallet: crypto_wallet
+          network_fee: 0.0001475
+          commission_price: 1
+          commission_percent: 5
+          is_used: true
+          can_pay: true
+          price: 21
+          used_time: 2021-09-20T11:33:33.568306
+          reference_code: bb715b4e-6792-45ca-9ca5-2d708f41a6d4
+          crypto_currency_id: 1
+          id: 1538
+          status_text: waiting
+          currency_id: 1
+          terminal_id: 92
+          status: 0
+        - requested_price: 20
+          created_time: 2021-09-20T11:33:33.568306
+          crypto_price: 6
+          crypto_currency_data:
+            symbol: ₿
+            code: BTC
+            title: bitcoin
+          currency_daya:
+            symbol: $
+            code: USD
+            currency: Dollars
+          crypto_amount: 0
+          crypto_wallet: crypto_wallet
+          network_fee: 0.0001475
+          commission_price: 1
+          commission_percent: 5
+          is_used: true
+          can_pay: true
+          price: 21
+          used_time: 2021-09-20T11:33:33.568306
+          reference_code: bb715b4e-6792-45ca-9ca5-2d708f41a6d4
+          crypto_currency_id: 1
+          id: 1538
+          status_text: waiting
+          currency_id: 1
+          terminal_id: 92
+          status: 0
+      properties:
+        count:
+          description: Number of total orders
+          example: 256
+          type: number
+        next:
+          description: next page of orders
+          example: https://api.ezpaypin.com/vendors/v2/crypto/orders/?limit=1&offset=1
+          type: string
+        previous:
+          description: previous page of orders
+          example: "null"
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/CryptoCurrencyOrder'
+          type: array
+      type: object
+    _crypto_orders__post_request:
+      properties:
+        currency_id:
+          description: ID of Fiat currency
+          example: 1
+          type: integer
+        crypto_currency_id:
+          description: ID of Crypto Currency
+          example: 1
+          type: integer
+        requested_price:
+          description: The amount you need to exchange from fiat currency to Cryptocurrency
+          example: 20
+          type: integer
+        reference_code:
+          description: A unique UUID v4 reference code must be included in request
+          example: 85735ace-99f2-486a-9d1d-8e8b6c2b32dc
+          type: string
+        terminal_id:
+          description: Terminal ID of the sub-users that can be defined in setting
+            section in user panel
+          example: 92
+          type: number
+        terminal_pin:
+          description: Pin defined for sub-user
+          example: 1148
+          type: number
+      type: object
+    _crypto_orders__reference_code__finalize__post_request:
+      properties:
+        crypto_wallet:
+          description: "Cryptocurrency wallet, which will receive the order amount"
+          example: bc1q7yu6tdqnm82xp544qntxnek4zllwv2a0wdqs26
+          type: string
+      type: object
+    _crypto_orders__reference_code__finalize__post_200_response:
+      example:
+        code: 823
+        detail: Request is in process.
+      properties:
+        detail:
+          description: result of finaliz
+          example: Request is in process.
+          type: string
+        code:
+          description: message code
+          example: 823
+          type: number
+      type: object
+    _notification_config__post_200_response:
+      example:
+        code: 801
+        detail: API setting added successfully
+      properties:
+        detail:
+          description: API message
+          example: API setting added successfully
+          type: string
+        code:
+          description: the status code of notification config
+          example: 801
+          type: integer
+      type: object
+    Catalog_showing_price:
+      example:
+        showing_currency:
+        - symbol: $
+          code: USD
+          currency: Dollar
+        - symbol: $
+          code: USD
+          currency: Dollar
+        price: 35
+      properties:
+        price:
+          description: showing price
+          example: 35
+          type: number
+        showing_currency:
+          items:
+            $ref: '#/components/schemas/ShowingCurrency'
+          type: array
+      type: object
+    CryptoCurrencyOrder_crypto_currency_data:
+      example:
+        symbol: ₿
+        code: BTC
+        title: bitcoin
+      properties:
+        title:
+          description: crypto currency title
+          example: bitcoin
+          type: string
+        code:
+          description: code of this cryptocurreny
+          example: BTC
+          type: string
+        symbol:
+          description: symbol of this crypto currency
+          example: ₿
+          type: string
+      type: object
+    CryptoCurrencyOrder_currency_daya:
+      example:
+        symbol: $
+        code: USD
+        currency: Dollars
+      properties:
+        currency:
+          description: title of fiat currency
+          example: Dollars
+          type: string
+        symbol:
+          description: symbol of this fiat currency
+          example: $
+          type: string
+        code:
+          description: code of this fiat curreny
+          example: USD
+          type: string
+      type: object
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: Bearer
+      scheme: bearer
+      type: http
