@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Sku** | Pointer to **int32** | sku of product | [optional] 
-**Upc** | Pointer to **string** | upc of product | [optional] 
+**Upc** | Pointer to **int64** | upc of product | [optional] 
 **Title** | Pointer to **string** | title of product | [optional] 
 **MinPrice** | Pointer to **decimal.Decimal** | product minimumm price | [optional] 
 **MaxPrice** | Pointer to **decimal.Decimal** | product maximumm price | [optional] 
@@ -71,14 +71,14 @@ GetUpc returns the Upc field if non-nil, zero value otherwise.
 
 ### GetUpcOk
 
-`func (o *Catalog) GetUpcOk() (*string, bool)`
+`func (o *Catalog) GetUpcOk() (*int64, bool)`
 
 GetUpcOk returns a tuple with the Upc field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpc
 
-`func (o *Catalog) SetUpc(v string)`
+`func (o *Catalog) SetUpc(v int64)`
 
 SetUpc sets Upc field to given value.
 
@@ -90,13 +90,13 @@ HasUpc returns a boolean if a field has been set.
 
 ### GetTitle
 
-`func (o *Catalog) GetTitle() string`
+`func (o *Catalog) GetTitle() int64`
 
 GetTitle returns the Title field if non-nil, zero value otherwise.
 
 ### GetTitleOk
 
-`func (o *Catalog) GetTitleOk() (*string, bool)`
+`func (o *Catalog) GetTitleOk() (*int64, bool)`
 
 GetTitleOk returns a tuple with the Title field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.

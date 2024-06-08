@@ -24,7 +24,7 @@ type Catalog struct {
 	// sku of product
 	Sku *int32 `json:"sku,omitempty"`
 	// upc of product
-	Upc *string `json:"upc,omitempty"`
+	Upc *int64 `json:"upc,omitempty"`
 	// title of product
 	Title *string `json:"title,omitempty"`
 	// product minimumm price
@@ -97,9 +97,9 @@ func (o *Catalog) SetSku(v int32) {
 }
 
 // GetUpc returns the Upc field value if set, zero value otherwise.
-func (o *Catalog) GetUpc() string {
+func (o *Catalog) GetUpc() int64 {
 	if o == nil || IsNil(o.Upc) {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.Upc
@@ -107,7 +107,7 @@ func (o *Catalog) GetUpc() string {
 
 // GetUpcOk returns a tuple with the Upc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Catalog) GetUpcOk() (*string, bool) {
+func (o *Catalog) GetUpcOk() (*int64, bool) {
 	if o == nil || IsNil(o.Upc) {
 		return nil, false
 	}
@@ -123,8 +123,8 @@ func (o *Catalog) HasUpc() bool {
 	return false
 }
 
-// SetUpc gets a reference to the given string and assigns it to the Upc field.
-func (o *Catalog) SetUpc(v string) {
+// SetUpc gets a reference to the given int64 and assigns it to the Upc field.
+func (o *Catalog) SetUpc(v int64) {
 	o.Upc = &v
 }
 

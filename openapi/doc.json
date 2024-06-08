@@ -1116,7 +1116,7 @@
                         "description": "sku of product"
                     },
                     "upc": {
-                        "type": "string",
+                        "type": "integer",
                         "example": 659245724761,
                         "description": "upc of product"
                     },

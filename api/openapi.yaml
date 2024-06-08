@@ -490,7 +490,7 @@ components:
           name: Global
         - code: GLC
           name: Global
-        upc: "659245724761"
+        upc: 659245724761
         description: "null"
         pre_order: false
         showing_price:
@@ -521,8 +521,8 @@ components:
           type: integer
         upc:
           description: upc of product
-          example: "659245724761"
-          type: string
+          example: 659245724761
+          type: integer
         title:
           description: title of product
           example: iTunes $400
@@ -1106,7 +1106,7 @@ components:
             name: Global
           - code: GLC
             name: Global
-          upc: "659245724761"
+          upc: 659245724761
           description: "null"
           pre_order: false
           showing_price:
@@ -1137,7 +1137,7 @@ components:
             name: Global
           - code: GLC
             name: Global
-          upc: "659245724761"
+          upc: 659245724761
           description: "null"
           pre_order: false
           showing_price:
