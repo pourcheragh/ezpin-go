@@ -17,8 +17,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/shopspring/decimal"
 )
 
 
@@ -653,7 +651,7 @@ type ApiCatalogsProductSkuAvailabilityGetRequest struct {
 	ApiService *DefaultAPIService
 	productSku int32
 	itemCount *int32
-	price *decimal.Decimal
+	price *float64
 }
 
 // Number of items
@@ -663,7 +661,7 @@ func (r ApiCatalogsProductSkuAvailabilityGetRequest) ItemCount(itemCount int32) 
 }
 
 // Product price
-func (r ApiCatalogsProductSkuAvailabilityGetRequest) Price(price decimal.Decimal) ApiCatalogsProductSkuAvailabilityGetRequest {
+func (r ApiCatalogsProductSkuAvailabilityGetRequest) Price(price float64) ApiCatalogsProductSkuAvailabilityGetRequest {
 	r.price = &price
 	return r
 }

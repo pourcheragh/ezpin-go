@@ -82,8 +82,8 @@ paths:
         name: price
         required: true
         schema:
-          example: "10"
-          format: decimal
+          example: 10.0
+          format: number
           type: string
         style: form
       responses:

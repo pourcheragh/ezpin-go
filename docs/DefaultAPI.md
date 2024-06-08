@@ -456,7 +456,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **itemCount** | **int32** | Number of items | 
- **price** | **decimal.Decimal** | Product price | 
+ **price** | **float64** | Product price | 
 
 ### Return type
 
